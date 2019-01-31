@@ -38,13 +38,13 @@
     "commit": "cross-env COMMITIZEN=# git-cz"
   },
   "license": "MIT",
-  "homepage": "https://github.com/rafamel/ts-project",
+  "homepage": "https://github.com/rafamel/shell-parser",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafamel/ts-project"
+    "url": "https://github.com/rafamel/shell-parser"
   },
   "bugs": {
-    "url": "https://github.com/rafamel/ts-project/issues"
+    "url": "https://github.com/rafamel/shell-parser/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
