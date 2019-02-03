@@ -1,9 +1,10 @@
 # Project Specific #
 ####################
+/src/core
+/build
 /lib
 /bin
 /dist
-/build
 _test.*
 
 # Node, Frameworks, Editors #

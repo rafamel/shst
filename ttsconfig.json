@@ -3,6 +3,10 @@
   "extends": "./tsconfig.json",
   "include": ["src/**/*"],
   "compilerOptions": {
+    "paths": {
+      "~/*": ["src/*"],
+      "lib/*": ["src/lib/*"]
+    },
     "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
