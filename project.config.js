@@ -1,6 +1,8 @@
 module.exports = {
   // Whether to use TypeScript. Boolean.
   TYPESCRIPT: true,
+  // Root directory
+  ROOT_DIR: __dirname,
   // Output build directory. String.
   OUT_DIR: 'build',
   // Output directory for docs. String.
@@ -13,5 +15,5 @@ module.exports = {
   // Build project on version bump. Boolean.
   RELEASE_BUILD: true,
   // Generate docs from TS on version bump. Boolean.
-  RELEASE_DOCS: false
+  RELEASE_DOCS: true
 };

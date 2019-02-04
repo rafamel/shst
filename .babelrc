@@ -9,7 +9,7 @@
       {
         "alias": {
           "~": "./src",
-          "lib": "./lib"
+          "sh": "./sh/out/sh"
         }
       }
     ],
@@ -17,7 +17,7 @@
     "@babel/plugin-proposal-class-properties",
     ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true }]
   ],
-  "ignore": ["node_modules", "src/core/sh"],
+  "ignore": ["node_modules"],
   "env": {
     "production": {
       "plugins": [
@@ -26,7 +26,7 @@
           {
             "alias": {
               "~": "./src",
-              "lib": "./src/lib"
+              "sh": "./src/sh"
             }
           }
         ]

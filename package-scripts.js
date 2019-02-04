@@ -17,6 +17,7 @@ const {
 const EXT = EXT_JS + ',' + EXT_TS;
 const DOT_EXT = '.' + EXT.replace(/,/g, ',.');
 const { COMMIT, COMMITIZEN } = process.env;
+const shs = require('./sh/scripts');
 
 process.env.LOG_LEVEL = 'disable';
 module.exports = scripts({
@@ -29,7 +30,7 @@ module.exports = scripts({
       `shx mkdir ${OUT_DIR}`,
       `jake run:zero["shx cp README* LICENSE* CHANGELOG* ${OUT_DIR}/"]`,
       `jake fixpackage["${__dirname}","${OUT_DIR}"]`,
-      `shx cp -r lib ${OUT_DIR}/`
+      `nps sh.raise`
     ),
     transpile: series(
       `babel src --out-dir ${OUT_DIR} --extensions ${DOT_EXT} --source-maps inline`
@@ -39,20 +40,8 @@ module.exports = scripts({
       `shx echo "${TS ? 'Declaration files built' : ''}"`
     )
   },
-  setup: {
-    default: 'nps setup.lib',
-    lib: series(
-      `jake run:zero["shx rm -r lib"]`,
-      'shx mkdir lib',
-      'shx cp scripts/README.md lib/',
-      [
-        'docker run -ti --rm --name go-sh-build',
-        `--mount type=bind,source=${__dirname},target=/go/src/app`,
-        'golang:1.11.5-alpine',
-        '/bin/sh -x /go/src/app/scripts/docker.sh'
-      ].join(' ')
-    )
-  },
+  setup: 'nps sh',
+  sh: shs,
   publish: `cd ${OUT_DIR} && npm publish`,
   watch: series(
     'nps build.prepare',
@@ -72,7 +61,9 @@ module.exports = scripts({
   },
   types: TS && 'tsc',
   lint: {
-    default: `eslint ./src ./test --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
+    default: `eslint ./src ./test ./sh --ext ${DOT_EXT} -c ${dir(
+      '.eslintrc.js'
+    )}`,
     md: series(
       `markdownlint README.md --config ${dir('markdown.json')}`,
       "mdspell -r --en-us '**/*.md' '!**/node_modules/**/*.md' '!**/build/**/*.md' '!**/core/**/*.md'"
@@ -90,7 +81,7 @@ module.exports = scripts({
     COMMIT && !COMMITIZEN && 'jake run:conditional[' +
         `"\nCommits should be done via 'npm run commit'. Continue?",` +
         '"","exit 1",Yes,5]',
-    'nps test lint.md lint.scripts',
+    'nps test sh.test lint.md lint.scripts',
     'jake run:zero["npm outdated"]',
     COMMIT && `jake run:conditional["\nCommit?","","exit 1",Yes,5]`
   ),

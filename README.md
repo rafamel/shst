@@ -1,6 +1,6 @@
 # shell-parser
 
-Provides a JS-native api for [@mvdan's `sh`](https://github.com/mvdan/sh).
+Provides a JS api for [@mvdan's `sh`](https://github.com/mvdan/sh).
 
 ## Build
 
@@ -9,13 +9,14 @@ Provides a JS-native api for [@mvdan's `sh`](https://github.com/mvdan/sh).
 $ git clone https://github.com/rafamel/shell-parser.git
 $ cd shell-parser
 $ npm install
+$ npm run setup
 $ npm run build
 ```
 <!-- markdownlint-enable MD014 MD031 -->
 
 ## Usage
 
-Transpiled JS files can be found at `/build`. It exposes the `Parser` and `Printer` classes, and the `traverse()` function. Further documentation for those can be found [here.](https://rafamel.github.io/shell-parser/)
+Transpiled JS files can be found at `/build`. They expose the `Parser` and `Printer` classes, and the `traverse()` function. Further documentation for those can be found [here.](https://rafamel.github.io/shell-parser/)
 
 ## Examples
 
@@ -57,11 +58,17 @@ console.log(printer.print(tree)); // echo 'bar'
 
 <!-- ## Notes
 
+* `Errors`: it would be great if they shipped with an identifier, so the message could be native to JS given an error message.
+
+* Dead code from source cannot be tree shaked in JS.
+
+* Node parent.
+
 * `Interactive` doesn't seem to properly work with streams. The test case seems to be limited to directly invoking `stream.read()`, and analyzing the source, it seems there is no way for the stream for emit data that `Interactive` would react to.
 
-* License: The package uploaded to npm doesn't respect the project license.
-
-* `Errors`: it would be great if they shipped with an identifier, so the message could be native to JS given an error message. 
-
 * Node parents: There should be a way to obtain the node parent on traversal (Walk)
+
+* instantiating a node from serialized
+
+* exec() returns an object
 -->

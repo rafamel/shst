@@ -2,7 +2,7 @@
   "name": "shell-parser",
   "version": "0.0.0",
   "author": "Rafa Mel",
-  "description": "Here's a task runner for you. Finally.",
+  "description": "",
   "keywords": [
     "keyword",
     "keyword",
@@ -18,7 +18,12 @@
     "build:transpile": "nps build.transpile",
     "build:declaration": "nps build.declaration",
     "setup": "nps setup",
-    "setup:lib": "nps setup.lib",
+    "sh": "nps sh",
+    "sh:prepare": "nps sh.prepare",
+    "sh:build": "nps sh.build",
+    "sh:process": "nps sh.process",
+    "sh:test": "nps sh.test",
+    "sh:raise": "nps sh.raise",
     "publish": "nps publish",
     "watch": "nps watch",
     "fix": "nps fix",
@@ -63,6 +68,7 @@
     "@zerollup/ts-transform-paths": "^1.6.5",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.0.0",
+    "babel-minify": "^0.5.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "commitizen": "^3.0.5",
     "concurrently": "^4.1.0",
@@ -85,9 +91,11 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-restricted-globals": "^0.2.0",
     "exits": "^0.4.0",
+    "google-closure-compiler": "^20190121.0.0",
     "husky": "1.3.0",
     "jake": "^8.0.19",
     "jest-cli": "^24.0.0",
+    "jscodeshift": "^0.6.3",
     "markdown-spellcheck": "^1.3.1",
     "markdownlint-cli": "^0.13.0",
     "nps": "^5.9.3",
@@ -97,7 +105,8 @@
     "shx": "^0.3.2",
     "ttypescript": "^1.5.6",
     "typedoc": "^0.13.0",
-    "typescript": "^3.2.1"
+    "typescript": "^3.2.1",
+    "uuid": "^3.3.2"
   },
   "dependencies": {
     "camelcase": "^5.0.0"

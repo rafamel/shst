@@ -5,7 +5,7 @@
   "compilerOptions": {
     "paths": {
       "~/*": ["src/*"],
-      "lib/*": ["src/lib/*"]
+      "sh": ["src/sh"]
     },
     "noEmit": false,
     "declaration": true,

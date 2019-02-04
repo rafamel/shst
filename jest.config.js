@@ -12,5 +12,6 @@ module.exports = {
     '<rootDir>/src/bin'
   ],
   moduleFileExtensions: EXT_ARR.concat(['json']),
-  testPathIgnorePatterns: ['/node_modules/']
+  testPathIgnorePatterns: ['/node_modules/'],
+  testMatch: ['<rootDir>/test/**/*.[jt]s?(x)']
 };

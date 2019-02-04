@@ -1,6 +1,6 @@
 # Project Specific #
 ####################
-/src/core
+/sh/out
 /build
 /lib
 /bin
