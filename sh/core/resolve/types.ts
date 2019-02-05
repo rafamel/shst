@@ -23,11 +23,16 @@ export interface IEnumDef extends ITypeDef {
 
 export interface IStructDef extends ITypeDef {
   kind: 'struct';
-  fields: any[];
+  fields: IPropDef[];
   methods: any[]; // TODO
 }
 
 export interface IInterfaceDef extends ITypeDef {
   kind: 'interface';
   values: string[];
+}
+
+export interface IPropDef extends IDef {
+  list: boolean;
+  type: string;
 }

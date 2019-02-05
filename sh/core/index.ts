@@ -9,4 +9,6 @@ function main(): void {
   console.log('Resolving sh types...');
   const types = resolveTypes();
   write(OUT_DIR, 'core.types.json', JSON.stringify(types, null, 2));
+
+  // TODO add lock
 }
