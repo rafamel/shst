@@ -37,7 +37,10 @@ export interface IFieldDef extends IDef {
 }
 
 export interface IMethodDef extends IDef {
-  params: IValue[];
+  params: Array<{
+    name: string;
+    value: IValue;
+  }>;
   returns: IValue;
 }
 
