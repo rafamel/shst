@@ -45,7 +45,7 @@ module.exports = scripts({
   publish: `cd ${OUT_DIR} && npm publish`,
   watch: series(
     'nps build.prepare',
-    `onchange "./src/**/*.{${EXT}}" --initial --kill -- ` +
+    `onchange "./{src,sh}/**/*.{${EXT}}" --initial --kill -- ` +
       `jake clear run:exec["shx echo ⚡"] run:zero["nps private.watch"]`
   ),
   fix: {

@@ -1,0 +1,22 @@
+{
+  "scalars": {
+    "uint32": "number",
+    "int": "number",
+    "bool": "boolean",
+    "string": "string"
+  },
+  "types": {
+    "Pos": "Position",
+    "Lit": "Literal",
+    "StmtList": "StatementList",
+    "Stmt": "Statement"
+  },
+  "props": {
+    "Stmts": "statements",
+    "StmtList": "statementList"
+  },
+  "values": {
+    "AndStmt": "AndStatement",
+    "OrStmt": "OrStatement"
+  }
+}

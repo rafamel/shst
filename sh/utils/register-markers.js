@@ -7,6 +7,6 @@ module.exports = {
     return (obj[id] = true);
   },
   end() {
-    return write(OUT_DIR, 'markers.json', JSON.stringify(obj, null, 2));
+    return write(OUT_DIR, 'sh.markers.json', JSON.stringify(obj, null, 2));
   }
 };

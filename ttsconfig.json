@@ -4,6 +4,7 @@
   "include": ["src/**/*"],
   "compilerOptions": {
     "paths": {
+      "#/*": ["src/*"],
       "~/*": ["src/*"],
       "sh": ["src/sh"]
     },

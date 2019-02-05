@@ -2,7 +2,7 @@ const uuid = require('uuid/v4');
 const path = require('path');
 const j = require('jscodeshift');
 const { OUT_DIR, read, write } = require('../utils/fsutil');
-const markers = require(path.join(OUT_DIR, 'markers.json'));
+const markers = require(path.join(OUT_DIR, 'sh.markers.json'));
 
 main();
 

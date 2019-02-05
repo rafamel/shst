@@ -5,7 +5,7 @@ const docker = `docker run -ti --rm --name go-sh-build \
 golang:1.11.5-alpine /bin/sh -x /go/src/app/sh/docker.sh`;
 
 module.exports = {
-  default: 'nps sh.prepare sh.build sh.process sh.test',
+  default: 'nps sh.prepare sh.build sh.process sh.core sh.test',
   prepare: 'jake run:zero["shx rm -r sh/out" && shx mkdir sh/out',
   build: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
   process:
@@ -21,6 +21,7 @@ module.exports = {
   //   // Minify
   //   'minify sh/out/sh.2.no-dead.js --out-file sh/out/sh/index.js --mangle.topLevel'
   // ].join(' && '),
+  core: 'node scripts/babel sh/core',
   test: `cross-env NODE_ENV=test jest --config=./sh/jest.config.js sh/test/setup/final.js`,
   raise: [
     `shx cp -r sh/out/sh ${OUT_DIR}/`
