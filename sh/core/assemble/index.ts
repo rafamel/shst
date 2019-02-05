@@ -39,6 +39,7 @@ export default function assemble(arr: ITypeDef[]): string {
 export function assembleEnum(obj: IEnumDef): string {
   assert(obj.kind === 'enum');
 
+  // TODO build enumerations with indexes (for typedoc)
   return (
     dumpDoc(obj.doc) +
     `export enum ${obj.is} { ${obj.values.join(', ')} }`.trim()
@@ -54,10 +55,10 @@ export function assembleStruct(obj: IStructDef): string {
         return (
           dumpDoc(field.doc) +
           `
-            get ${field.is}(): ${valueType(field.value)} {
+            public get ${field.is}(): ${valueType(field.value)} {
               return this[SYMBOL]["${field.was}"];
             }
-            set ${field.is}(val: ${valueType(field.value)}) {
+            public set ${field.is}(val: ${valueType(field.value)}) {
               this[SYMBOL]["${field.was}"] = val;
             }
           `.trim()
@@ -75,8 +76,10 @@ export function assembleStruct(obj: IStructDef): string {
         return (
           dumpDoc(method.doc) +
           `
-            ${method.is}(${params}): ${valueType(method.returns)} {
-              return this[SYMBOL]["${method.was}"]()
+            public ${method.is}(${params}): ${valueType(method.returns)} {
+              return this[SYMBOL]["${method.was}"](
+                ${method.params.map((x) => x.name).join(', ')}
+              );
             }
           `.trim()
         );

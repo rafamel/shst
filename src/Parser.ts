@@ -1,4 +1,4 @@
-import { sh } from '~/lib';
+import sh from '~/lib/sh';
 import { SYMBOL, LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts, IFileNode } from '~/types';
 import toNode from '~/utils/to-node';

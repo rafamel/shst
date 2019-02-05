@@ -8,8 +8,9 @@ module.exports = {
   module: 'system',
   exclude: [
     '**/internal/**/*.ts',
+    '**/lib/sh/**/*.ts',
     '**/utils/**/*.ts',
-    '**/core.ts',
-    '**/constants.ts'
+    '**/constants.ts',
+    '**/RootModel.ts'
   ]
 };

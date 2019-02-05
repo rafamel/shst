@@ -1,6 +1,7 @@
 # Project Specific #
 ####################
 /sh/out
+/src/lib
 /build
 /lib
 /bin

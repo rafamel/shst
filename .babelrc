@@ -9,8 +9,7 @@
       {
         "alias": {
           "#": "./",
-          "~": "./src",
-          "sh": "./sh/out/sh"
+          "~": "./src"
         }
       }
     ],
@@ -18,16 +17,17 @@
     "@babel/plugin-proposal-class-properties",
     ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true }]
   ],
-  "ignore": ["node_modules"],
+  "ignore": ["node_modules", "src/lib/sh"],
   "env": {
-    "production": {
+    "test": {
       "plugins": [
         [
           "babel-plugin-module-resolver",
           {
             "alias": {
-              "~": "./src",
-              "sh": "./src/sh"
+              "~/lib/sh": "./sh/out/sh",
+              "#": "./",
+              "~": "./src"
             }
           }
         ]

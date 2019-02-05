@@ -1,4 +1,4 @@
-import { sh } from '~/lib';
+import sh from '~/lib/sh';
 import { INode, IFileNode } from '~/types';
 import toNode from '~/utils/to-node';
 import { SYMBOL } from '~/constants';

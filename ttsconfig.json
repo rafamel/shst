@@ -3,10 +3,10 @@
   "extends": "./tsconfig.json",
   "include": ["src/**/*"],
   "compilerOptions": {
+    "baseUrl": "./src",
     "paths": {
-      "#/*": ["src/*"],
-      "~/*": ["src/*"],
-      "sh": ["src/sh"]
+      "#/*": ["*"],
+      "~/*": ["*"]
     },
     "noEmit": false,
     "declaration": true,

@@ -17,7 +17,6 @@ const {
 const EXT = EXT_JS + ',' + EXT_TS;
 const DOT_EXT = '.' + EXT.replace(/,/g, ',.');
 const { COMMIT, COMMITIZEN } = process.env;
-const shs = require('./sh/scripts');
 
 process.env.LOG_LEVEL = 'disable';
 module.exports = scripts({
@@ -27,10 +26,10 @@ module.exports = scripts({
       ' nps validate build.prepare build.transpile build.declaration',
     prepare: series(
       `jake run:zero["shx rm -r ${OUT_DIR}"]`,
-      `shx mkdir ${OUT_DIR}`,
+      `shx mkdir ${OUT_DIR} ${OUT_DIR}/lib`,
       `jake run:zero["shx cp README* LICENSE* CHANGELOG* ${OUT_DIR}/"]`,
       `jake fixpackage["${__dirname}","${OUT_DIR}"]`,
-      `nps sh.raise`
+      `shx cp -r src/lib/sh ${OUT_DIR}/lib/`
     ),
     transpile: series(
       `babel src --out-dir ${OUT_DIR} --extensions ${DOT_EXT} --source-maps inline`
@@ -40,8 +39,7 @@ module.exports = scripts({
       `shx echo "${TS ? 'Declaration files built' : ''}"`
     )
   },
-  setup: 'nps sh',
-  sh: shs,
+  sh: require('./sh/scripts'),
   publish: `cd ${OUT_DIR} && npm publish`,
   watch: series(
     'nps build.prepare',
@@ -81,7 +79,7 @@ module.exports = scripts({
     COMMIT && !COMMITIZEN && 'jake run:conditional[' +
         `"\nCommits should be done via 'npm run commit'. Continue?",` +
         '"","exit 1",Yes,5]',
-    'nps test sh.test lint.md lint.scripts',
+    'nps test lint.md lint.scripts',
     'jake run:zero["npm outdated"]',
     COMMIT && `jake run:conditional["\nCommit?","","exit 1",Yes,5]`
   ),

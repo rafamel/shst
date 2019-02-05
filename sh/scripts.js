@@ -1,13 +1,12 @@
-const path = require('path');
-const { ROOT_DIR, OUT_DIR, CONFIG_DIR } = require('../project.config');
-const dir = (file) => path.join(CONFIG_DIR, file);
+const { ROOT_DIR, CONFIG_DIR } = require('../project.config');
 
 const docker = `docker run -ti --rm --name go-sh-build \
 --mount type=bind,source=${ROOT_DIR},target=/go/src/app \
 golang:1.11.5-alpine /bin/sh -x /go/src/app/sh/docker.sh`;
 
+// TODO prevent and test for "global" pollution (gopher)
 module.exports = {
-  default: 'nps sh.prepare sh.build sh.process sh.core sh.test',
+  default: 'nps sh.prepare sh.build sh.process sh.test sh.core sh.raise',
   prepare: [
     'jake run:zero["shx rm -r sh/out"',
     'shx mkdir sh/out sh/out/sh sh/out/core'
@@ -15,7 +14,7 @@ module.exports = {
   build: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
   process:
     'minify sh/out/sh.0.gopher.js --out-file sh/out/sh/index.js --mangle.topLevel',
-  /* Commented out as test cases are pending */
+  /* TODO Commented out as test cases are pending */
   // [
   //   // Set markers
   //   'node sh/transforms/set-markers',
@@ -26,15 +25,15 @@ module.exports = {
   //   // Minify
   //   'minify sh/out/sh.2.no-dead.js --out-file sh/out/sh/index.js --mangle.topLevel'
   // ].join(' && '),
+  test: `cross-env NODE_ENV=test jest --config=./sh/jest.config.js sh/test/setup/final.js`,
   core: [
     'node scripts/babel sh/core',
-    `prettier --write "./sh/out/core/*.{ts,js}" --config "${dir(
-      '.prettierrc.js'
-    )}" --ignore-path`
+    `prettier --write "./sh/out/core/*.{ts,js}" --config "${CONFIG_DIR}/.prettierrc.js" --ignore-path`
   ].join(' && '),
-  test: `cross-env NODE_ENV=test jest --config=./sh/jest.config.js sh/test/setup/final.js`,
   raise: [
-    `shx cp -r sh/out/sh ${OUT_DIR}/`
-    // core
+    `jake run:zero["shx rm -r src/lib"]`,
+    `shx mkdir src/lib`,
+    `shx cp -r sh/out/sh src/lib/sh`,
+    `shx cp -r sh/out/core src/lib/core`
   ].join(' && ')
 };

@@ -9,7 +9,7 @@ Provides a JS api for [@mvdan's `sh`](https://github.com/mvdan/sh).
 $ git clone https://github.com/rafamel/shell-parser.git
 $ cd shell-parser
 $ npm install
-$ npm run setup
+$ npm run sh
 $ npm run build
 ```
 <!-- markdownlint-enable MD014 MD031 -->
