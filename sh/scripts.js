@@ -1,4 +1,6 @@
-const { ROOT_DIR, OUT_DIR } = require('../project.config');
+const path = require('path');
+const { ROOT_DIR, OUT_DIR, CONFIG_DIR } = require('../project.config');
+const dir = (file) => path.join(CONFIG_DIR, file);
 
 const docker = `docker run -ti --rm --name go-sh-build \
 --mount type=bind,source=${ROOT_DIR},target=/go/src/app \
@@ -6,7 +8,10 @@ golang:1.11.5-alpine /bin/sh -x /go/src/app/sh/docker.sh`;
 
 module.exports = {
   default: 'nps sh.prepare sh.build sh.process sh.core sh.test',
-  prepare: 'jake run:zero["shx rm -r sh/out" && shx mkdir sh/out',
+  prepare: [
+    'jake run:zero["shx rm -r sh/out"',
+    'shx mkdir sh/out sh/out/sh sh/out/core'
+  ].join(' && '),
   build: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
   process:
     'minify sh/out/sh.0.gopher.js --out-file sh/out/sh/index.js --mangle.topLevel',
@@ -21,7 +26,12 @@ module.exports = {
   //   // Minify
   //   'minify sh/out/sh.2.no-dead.js --out-file sh/out/sh/index.js --mangle.topLevel'
   // ].join(' && '),
-  core: 'node scripts/babel sh/core',
+  core: [
+    'node scripts/babel sh/core',
+    `prettier --write "./sh/out/core/*.{ts,js}" --config "${dir(
+      '.prettierrc.js'
+    )}" --ignore-path`
+  ].join(' && '),
   test: `cross-env NODE_ENV=test jest --config=./sh/jest.config.js sh/test/setup/final.js`,
   raise: [
     `shx cp -r sh/out/sh ${OUT_DIR}/`

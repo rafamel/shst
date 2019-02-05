@@ -52,7 +52,7 @@ module.exports = scripts({
     default: 'nps fix.format fix.md',
     format: [
       'prettier',
-      `--write "./**/*.{${EXT},.json,.scss}"`,
+      `--write "./**/*.{${EXT},json,scss}"`,
       `--config "${dir('.prettierrc.js')}"`,
       `--ignore-path "${dir('.prettierignore')}"`
     ].join(' '),

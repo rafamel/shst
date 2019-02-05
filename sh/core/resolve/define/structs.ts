@@ -62,6 +62,7 @@ export function resolveProp(obj: any): IValue {
   throw Error(`Couldn't resolve prop`);
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function paramNameGenerator() {
   let char = 97; // Must be from 97 (a) to 122 (z)
   const names: any = {};
