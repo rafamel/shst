@@ -42,7 +42,9 @@ export function assembleEnum(obj: IEnumDef): string {
   // TODO build enumerations with indexes (for typedoc)
   return (
     dumpDoc(obj.doc) +
-    `export enum ${obj.is} { ${obj.values.join(', ')} }`.trim()
+    `export enum ${obj.is} { ${obj.values
+      .map((name, i) => name + ' = ' + i)
+      .join(', ')} }`.trim()
   );
 }
 
