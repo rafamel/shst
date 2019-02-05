@@ -30,7 +30,7 @@ export default function getName(
       case 'enum':
         return 'E' + pascalcase(map(maps.types, str));
       case 'interface':
-        return 'T' + pascalcase(map(maps.types, str));
+        return 'I' + pascalcase(map(maps.types, str));
       case 'struct':
         return pascalcase(map(maps.types, str));
       case 'prop':

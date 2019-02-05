@@ -4,13 +4,13 @@ import {
   IInterfaceDef,
   IStructDef,
   IEnumDef,
-  TTypeDefs,
+  TTypeDef,
   ITypeDef
 } from '../../types';
 import typesMap from '../types-map';
 import getName from '../get-name';
 
-export default function define(name: string, obj: any): TTypeDefs {
+export default function define(name: string, obj: any): TTypeDef {
   assert(typeof name === 'string');
   assert(typeof obj === 'object');
 
@@ -50,7 +50,12 @@ function defineInterface(def: ITypeDef, obj: any): IInterfaceDef {
     ...def,
     kind: 'interface',
     doc: obj.doc,
-    values: obj.implementers.map((name: string) => typesMap.get(name).is)
+    methods: obj.type.methods
+      ? Object.entries(obj.type.methods).map(([key, value]) =>
+          structMethod(key, value)
+        )
+      : [],
+    implementedBy: obj.implementers.map((name: string) => typesMap.get(name).is)
   };
 }
 
@@ -70,6 +75,7 @@ function defineStruct(def: ITypeDef, obj: any): IStructDef {
       ? Object.entries(obj.methods).map(([key, value]) =>
           structMethod(key, value)
         )
-      : []
+      : [],
+    implements: []
   };
 }

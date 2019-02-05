@@ -10,7 +10,8 @@
     "Pos": "Position",
     "Lit": "Literal",
     "StmtList": "StatementList",
-    "Stmt": "Statement"
+    "Stmt": "Statement",
+    "Assign": "Assignment"
   },
   "props": {
     "Stmts": "statements",

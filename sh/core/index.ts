@@ -5,6 +5,8 @@ import assemble from './assemble';
 // TODO make sh.types.json available via docker build
 main();
 
+// TODO: prop "String": "toString"
+
 function main(): void {
   // eslint-disable-next-line no-console
   console.log('Resolving sh types...');

@@ -12,7 +12,7 @@ import { valueType, dumpDoc } from './helpers';
 export default function assemble(arr: ITypeDef[]): string {
   return (
     `
-    import RootModel from '~/RootModel.ts';
+    import RootModel from '~/RootModel';
     import { SYMBOL } from '~/constants';
     ` +
     arr
@@ -86,9 +86,13 @@ export function assembleStruct(obj: IStructDef): string {
       }
     )
     .join('');
+  // classes should implement interfaces
+  const implement = obj.implements.length
+    ? 'implements ' + obj.implements.join(', ')
+    : '';
 
   return `
-    export class ${obj.is} extends RootModel {
+    export class ${obj.is} extends RootModel ${implement} {
       ${fields}
       ${methods}
     }
@@ -97,7 +101,27 @@ export function assembleStruct(obj: IStructDef): string {
 
 export function assembleInterface(obj: IInterfaceDef): string {
   assert(obj.kind === 'interface');
+
+  const methods = obj.methods
+    .map(
+      (method: IMethodDef): string => {
+        const params = method.params
+          .map((param): string => `${param.name}: ${valueType(param.value)}`)
+          .join(', ');
+        return (
+          dumpDoc(method.doc) +
+          `${method.is}(${params}): ${valueType(method.returns)};`
+        );
+      }
+    )
+    .join('\n');
+
   return (
-    dumpDoc(obj.doc) + `export type ${obj.is} = ${obj.values.join(' | ')};`
+    dumpDoc(obj.doc) +
+    `
+    export interface ${obj.is} {
+      ${methods}
+    }
+  `.trim()
   );
 }
