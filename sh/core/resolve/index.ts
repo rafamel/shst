@@ -1,7 +1,7 @@
-import types from './types-raw';
+import types from '../raw';
 import define from './define';
 import { queue } from './types-map';
-import { ITypeMap } from './types';
+import { ITypeMap } from '../types';
 // TODO: replace replaceMap in docs
 // import { replaceMap } from './get-name';
 

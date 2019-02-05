@@ -1,7 +1,8 @@
 {
   "scalars": {
-    "uint32": "number",
     "int": "number",
+    "uint": "number",
+    "uint32": "number",
     "bool": "boolean",
     "string": "string"
   },

@@ -6,7 +6,7 @@ import {
   IEnumDef,
   TTypeDefs,
   ITypeDef
-} from '../types';
+} from '../../types';
 import typesMap from '../types-map';
 import getName from '../get-name';
 
@@ -66,8 +66,8 @@ function defineStruct(def: ITypeDef, obj: any): IStructDef {
           structField(key, value)
         )
       : [],
-    methods: obj.type.methods
-      ? Object.entries(obj.type.methods).map(([key, value]) =>
+    methods: obj.methods
+      ? Object.entries(obj.methods).map(([key, value]) =>
           structMethod(key, value)
         )
       : []

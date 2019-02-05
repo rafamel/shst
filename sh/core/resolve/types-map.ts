@@ -1,7 +1,7 @@
 import assert from 'assert';
-import types from './types-raw';
-import maps from './maps.json';
-import { ITypeMap, ITypeDef } from './types';
+import types from '../raw';
+import maps from '../maps.json';
+import { ITypeMap, ITypeDef } from '../types';
 import getName from './get-name';
 
 let run = false;
