@@ -23,7 +23,7 @@
     "sh:process": "nps sh.process",
     "sh:test": "nps sh.test",
     "sh:core": "nps sh.core",
-    "sh:raise": "nps sh.raise",
+    "sh:promote": "nps sh.promote",
     "publish": "nps publish",
     "watch": "nps watch",
     "fix": "nps fix",
@@ -110,7 +110,9 @@
     "uuid": "^3.3.2"
   },
   "dependencies": {
-    "camelcase": "^5.0.0"
+    "camelcase": "^5.0.0",
+    "immutable": "^4.0.0-rc.12",
+    "list": "^2.0.16"
   },
   "husky": {
     "hooks": {

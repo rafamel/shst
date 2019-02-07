@@ -20,6 +20,7 @@ const { COMMIT, COMMITIZEN } = process.env;
 
 process.env.LOG_LEVEL = 'disable';
 module.exports = scripts({
+  sh: require('./sh/scripts'),
   build: {
     default:
       'cross-env NODE_ENV=production' +
@@ -27,8 +28,8 @@ module.exports = scripts({
     prepare: series(
       `jake run:zero["shx rm -r ${OUT_DIR}"]`,
       `shx mkdir ${OUT_DIR} ${OUT_DIR}/lib`,
-      `jake run:zero["shx cp README* LICENSE* CHANGELOG* ${OUT_DIR}/"]`,
       `jake fixpackage["${__dirname}","${OUT_DIR}"]`,
+      `jake run:zero["shx cp README* LICENSE* CHANGELOG* ${OUT_DIR}/"]`,
       `shx cp -r src/lib/sh ${OUT_DIR}/lib/`
     ),
     transpile: series(
@@ -36,10 +37,10 @@ module.exports = scripts({
     ),
     declaration: series(
       TS && `ttsc --project ttsconfig.json --outDir ${OUT_DIR}`,
+      TS && `jake cpr["./src","${OUT_DIR}",d.ts]`,
       `shx echo "${TS ? 'Declaration files built' : ''}"`
     )
   },
-  sh: require('./sh/scripts'),
   publish: `cd ${OUT_DIR} && npm publish`,
   watch: series(
     'nps build.prepare',

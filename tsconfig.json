@@ -2,7 +2,7 @@
   "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
   "extends": "./jsconfig.json",
   "include": ["src/**/*", "sh/**/*", "test/**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "sh/out/**/*"],
   // https://www.typescriptlang.org/docs/handbook/compiler-options.html
   // http://json.schemastore.org/tsconfig
   "compilerOptions": {
@@ -33,7 +33,7 @@
     // "strictNullChecks": true,              /* Enable strict null checks. */
     // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
     // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
-    // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
+    "noImplicitThis": false /* Raise error on 'this' expressions with an implied 'any' type. */,
     // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
 
     /* Additional Checks */

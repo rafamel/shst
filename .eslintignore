@@ -1,2 +1,3 @@
-sh/out
-src/lib/sh
+sh/out/
+src/lib/
+**/*.d.ts
