@@ -12,6 +12,7 @@
     "@root": "npm run",
     "@sh": "npm run --prefix ./pipe/sh",
     "@core": "npm run --prefix ./pipe/core",
+    "@all": "lerna run",
     ":link": "lerna link",
     ":commit": "exit 1"
   },

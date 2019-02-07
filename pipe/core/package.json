@@ -22,6 +22,7 @@
     "@root": "npm run --prefix ../../",
     "@sh": "npm run --prefix ../sh",
     "@core": "npm run",
+    "@all": "npm run @root -- @all",
     ":link": "npm run @root -- :link",
     ":commit": "npm run @root -- :commit"
   },
