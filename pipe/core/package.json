@@ -1,0 +1,48 @@
+{
+  "name": "@shast/core",
+  "author": "Rafa Mel",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "prepublishOnly": "exit 1",
+    "build": "nps build",
+    "build:prepare": "nps build.prepare",
+    "build:init": "nps build.init",
+    "build:transpile": "nps build.transpile",
+    "build:declaration": "nps build.declaration",
+    "watch": "nps watch",
+    "fix": "nps fix",
+    "types": "nps types",
+    "lint": "nps lint",
+    "lint:scripts": "nps lint:scripts",
+    "test": "nps test",
+    "validate": "nps validate",
+    "update": "nps update",
+    "clean": "nps clean",
+    "@root": "npm run --prefix ../../",
+    "@sh": "npm run --prefix ../sh",
+    "@core": "npm run",
+    ":link": "npm run @root -- :link",
+    ":commit": "npm run @root -- :commit"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@shast/sh": "^0.0.0",
+    "@types/camelcase": "^4.1.0",
+    "camelcase": "^5.0.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.13.0",
+    "jake": "^8.0.19",
+    "jest-cli": "^24.0.0",
+    "jscodeshift": "^0.6.3",
+    "nps": "^5.9.3",
+    "onchange": "^5.2.0",
+    "prettier": "^1.16.4",
+    "shx": "^0.3.2",
+    "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "list": "^2.0.16"
+  }
+}
