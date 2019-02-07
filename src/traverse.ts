@@ -1,7 +1,8 @@
 import sh from '~/lib/sh';
-import { INode, IFileNode } from '~/types';
+import { IFileNode } from '~/types';
 import toNode from '~/utils/to-node';
 import { SYMBOL } from '~/constants';
+import { INode } from '~/lib/core';
 
 export default function traverse(
   node: IFileNode,

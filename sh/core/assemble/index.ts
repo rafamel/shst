@@ -1,129 +1,49 @@
-import {
-  ITypeDef,
-  IEnumDef,
-  IStructDef,
-  IInterfaceDef,
-  IFieldDef,
-  IMethodDef
-} from '../types';
-import assert from 'assert';
-import { valueType, dumpDoc } from './helpers';
+import { ITypeDefMap, TTypeDef, IKindBox } from '../types';
+import { collection, imports } from './render';
 
-export default function assemble(arr: ITypeDef[]): string {
-  return (
-    `
-    import RootModel from '~/RootModel';
-    import { SYMBOL } from '~/constants';
-    ` +
-    arr
-      .map((item: any) => {
-        switch (item.kind) {
-          case 'enum':
-            return assembleEnum(item);
-          case 'struct':
-            return assembleStruct(item);
-          case 'interface':
-            return assembleInterface(item);
-          default:
-            break;
-        }
-
-        // eslint-disable-next-line no-console
-        console.error(item);
-        throw Error('Item kind was not recognizable for assemble');
-      })
-      .join('\n\n')
+export function kindBox(arr: TTypeDef[]): IKindBox {
+  return arr.reduce(
+    (acc: IKindBox, item) => {
+      switch (item.kind) {
+        case 'enum':
+          acc.enum.push(item);
+          break;
+        case 'interface':
+          acc.interface.push(item);
+          break;
+        case 'struct':
+          acc.struct.push(item);
+          break;
+        default:
+          // eslint-disable-next-line no-console
+          console.error(item);
+          throw Error('Kind could not be identified');
+      }
+      return acc;
+    },
+    { enum: [], interface: [], struct: [] }
   );
 }
 
-export function assembleEnum(obj: IEnumDef): string {
-  assert(obj.kind === 'enum');
+export default function assemble(
+  types: ITypeDefMap
+): { [key: string]: string } {
+  const boxed = kindBox(Object.values(types));
+  const all = {
+    enum: collection(boxed.enum),
+    interface: collection(boxed.interface),
+    struct: collection(boxed.struct)
+  };
 
-  // TODO build enumerations with indexes (for typedoc)
-  return (
-    dumpDoc(obj.doc) +
-    `export enum ${obj.is} { ${obj.values
-      .map((name, i) => name + ' = ' + i)
-      .join(', ')} }`.trim()
-  );
-}
-
-export function assembleStruct(obj: IStructDef): string {
-  assert(obj.kind === 'struct');
-
-  const fields = obj.fields
-    .map(
-      (field: IFieldDef): string => {
-        return (
-          dumpDoc(field.doc) +
-          `
-            public get ${field.is}(): ${valueType(field.value)} {
-              return this[SYMBOL]["${field.was}"];
-            }
-            public set ${field.is}(val: ${valueType(field.value)}) {
-              this[SYMBOL]["${field.was}"] = val;
-            }
-          `.trim()
-        );
-      }
-    )
-    .join('');
-
-  const methods = obj.methods
-    .map(
-      (method: IMethodDef): string => {
-        const params = method.params
-          .map((param): string => `${param.name}: ${valueType(param.value)}`)
-          .join(', ');
-        return (
-          dumpDoc(method.doc) +
-          `
-            public ${method.is}(${params}): ${valueType(method.returns)} {
-              return this[SYMBOL]["${method.was}"](
-                ${method.params.map((x) => x.name).join(', ')}
-              );
-            }
-          `.trim()
-        );
-      }
-    )
-    .join('');
-  // classes should implement interfaces
-  const implement = obj.implements.length
-    ? 'implements ' + obj.implements.join(', ')
-    : '';
-
-  return `
-    export class ${obj.is} extends RootModel ${implement} {
-      ${fields}
-      ${methods}
-    }
-  `;
-}
-
-export function assembleInterface(obj: IInterfaceDef): string {
-  assert(obj.kind === 'interface');
-
-  const methods = obj.methods
-    .map(
-      (method: IMethodDef): string => {
-        const params = method.params
-          .map((param): string => `${param.name}: ${valueType(param.value)}`)
-          .join(', ');
-        return (
-          dumpDoc(method.doc) +
-          `${method.is}(${params}): ${valueType(method.returns)};`
-        );
-      }
-    )
-    .join('\n');
-
-  return (
-    dumpDoc(obj.doc) +
-    `
-    export interface ${obj.is} {
-      ${methods}
-    }
-  `.trim()
-  );
+  return {
+    index: `
+      export * from './enum';
+      export * from './interface';
+      export * from './struct';
+    `,
+    enum: imports(all.enum.dependencies, 'enum') + all.enum.render,
+    interface:
+      imports(all.interface.dependencies, 'interface') + all.interface.render,
+    struct: imports(all.struct.dependencies, 'struct') + all.struct.render
+  };
 }

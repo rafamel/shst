@@ -1,7 +1,7 @@
 import sh from '~/lib/sh';
 import { SYMBOL, LANGUAGE_MAP } from '~/constants';
-import { TLanguage, IParserOpts, IFileNode } from '~/types';
-import toNode from '~/utils/to-node';
+import { TLanguage, IParserOpts } from '~/types';
+import { File } from '~/lib/core';
 
 const { syntax } = sh;
 export default class Parser {
@@ -26,12 +26,18 @@ export default class Parser {
     this.language = lang.self;
     args.push(syntax.Variant(syntax[lang.sh]));
 
-    this[SYMBOL] = syntax.NewParser(...args);
+    Object.defineProperty(this, SYMBOL, {
+      enumerable: false,
+      value: syntax.NewParser(...args)
+    });
   }
-  public parse(str: string): IFileNode {
+  public parse(str: string): File {
     const rootNode = this[SYMBOL].Parse(str);
-    // const type: string = rootNode.$type.replace(/^.*\.\*/, '');
-    // make sure str is not undefined
-    return toNode(rootNode);
+    return Object.create(File.prototype, {
+      [SYMBOL]: {
+        enumerable: false,
+        value: rootNode
+      }
+    });
   }
 }

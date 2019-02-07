@@ -44,7 +44,8 @@ export function resolveProp(obj: any): IValue {
   if (typeof obj === 'string') {
     return {
       list: false,
-      type: typesMap.get(obj).is
+      type: typesMap.get(obj).is,
+      kind: typesMap.get(obj).kind
     };
   }
   if (typeof obj === 'object') {

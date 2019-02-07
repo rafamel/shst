@@ -1,3 +1,4 @@
+import path from 'path';
 import resolveTypes from './resolve';
 import { OUT_DIR, write } from '../utils/fsutil';
 import assemble from './assemble';
@@ -5,7 +6,8 @@ import assemble from './assemble';
 // TODO make sh.types.json available via docker build
 main();
 
-// TODO: prop "String": "toString"
+// TODO: prop "String": "toString" only for methods
+// TODO: add validation for sh.types.json
 
 function main(): void {
   // eslint-disable-next-line no-console
@@ -15,5 +17,10 @@ function main(): void {
 
   // eslint-disable-next-line no-console
   console.log('Assembling core types...');
-  write(OUT_DIR, 'core/index.ts', assemble(Object.values(types)));
+  const assembled = assemble(types);
+  Object.entries(assembled).forEach(([file, content]) => {
+    write(OUT_DIR, path.join('core', file + '.ts'), content);
+  });
+
+  // TODO add README for lib (programmatically generated)
 }

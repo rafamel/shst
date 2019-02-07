@@ -6,7 +6,7 @@ golang:1.11.5-alpine /bin/sh -x /go/src/app/sh/docker.sh`;
 
 // TODO prevent and test for "global" pollution (gopher)
 module.exports = {
-  default: 'nps sh.prepare sh.build sh.process sh.test sh.core sh.raise',
+  default: 'nps sh.prepare sh.build sh.process sh.core sh.promote',
   prepare: [
     'jake run:zero["shx rm -r sh/out"',
     'shx mkdir sh/out sh/out/sh sh/out/core'
@@ -25,15 +25,23 @@ module.exports = {
   //   // Minify
   //   'minify sh/out/sh.2.no-dead.js --out-file sh/out/sh/index.js --mangle.topLevel'
   // ].join(' && '),
-  test: `cross-env NODE_ENV=test jest --config=./sh/jest.config.js sh/test/setup/final.js`,
+  test: [
+    // core
+    `eslint ./sh/out/core --ext .js,.ts -c ${CONFIG_DIR}/.eslintrc.js --no-ignore`,
+    'tsc --noEmit --project ./sh/tsconfig.core.json',
+    // sh
+    'cross-env NODE_ENV=test jest --config=./sh/jest.config.js sh/test/setup/final.js'
+  ].join(' && '),
   core: [
     'node scripts/babel sh/core',
     `prettier --write "./sh/out/core/*.{ts,js}" --config "${CONFIG_DIR}/.prettierrc.js" --ignore-path`
   ].join(' && '),
-  raise: [
-    `jake run:zero["shx rm -r src/lib"]`,
-    `shx mkdir src/lib`,
-    `shx cp -r sh/out/sh src/lib/sh`,
-    `shx cp -r sh/out/core src/lib/core`
+  promote: [
+    // 'nps sh.test', // TODO
+    'jake run:zero["shx rm -r src/lib"]',
+    'shx mkdir src/lib',
+    // copy
+    'shx cp -r sh/out/sh src/lib/sh',
+    'shx cp -r sh/out/core src/lib/core'
   ].join(' && ')
 };

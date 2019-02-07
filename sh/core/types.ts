@@ -4,7 +4,7 @@ export interface IDef {
   doc?: string;
 }
 
-export type TKind = 'scalar' | 'enum' | 'struct' | 'interface';
+export type TKind = 'scalar' | 'enum' | 'interface' | 'struct';
 
 export interface ITypeMap {
   [key: string]: ITypeDef;
@@ -18,11 +18,16 @@ export interface ITypeDefMap {
   [key: string]: TTypeDef;
 }
 
-export type TTypeDef = IEnumDef | IStructDef | IInterfaceDef;
+export type TTypeDef = IEnumDef | IInterfaceDef | IStructDef;
 
 export interface IEnumDef extends ITypeDef {
   kind: 'enum';
   values: string[];
+}
+export interface IInterfaceDef extends ITypeDef {
+  kind: 'interface';
+  methods: IMethodDef[];
+  implementedBy: string[];
 }
 
 export interface IStructDef extends ITypeDef {
@@ -30,12 +35,6 @@ export interface IStructDef extends ITypeDef {
   fields: IFieldDef[];
   methods: IMethodDef[];
   implements: string[];
-}
-
-export interface IInterfaceDef extends ITypeDef {
-  kind: 'interface';
-  methods: IMethodDef[];
-  implementedBy: string[];
 }
 
 export interface IFieldDef extends IDef {
@@ -53,4 +52,11 @@ export interface IMethodDef extends IDef {
 export interface IValue {
   list: boolean;
   type: string;
+  kind: string;
+}
+
+export interface IKindBox {
+  enum: IEnumDef[];
+  interface: IInterfaceDef[];
+  struct: IStructDef[];
 }

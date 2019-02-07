@@ -8,12 +8,8 @@ export interface IParserOpts {
   language?: TLanguage;
 }
 
-export interface INode {
-  type: string;
+export interface IFileNode {
+  type: 'File';
   [key: string]: any;
   readonly [SYMBOL]: unique symbol;
-}
-
-export interface IFileNode extends INode {
-  type: 'File';
 }
