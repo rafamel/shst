@@ -22,9 +22,12 @@ module.exports = scripts({
       `shx mkdir ${OUT_DIR} out`
     ),
     transpile: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
-    process:
-      'minify out/sh.0.gopher.js --out-file lib/index.js --mangle.topLevel'
-    // [
+    process: series(
+      'minify out/sh.0.gopher.js --out-file lib/index.js --mangle.topLevel',
+      // TODO build types from source
+      'shx cp sh.types.json lib/'
+    )
+    // series(
     //   /* TODO Commented out as test cases are pending */
     //   // Set markers
     //   'node transforms/set-markers',
@@ -34,7 +37,7 @@ module.exports = scripts({
     //   'node transforms/remove-dead',
     //   // Minify
     //   'minify out/sh.2.no-dead.js --out-file lib/index.js --mangle.topLevel'
-    // ].join(' && ')
+    // )
   },
   fix: [
     'prettier',

@@ -1,5 +1,7 @@
 {
   "name": "@shast/sh",
+  "author": "Rafa Mel",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "prepublishOnly": "exit 1",
@@ -13,7 +15,12 @@
     "test": "nps test",
     "validate": "nps validate",
     "update": "nps update",
-    "clean": "nps clean"
+    "clean": "nps clean",
+    "@root": "npm run --prefix ../../",
+    "@sh": "npm run",
+    "@core": "npm run --prefix ../core",
+    ":link": "npm run @root -- :link",
+    ":commit": "npm run @root -- :commit"
   },
   "devDependencies": {
     "babel-minify": "^0.5.0",
