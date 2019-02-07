@@ -1,6 +1,8 @@
 const globals = require('eslint-restricted-globals');
-const { EXT_JS, EXT_TS } = require('./project.config');
 const { configs: ts } = require('@typescript-eslint/eslint-plugin');
+
+const EXT_JS = 'js,mjs,jsx';
+const EXT_TS = 'ts,tsx';
 
 module.exports = {
   root: true,

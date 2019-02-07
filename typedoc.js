@@ -6,11 +6,5 @@ module.exports = {
   excludeExternals: true,
   moduleResolution: 'node',
   module: 'system',
-  exclude: [
-    '**/internal/**/*.ts',
-    '**/lib/sh/**/*.ts',
-    '**/utils/**/*.ts',
-    '**/constants.ts',
-    '**/RootModel.ts'
-  ]
+  exclude: ['**/internal/**/*.ts']
 };

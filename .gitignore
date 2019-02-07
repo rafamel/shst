@@ -1,11 +1,9 @@
 # Project Specific #
 ####################
-/sh/out
-/src/lib
-/build
-/lib
-/bin
-/dist
+lib
+build
+bin
+dist
 _test.*
 
 # Node, Frameworks, Editors #
