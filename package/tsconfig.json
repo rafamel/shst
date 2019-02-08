@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
+  "extends": "../tsconfig.json",
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules"],
+  // https://www.typescriptlang.org/docs/handbook/compiler-options.html
+  // http://json.schemastore.org/tsconfig
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  }
+}

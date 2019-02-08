@@ -1,0 +1,67 @@
+{
+  "name": "shell-parser",
+  "version": "0.0.0",
+  "author": "Rafa Mel",
+  "description": "Shell parser",
+  "keywords": [
+    "keyword",
+    "keyword",
+    "keyword"
+  ],
+  "scripts": {
+    "prepublishOnly": "exit 1",
+    "start": "npm run watch",
+    "build": "nps build",
+    "build:prepare": "nps build.prepare",
+    "build:transpile": "nps build.transpile",
+    "build:declaration": "nps build.declaration",
+    "build:promote": "nps build.promote",
+    "watch": "nps watch",
+    "fix": "nps fix",
+    "types": "nps types",
+    "lint": "nps lint",
+    "lint:scripts": "nps lint.scripts",
+    "test": "nps test",
+    "test:watch": "nps test.watch",
+    "validate": "nps validate",
+    "update": "nps update",
+    "clean": "nps clean",
+    "@root": "npm run --prefix ../",
+    "@sh": "npm run @root -- @sh",
+    "@core": "npm run @root -- @core",
+    "@shast": "npm run @root -- @shast",
+    "@all": "npm run @root -- @all",
+    ":link": "npm run @root -- :link",
+    ":commit": "npm run @root -- :commit"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/rafamel/shell-parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rafamel/shell-parser"
+  },
+  "bugs": {
+    "url": "https://github.com/rafamel/shell-parser/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@shast/core": "^0.0.0",
+    "@shast/sh": "^0.0.0",
+    "@types/camelcase": "^4.1.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.13.0",
+    "jake": "^8.0.19",
+    "jest-cli": "^24.0.0",
+    "nps": "^5.9.3",
+    "onchange": "^5.2.0",
+    "prettier": "^1.16.4",
+    "shx": "^0.3.2",
+    "ttypescript": "^1.5.6",
+    "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "camelcase": "^5.0.0",
+    "list": "^2.0.16"
+  }
+}
