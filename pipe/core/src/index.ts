@@ -1,9 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import resolveTypes from './resolve';
+import parse from './parse';
 import render from './render';
 
-const OUT_PATH = path.join(__dirname, '../out');
+const OUT_PATH = path.join(__dirname, '../build/src');
+
 const write = (file: string, content: string): void =>
   fs.writeFileSync(path.join(OUT_PATH, file), content);
 
@@ -15,13 +16,13 @@ main();
 
 function main(): void {
   // eslint-disable-next-line no-console
-  console.log('Resolving sh types...');
-  const types = resolveTypes();
+  console.log('Parsing sh types...');
+  const types = parse();
 
   write('core.types.json', JSON.stringify(types, null, 2));
 
   // eslint-disable-next-line no-console
-  console.log('Assembling core types...');
+  console.log('Rendering core types...');
   const assembled = render(types);
   Object.entries(assembled).forEach(([name, content]) => {
     write(name + '.ts', content);

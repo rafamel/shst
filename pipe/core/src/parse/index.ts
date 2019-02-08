@@ -1,4 +1,4 @@
-import types from '~/raw';
+import types from './raw';
 import define from './define';
 import { queue } from './types-map';
 import { ITypeMap, ITypeDefMap } from '../types';

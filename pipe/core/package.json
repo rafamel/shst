@@ -1,13 +1,15 @@
 {
   "name": "@shast/core",
-  "author": "Rafa Mel",
   "version": "0.0.0",
+  "author": "Rafa Mel",
   "private": true,
+  "main": "build/lib",
   "scripts": {
     "prepublishOnly": "exit 1",
+    "start": "npm run watch",
     "build": "nps build",
     "build:prepare": "nps build.prepare",
-    "build:init": "nps build.init",
+    "build:render": "nps build.render",
     "build:transpile": "nps build.transpile",
     "build:declaration": "nps build.declaration",
     "watch": "nps watch",
@@ -20,11 +22,12 @@
     "update": "nps update",
     "clean": "nps clean",
     "@root": "npm run --prefix ../../",
-    "@sh": "npm run --prefix ../sh",
-    "@core": "npm run",
+    "@sh": "npm run @root -- @sh",
+    "@core": "npm run @root -- @core",
+    "@shast": "npm run @root -- @shast",
     "@all": "npm run @root -- @all",
-    ":link": "npm run @root -- :link",
-    ":commit": "npm run @root -- :commit"
+    ":link": "npm run @ -- :link",
+    ":commit": "npm run @ -- :commit"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

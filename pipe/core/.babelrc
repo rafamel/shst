@@ -9,12 +9,5 @@
     "@babel/plugin-proposal-class-properties",
     ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true }]
   ],
-  "ignore": ["node_modules", "**/*.d.ts"],
-  "env": {
-    "transpile": {
-      "plugins": [
-        ["babel-plugin-module-resolver", { "alias": { "~": "./out" } }]
-      ]
-    }
-  }
+  "ignore": ["node_modules", "**/*.d.ts"]
 }

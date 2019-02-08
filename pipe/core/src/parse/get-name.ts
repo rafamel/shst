@@ -1,6 +1,6 @@
 import camelcase from 'camelcase';
 import { TKind } from '~/types';
-import maps from '~/maps.json';
+import maps from './map.json';
 import assert from 'assert';
 
 export const replaceMap: { [key: string]: string } = {};

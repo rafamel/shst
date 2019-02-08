@@ -19,28 +19,27 @@ module.exports = scripts({
   build: {
     default:
       'cross-env NODE_ENV=production' +
-      ' nps validate build.prepare build.init build.transpile build.declaration',
+      ' nps validate build.prepare build.render build.transpile build.declaration',
     prepare: series(
-      `jake run:zero["shx rm -r ${OUT_DIR} out"]`,
-      `shx mkdir ${OUT_DIR} out`
+      `jake run:zero["shx rm -r ${OUT_DIR}"]`,
+      `shx mkdir ${OUT_DIR} ${OUT_DIR}/src ${OUT_DIR}/lib`
     ),
-    init: series(
+    render: series(
       `node ${dir('scripts/babel')} src`,
-      `shx cp -r tape/* out`,
+      `shx cp -r src/include/* ${OUT_DIR}/src/`,
       [
         'prettier',
-        `--write "./out/**/*.{${EXT},json,scss}"`,
+        `--write "./build/src/**/*.{${EXT},json,scss}"`,
         `--config "${dir('.prettierrc.js')}"`,
         `--ignore-path`
       ].join(' '),
-      `eslint ./out --ext ${DOT_EXT} -c ${dir('.eslintrc.js')} --no-ignore`,
-      'tsc --noEmit --project ttsconfig.json',
-      'shx cp out/core.types.json lib/'
+      `eslint ./build/src --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
+      'tsc --noEmit --project ttsconfig.json'
     ),
-    transpile: `cross-env BABEL_ENV=transpile babel out --out-dir ${OUT_DIR} --extensions ${DOT_EXT} --source-maps inline`,
+    transpile: `cross-env BABEL_ENV=transpile babel build/src --out-dir ${OUT_DIR}/lib --extensions ${DOT_EXT} --source-maps inline`,
     declaration: series(
       TS &&
-        `tsc --emitDeclarationOnly --project ttsconfig.json --outDir ${OUT_DIR}`,
+        `tsc --emitDeclarationOnly --project ttsconfig.json --outDir ${OUT_DIR}/lib`,
       `shx echo "${TS ? 'Declaration files built' : ''}"`
     )
   },
@@ -61,7 +60,7 @@ module.exports = scripts({
     scripts: 'jake lintscripts["' + __dirname + '"]'
   },
   test: series('nps lint types', 'cross-env NODE_ENV=test jest'),
-  validate: 'nps test lint.scripts',
+  validate: series('nps test lint.scripts', 'jake run:zero["npm outdated"]'),
   update: series('npm update --save/save-dev', 'npm outdated'),
   clean: series(
     `jake run:zero["shx rm -r ${OUT_DIR} out coverage"]`,

@@ -3,6 +3,8 @@
 import { SYMBOL } from './constants';
 import { List, from, toArray } from 'list';
 
+// TODO handle arrays as input
+
 export function getter(Class: any, list: boolean, prop: string) {
   if (!Class) {
     return list

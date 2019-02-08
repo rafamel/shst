@@ -1,6 +1,6 @@
 import assert from 'assert';
-import types from '~/raw';
-import maps from '~/maps.json';
+import types from './raw';
+import maps from './map.json';
 import { ITypeMap, ITypeDef } from '~/types';
 import getName from './get-name';
 
