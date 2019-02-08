@@ -6,7 +6,7 @@ const kindMap: any = {
   enum: './enum',
   interface: './interface',
   struct: './struct',
-  util: './util',
+  util: 'shell-parser/src/core',
   list: 'list'
 };
 

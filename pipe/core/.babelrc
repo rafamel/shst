@@ -9,5 +9,19 @@
     "@babel/plugin-proposal-class-properties",
     ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true }]
   ],
-  "ignore": ["node_modules", "**/*.d.ts"]
+  "ignore": ["node_modules", "**/*.d.ts"],
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "babel-plugin-module-resolver",
+          {
+            "alias": {
+              "shell-parser/src": ["./"]
+            }
+          }
+        ]
+      ]
+    }
+  }
 }

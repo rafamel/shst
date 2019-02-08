@@ -3,13 +3,14 @@
   "extends": "./tsconfig.json",
   "include": ["build/src/**/*"],
   "compilerOptions": {
-    "baseUrl": "./build/src",
-    "paths": {
-      "~/*": ["*"]
-    },
     "noEmit": false,
     "declaration": true,
     "allowJs": false,
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["../../package/src/*"],
+      "shell-parser/src/*": ["../../*"]
+    },
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths"
