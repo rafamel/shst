@@ -1,4 +1,4 @@
-const sh = require('../../out/sh.1.markers');
+const sh = require('../../build/src/markers');
 const register = require('../../utils/register-markers');
 const run = require('./run-all');
 

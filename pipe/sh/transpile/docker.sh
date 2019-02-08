@@ -17,12 +17,12 @@ GO111MODULE=on go install
 # Transpile
 cd /go/src/app/transpile
 # if desired, add -m flag for gopherjs output minification
-gopherjs build -o ../out/sh.0.gopher.js
-rm ../out/sh.0.gopher.js.map
+gopherjs build -o ../build/src/gopher.js
+cd ../build
+rm src/gopher.js.map
 
-cd ../lib
 # Declaration
-printf "declare const sh: any;\nexport default sh;" > index.d.ts
+printf "declare const sh: any;\nexport default sh;" > lib/index.d.ts
 
 # LICENSE
-cp /go/src/mvdan.cc/sh/LICENSE LICENSE
+cp /go/src/mvdan.cc/sh/LICENSE lib/LICENSE

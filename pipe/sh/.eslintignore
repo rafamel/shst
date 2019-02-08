@@ -1,4 +1,3 @@
-/out
-/lib
+/build
 /package-scripts.js
 /Jakefile.js

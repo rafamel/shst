@@ -9,7 +9,7 @@ module.exports = {
   end() {
     return write(
       __dirname,
-      '../out/sh.markers.json',
+      '../build/src/sh.markers.json',
       JSON.stringify(store, null, 2)
     );
   }

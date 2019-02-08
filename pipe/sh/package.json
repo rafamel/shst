@@ -1,8 +1,9 @@
 {
   "name": "@shast/sh",
-  "author": "Rafa Mel",
   "version": "0.0.0",
+  "author": "Rafa Mel",
   "private": true,
+  "main": "build/lib",
   "scripts": {
     "prepublishOnly": "exit 1",
     "build": "nps build",
@@ -17,8 +18,9 @@
     "update": "nps update",
     "clean": "nps clean",
     "@root": "npm run --prefix ../../",
-    "@sh": "npm run",
-    "@core": "npm run --prefix ../core",
+    "@sh": "npm run @root -- @sh",
+    "@core": "npm run @root -- @core",
+    "@shast": "npm run @root -- @shast",
     "@all": "npm run @root -- @all",
     ":link": "npm run @root -- :link",
     ":commit": "npm run @root -- :commit"

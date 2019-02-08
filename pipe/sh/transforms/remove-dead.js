@@ -2,15 +2,15 @@ const uuid = require('uuid/v4');
 const path = require('path');
 const j = require('jscodeshift');
 const { read, write } = require('../utils/fsutil');
-const markers = require(path.join(__dirname, '../out/sh.markers.json'));
+const markers = require(path.join(__dirname, '../build/src/sh.markers.json'));
 
 main();
 
 function main() {
   // eslint-disable-next-line no-console
   console.log('Removing dead code...');
-  const sh = read(__dirname, '../out/sh.0.gopher.js');
-  return write(__dirname, '../out/sh.2.no-dead.js', transform(sh));
+  const sh = read(__dirname, '../build/src/gopher.js');
+  return write(__dirname, '../build/src/no-dead.js', transform(sh));
 }
 
 function transform(srt) {

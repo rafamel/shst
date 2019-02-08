@@ -18,14 +18,14 @@ module.exports = scripts({
       'cross-env NODE_ENV=production' +
       ' nps lint build.prepare build.transpile build.process validate',
     prepare: series(
-      `jake run:zero["shx rm -r ${OUT_DIR} out"]`,
-      `shx mkdir ${OUT_DIR} out`
+      `jake run:zero["shx rm -r ${OUT_DIR}"]`,
+      `shx mkdir ${OUT_DIR} ${OUT_DIR}/src ${OUT_DIR}/lib`
     ),
     transpile: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
     process: series(
-      'minify out/sh.0.gopher.js --out-file lib/index.js --mangle.topLevel',
+      'minify build/src/gopher.js --out-file build/lib/index.js --mangle.topLevel',
       // TODO build types from source
-      'shx cp sh.types.json lib/'
+      'shx cp sh.types.json build/lib/'
     )
     // series(
     //   /* TODO Commented out as test cases are pending */
@@ -36,7 +36,7 @@ module.exports = scripts({
     //   // Remove unmarked code
     //   'node transforms/remove-dead',
     //   // Minify
-    //   'minify out/sh.2.no-dead.js --out-file lib/index.js --mangle.topLevel'
+    //   'minify build/src/no-dead.js --out-file build/lib/index.js --mangle.topLevel'
     // )
   },
   fix: [
@@ -50,7 +50,7 @@ module.exports = scripts({
     scripts: 'jake lintscripts["' + __dirname + '"]'
   },
   test: series('nps lint', 'cross-env NODE_ENV=test jest test/setup/final.js'),
-  validate: 'nps lint.scripts test',
+  validate: series('nps test lint.scripts', 'jake run:zero["npm outdated"]'),
   update: series('npm update --save/save-dev', 'npm outdated'),
   clean: series(
     `jake run:zero["shx rm -r ${OUT_DIR} out coverage"]`,

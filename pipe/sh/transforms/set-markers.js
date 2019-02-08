@@ -8,8 +8,8 @@ main();
 function main() {
   // eslint-disable-next-line no-console
   console.log('Setting markers...');
-  const sh = read(__dirname, '../out/sh.0.gopher.js');
-  return write(__dirname, '../out/sh.1.markers.js', transform(sh));
+  const sh = read(__dirname, '../build/src/gopher.js');
+  return write(__dirname, '../build/src/markers.js', transform(sh));
 }
 
 function transform(srt) {
