@@ -3,10 +3,11 @@ export { from } from '@/list';
 /**
  * An immutable [`List`](https://github.com/funkia/list/).
  * Only `toArray()` and `fromArray()` are exported from this module,
- * but you can choose to use any of [`list`'s available apis.](https://github.com/funkia/list/)
+ * but you can choose to use any of [`list`'s available apis.](https://github.com/funkia/list/#api-styles)
  */
 export class List<A> {
   readonly length: number;
+  public toJSON(): A[];
 }
 
 /**

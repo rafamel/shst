@@ -67,7 +67,6 @@
     "prettier": "^1.16.4",
     "shx": "^0.3.2",
     "typedoc": "^0.13.0",
-    "typedoc-plugin-external-module-map": "^0.1.0",
     "typescript": "^3.2.1"
   },
   "husky": {
