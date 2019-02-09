@@ -19,6 +19,17 @@ export default function renderStruct(
     .map((method) => renderMethod(method, dependencies))
     .join('\n');
 
+  const toJson = `
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    public toJSON() {
+      return {
+        ${obj.fields
+          .map((field) => `'${field.is}': this['${field.is}']`)
+          .join(',\n')}
+      }
+    }
+  `.trim();
+
   obj.implements.forEach((type) => dependencies.addCustom(type, 'interface'));
   const implement = obj.implements.length
     ? 'implements ' + obj.implements.join(', ')
@@ -30,6 +41,7 @@ export default function renderStruct(
       export class ${obj.is} ${implement} {
         ${fields}
         ${methods}
+        ${toJson}
       }
     `
   );
