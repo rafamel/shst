@@ -41,6 +41,7 @@ export default function assemble(
       export * from './enum';
       export * from './interface';
       export * from './struct';
+      export * from './types';
     `,
     enum: imports(all.enum.dependencies, 'enum') + all.enum.render,
     interface:
@@ -48,6 +49,32 @@ export default function assemble(
     struct:
       `/* eslint-disable @typescript-eslint/no-use-before-define */\n\n` +
       imports(all.struct.dependencies, 'struct') +
-      all.struct.render
+      all.struct.render,
+    types: `
+      export const interfaces: { [key:string]: string[] } = ${JSON.stringify(
+        Object.values(types).reduce((acc: any, item) => {
+          if (item.kind === 'interface') {
+            acc[item.is] = item.implementedBy;
+          }
+          return acc;
+        }, {}),
+        null,
+        2
+      )};
+      export const traversal: { [key:string]: string[] } = ${JSON.stringify(
+        Object.values(types).reduce((acc: any, item) => {
+          if (item.kind === 'struct') {
+            // @ts-ignore
+            const inodes = types.INode.implementedBy;
+            acc[item.is] = item.fields
+              .filter((field) => inodes.includes(field.value.type))
+              .map((field) => field.is);
+          }
+          return acc;
+        }, {}),
+        null,
+        2
+      )}
+    `
   };
 }

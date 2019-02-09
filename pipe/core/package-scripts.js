@@ -35,10 +35,7 @@ module.exports = scripts({
       `eslint ./build/src --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
       'tsc --noEmit --project ttsconfig.json'
     ),
-    transpile: series(
-      `jake cpr["build/src","${OUT_DIR}/lib",json]`,
-      `babel build/src --out-dir ${OUT_DIR}/lib --extensions ${DOT_EXT} --source-maps inline`
-    ),
+    transpile: `babel build/src --out-dir ${OUT_DIR}/lib --extensions ${DOT_EXT} --source-maps inline`,
     declaration: series(
       TS &&
         `tsc --emitDeclarationOnly --project ttsconfig.json --outDir ${OUT_DIR}/lib`,

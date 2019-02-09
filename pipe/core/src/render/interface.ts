@@ -40,6 +40,6 @@ export default function renderInterface(
       export interface ${obj.is} {
         ${methods}
       }
-    `
+    `.trim()
   );
 }
