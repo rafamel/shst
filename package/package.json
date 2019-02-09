@@ -33,8 +33,8 @@
     "@all": "npm run @root -- @all",
     ":bootstrap": "npm run @root -- :bootstrap",
     ":link": "npm run @root -- :link",
-    ":commit": "npm run @root -- :commit",
-    ":version": "npm run @root -- :version"
+    ":commit": "npm run @root -- :commit --",
+    ":version": "npm run @root -- :version --"
   },
   "license": "MIT",
   "homepage": "https://github.com/rafamel/shell-parser",

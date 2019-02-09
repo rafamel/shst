@@ -24,8 +24,8 @@
     "@all": "npm run @root -- @all",
     ":bootstrap": "npm run @root -- :bootstrap",
     ":link": "npm run @root -- :link",
-    ":commit": "npm run @root -- :commit",
-    ":version": "npm run @root -- :commit"
+    ":commit": "npm run @root -- :commit --",
+    ":version": "npm run @root -- :version --"
   },
   "devDependencies": {
     "babel-minify": "^0.5.0",
