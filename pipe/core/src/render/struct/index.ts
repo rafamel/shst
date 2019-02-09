@@ -39,6 +39,7 @@ export default function renderStruct(
     renderDoc(obj.doc) +
     `
       export class ${obj.is} ${implement} {
+        public static type: string = '${obj.is}';
         ${fields}
         ${methods}
         ${toJson}
