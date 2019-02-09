@@ -35,7 +35,10 @@ module.exports = scripts({
       `eslint ./build/src --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
       'tsc --noEmit --project ttsconfig.json'
     ),
-    transpile: `babel build/src --out-dir ${OUT_DIR}/lib --extensions ${DOT_EXT} --source-maps inline`,
+    transpile: series(
+      `jake cpr["build/src","${OUT_DIR}/lib",json]`,
+      `babel build/src --out-dir ${OUT_DIR}/lib --extensions ${DOT_EXT} --source-maps inline`
+    ),
     declaration: series(
       TS &&
         `tsc --emitDeclarationOnly --project ttsconfig.json --outDir ${OUT_DIR}/lib`,
@@ -68,6 +71,7 @@ module.exports = scripts({
   // Private
   private: {
     watch:
-      'concurrently "nps types" "nps lint"' + ' -n tsc,eslint -c magenta,yellow'
+      'concurrently "nps types" "nps lint" "nps build.render"' +
+      ' -n tsc,eslint,render -c magenta,yellow,green'
   }
 });

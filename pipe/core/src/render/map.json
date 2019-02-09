@@ -1,0 +1,8 @@
+{
+  "scalar": null,
+  "enum": "./enum",
+  "interface": "./interface",
+  "struct": "./struct",
+  "util": "shell-parser/src/utils/core",
+  "list": "list"
+}

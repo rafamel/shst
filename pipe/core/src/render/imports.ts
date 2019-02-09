@@ -1,15 +1,8 @@
 import Dependencies from './Dependencies';
 import assert from 'assert';
+import _map from './map.json';
 
-const kindMap: any = {
-  scalar: null,
-  enum: './enum',
-  interface: './interface',
-  struct: './struct',
-  util: 'shell-parser/src/core',
-  list: 'list'
-};
-
+const map: any = _map;
 export default function renderImports(
   dependencies: Dependencies,
   exclude: string
@@ -17,10 +10,10 @@ export default function renderImports(
   const all = dependencies.getAll();
 
   return Object.keys(all).reduce((acc: string, kind: string) => {
-    assert(kindMap.hasOwnProperty(kind));
+    assert(map.hasOwnProperty(kind));
 
-    if (kind === exclude || !kindMap[kind]) return acc;
+    if (kind === exclude || !map[kind]) return acc;
     const arr = all[kind];
-    return acc + `import { ${arr.join(', ')} } from '${kindMap[kind]}';\n`;
+    return acc + `import { ${arr.join(', ')} } from '${map[kind]}';\n`;
   }, '');
 }
