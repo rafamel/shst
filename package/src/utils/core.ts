@@ -8,6 +8,11 @@ List.prototype.toJSON = function<A>(): A[] {
   return toArray(this);
 };
 
+const regex = /^mvdan\.cc\/sh\/syntax\.\*?/;
+export function getType(item: any): string {
+  return item.$type ? item.$type.replace(regex, '') : '';
+}
+
 export function wrapType(Class: any, val: any) {
   const prev = val.__internal_object__[SYMBOL];
   if (prev) return prev;

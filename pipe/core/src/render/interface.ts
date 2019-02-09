@@ -34,6 +34,7 @@ export default function renderInterface(
     )
     .join('\n');
 
+  dependencies.addCustom('interfaced', 'helpers');
   return (
     renderDoc(obj.doc) +
     `

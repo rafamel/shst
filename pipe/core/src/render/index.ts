@@ -1,6 +1,7 @@
 import { ITypeDefMap, TTypeDef, IKindBox } from '~/types';
 import collection from './collection';
 import imports from './imports';
+import map from './map.json';
 
 export function kindBox(arr: TTypeDef[]): IKindBox {
   return arr.reduce(
@@ -38,40 +39,21 @@ export default function assemble(
 
   return {
     index: `
+      import * as types from './types';
+      
+      export default types;
       export * from './enum';
       export * from './interface';
       export * from './struct';
-      export * from './types';
     `,
     enum: imports(all.enum.dependencies, 'enum') + all.enum.render,
     interface:
-      imports(all.interface.dependencies, 'interface') +
-      `
-      import { interfaces } from './types';
-
-      function interfaced(name: string, instance: any): boolean {
-        const type = instance.constructor && instance.constructor.type;
-        if (!type) return false;
-        const arr: string[] | void = interfaces[name];
-        return !!arr && arr.includes(type);
-      }
-      `.trim() +
-      all.interface.render,
+      imports(all.interface.dependencies, 'interface') + all.interface.render,
     struct:
       `/* eslint-disable @typescript-eslint/no-use-before-define */\n\n` +
       imports(all.struct.dependencies, 'struct') +
       all.struct.render,
     types: `
-      export const interfaces: { [key:string]: string[] } = ${JSON.stringify(
-        Object.values(types).reduce((acc: any, item) => {
-          if (item.kind === 'interface') {
-            acc[item.is] = item.implementedBy;
-          }
-          return acc;
-        }, {}),
-        null,
-        2
-      )};
       export const traversal: { [key:string]: string[] } = ${JSON.stringify(
         Object.values(types).reduce((acc: any, item) => {
           if (item.kind === 'struct') {
@@ -86,6 +68,46 @@ export default function assemble(
         null,
         2
       )}
-    `
+      export const structs: { [key:string]: string } = ${JSON.stringify(
+        Object.values(types).reduce((acc: any, item) => {
+          if (item.kind === 'struct') {
+            acc[item.was] = item.is;
+          }
+          return acc;
+        }, {}),
+        null,
+        2
+      )}
+      export const interfaces: { [key:string]: string[] } = ${JSON.stringify(
+        Object.values(types).reduce((acc: any, item) => {
+          if (item.kind === 'interface') {
+            acc[item.is] = item.implementedBy;
+          }
+          return acc;
+        }, {}),
+        null,
+        2
+      )};
+    `,
+    helpers: `
+      import { interfaces, structs } from './types';
+      import * as classes from './struct';
+      import { getType, wrapType, wrapList } from '${map.util}';
+
+      export function interfaced(name: string, instance: any): boolean {
+        const type = instance.constructor && instance.constructor.type;
+        if (!type) return false;
+        const arr: string[] | void = interfaces[name];
+        return !!arr && arr.includes(type);
+      }
+      export function resolveInterface(item: any): any {
+        const type = getType(item);
+        // @ts-ignore
+        return type ? wrapType(classes[structs[type]], item) : item;
+      }
+      export function resolveInterfaceList(arr: any[]): any {
+        return wrapList(arr.map(resolveInterface));
+      }
+      `
   };
 }

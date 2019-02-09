@@ -1,8 +1,8 @@
 import { IValue, IFieldDef, IMethodDef } from '~/types';
 import Dependencies from '../Dependencies';
 
-export function isStruct(value: IValue): boolean {
-  return value.kind === 'struct';
+export function typeWrap(value: IValue): boolean {
+  return value.kind === 'struct' || value.kind === 'interface';
 }
 
 export function ownProp(
@@ -18,13 +18,23 @@ export function wrapValue(
   value: IValue,
   dependencies: Dependencies
 ): string {
-  if (isStruct(value)) {
-    if (value.list) {
-      dependencies.addCustom('wrapTypeList', 'util');
-      return `wrapTypeList(${value.type}, ${str})`;
+  if (typeWrap(value)) {
+    if (value.kind === 'struct') {
+      if (value.list) {
+        dependencies.addCustom('wrapTypeList', 'util');
+        return `wrapTypeList(${value.type}, ${str})`;
+      } else {
+        dependencies.addCustom('wrapType', 'util');
+        return `wrapType(${value.type}, ${str})`;
+      }
     } else {
-      dependencies.addCustom('wrapType', 'util');
-      return `wrapType(${value.type}, ${str})`;
+      if (value.list) {
+        dependencies.addCustom('resolveInterfaceList', 'helpers');
+        return `resolveInterfaceList(${str})`;
+      } else {
+        dependencies.addCustom('resolveInterface', 'helpers');
+        return `resolveInterface(${str})`;
+      }
     }
   }
   if (value.list) {
@@ -39,7 +49,7 @@ export function unwrapValue(
   value: IValue,
   dependencies: Dependencies
 ): string {
-  if (isStruct(value)) {
+  if (typeWrap(value)) {
     if (value.list) {
       dependencies.addCustom('unwrapTypeList', 'util');
       return `unwrapTypeList(${str})`;
