@@ -4,21 +4,29 @@
     "@babel/typescript"
   ],
   "plugins": [
-    ["babel-plugin-module-resolver", { "alias": { "~": "./src" } }],
+    [
+      "babel-plugin-module-resolver",
+      {
+        "alias": {
+          "~": "./src",
+          "@shast": "./src/pipe"
+        }
+      }
+    ],
     ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": false }],
     "@babel/plugin-proposal-class-properties",
     ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true }]
   ],
   "ignore": ["node_modules", "**/*.d.ts"],
   "env": {
-    "production": {
+    "test": {
       "plugins": [
         [
           "babel-plugin-module-resolver",
           {
             "alias": {
-              "~": "./src",
-              "@shast": "./src/pipe"
+              "~": "./lib",
+              "@shast": "./lib/pipe"
             }
           }
         ]

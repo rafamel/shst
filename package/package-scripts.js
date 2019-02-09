@@ -33,13 +33,13 @@ module.exports = scripts({
       `shx echo "${TS ? 'Declaration files built' : ''}"`
     ),
     promote: series(
-      `shx mkdir ${OUT_DIR}/pipe`,
+      `jake run:zero["shx mkdir ${OUT_DIR}/pipe"]`,
       `shx cp -r ../pipe/sh/build/lib ${OUT_DIR}/pipe/sh`,
       `shx cp -r ../pipe/core/build/lib ${OUT_DIR}/pipe/core`
     )
   },
   watch: series(
-    'nps build.prepare',
+    'nps build.prepare build.promote',
     `onchange "./src/**/*.{${EXT}}" --initial --kill -- ` +
       `jake clear run:exec["shx echo ⚡"] run:zero["nps private.watch"]`
   ),
@@ -54,12 +54,7 @@ module.exports = scripts({
     default: `eslint ./src ./test --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
     scripts: 'jake lintscripts["' + __dirname + '"]'
   },
-  test: {
-    default: series('nps lint types', 'cross-env NODE_ENV=test jest'),
-    watch:
-      `onchange "./{src,test}/**/*.{${EXT}}" --initial --kill -- ` +
-      'jake clear run:exec["shx echo ⚡"] run:zero["nps test"]'
-  },
+  test: series('nps lint types', 'cross-env NODE_ENV=test jest'),
   validate: series('nps test lint.scripts', 'jake run:zero["npm outdated"]'),
   update: series('npm update --save/save-dev', 'npm outdated'),
   clean: series(
