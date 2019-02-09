@@ -29,13 +29,14 @@ export default function renderMethod(
     dependencies
   );
 
+  dependencies.addCustom('call', 'util');
   return (
     renderDoc(method.doc) +
     `public ${method.is}(${params}): ${renderType(
       method.returns,
       dependencies
     )} {
-      return ${returns};
+      return call(() => ${returns});
     }`
   );
 }

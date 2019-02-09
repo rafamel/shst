@@ -9,11 +9,3 @@ export function wrap<T>(obj: T, val: any): T {
 export function unwrap(val: any): any {
   return val[SYMBOL];
 }
-
-export function call<T>(fn: () => T): T {
-  try {
-    return fn();
-  } catch (e) {
-    throw Error(e.message);
-  }
-}

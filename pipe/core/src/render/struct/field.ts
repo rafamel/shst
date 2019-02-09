@@ -8,7 +8,7 @@ export default function renderField(
   dependencies: Dependencies
 ): string {
   dependencies.add(field.value);
-
+  dependencies.addCustom('call', 'util');
   return (
     renderDoc(field.doc) +
     `
@@ -20,11 +20,11 @@ export default function renderField(
       )};
     }
     public set ${field.is}(value: ${renderType(field.value, dependencies)}) {
-      ${ownProp(field, dependencies)} = ${unwrapValue(
+      call(() => (${ownProp(field, dependencies)} = ${unwrapValue(
       'value',
       field.value,
       dependencies
-    )};
+    )}));
     }
   `.trim()
   );

@@ -13,6 +13,14 @@ export function getType(item: any): string {
   return item.$type ? item.$type.replace(regex, '') : '';
 }
 
+export function call<T>(fn: () => T): T {
+  try {
+    return fn();
+  } catch (e) {
+    throw Error(e.message);
+  }
+}
+
 export function wrapType(Class: any, val: any) {
   const prev = val.__internal_object__[SYMBOL];
   if (prev) return prev;
