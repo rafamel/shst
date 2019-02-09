@@ -21,17 +21,19 @@
     "validate": "nps validate",
     "update": "nps update",
     "clean": "nps clean",
-    "@root": "npm run --prefix ../../",
+    "@root": "cd ../../ && npm run",
     "@sh": "npm run @root -- @sh",
     "@core": "npm run @root -- @core",
     "@shast": "npm run @root -- @shast",
     "@all": "npm run @root -- @all",
+    ":bootstrap": "npm run @root -- :bootstrap",
     ":link": "npm run @root -- :link",
-    ":commit": "npm run @root -- :commit"
+    ":commit": "npm run @root -- :commit",
+    ":version": "npm run @root -- :commit"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@shast/sh": "^0.0.0",
+    "@shast/sh": "^0.0.4",
     "@types/camelcase": "^4.1.0",
     "camelcase": "^5.0.0",
     "concurrently": "^4.1.0",
@@ -43,7 +45,7 @@
     "nps": "^5.9.3",
     "onchange": "^5.2.0",
     "prettier": "^1.16.4",
-    "shell-parser": "^0.0.0",
+    "shell-parser": "^0.0.4",
     "shx": "^0.3.2",
     "typescript": "^3.2.1"
   },

@@ -14,6 +14,7 @@ const {
 const EXT = EXT_JS + ',' + EXT_TS;
 const DOT_EXT = '.' + EXT.replace(/,/g, ',.');
 
+// TODO add publish; build on publish
 process.env.LOG_LEVEL = 'disable';
 module.exports = scripts({
   build: {

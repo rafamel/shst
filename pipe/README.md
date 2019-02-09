@@ -2,7 +2,7 @@
 
 1. `sh`: transpiles [@mvdan's `sh`](https://github.com/mvdan/sh) from `Go` into `JS`.
 2. `core`: builds the `TS` typings and `JS` classes from a `JSON` dump stemming from the original library.
-3. The output of this build process -found at `sh/lib` & `sh/core`- will be merged for the final `shast` build, they're not actually released as several packages -`lerna` is used for convenience.
+3. The output of this build process -found at `sh/lib` & `sh/core`- will be merged for the final `shast` build, they're not actually released as several packages -`lerna` is just used for convenience.
 
 ## Launch
 

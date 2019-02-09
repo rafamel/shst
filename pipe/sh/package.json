@@ -17,13 +17,15 @@
     "validate": "nps validate",
     "update": "nps update",
     "clean": "nps clean",
-    "@root": "npm run --prefix ../../",
+    "@root": "cd ../../ && npm run",
     "@sh": "npm run @root -- @sh",
     "@core": "npm run @root -- @core",
     "@shast": "npm run @root -- @shast",
     "@all": "npm run @root -- @all",
+    ":bootstrap": "npm run @root -- :bootstrap",
     ":link": "npm run @root -- :link",
-    ":commit": "npm run @root -- :commit"
+    ":commit": "npm run @root -- :commit",
+    ":version": "npm run @root -- :commit"
   },
   "devDependencies": {
     "babel-minify": "^0.5.0",
