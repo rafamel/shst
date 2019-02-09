@@ -5,8 +5,6 @@ const series = (...x) => `(${x.map((x) => x || 'shx echo').join(') && (')})`;
 const scripts = (x) => Object.entries(x)
   .reduce((m, [k, v]) => (m.scripts[k] = v || 'shx echo') && m, { scripts: {} });
 const {
-  TYPESCRIPT: TS,
-  OUT_DIR,
   DOCS_DIR,
   CONFIG_DIR,
   RELEASE_BUILD,
@@ -17,7 +15,10 @@ const { COMMIT, COMMITIZEN, VERSION } = process.env;
 process.env.LOG_LEVEL = 'disable';
 module.exports = scripts({
   setup: series('npm run @sh -- build', 'npm run @core -- build'),
-  docs: 'echo 1',
+  docs: series(
+    `jake run:zero["shx rm -r ${DOCS_DIR}"]`,
+    `typedoc --out ${DOCS_DIR} --tsconfig package/typings/tsconfig.json`
+  ),
   changelog: 'conventional-changelog -p angular -i CHANGELOG.md -s -r 0',
   validate: {
     default: series(
@@ -46,7 +47,11 @@ module.exports = scripts({
   ),
   // Private
   private: {
-    version: series('nps changelog', RELEASE_DOCS && 'nps docs'),
+    version: series(
+      'nps changelog',
+      RELEASE_BUILD && 'npm run @shast -- build',
+      RELEASE_DOCS && 'nps docs'
+    ),
     preversion: series(
       !VERSION &&
         'jake run:conditional[' +

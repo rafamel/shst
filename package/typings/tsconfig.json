@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
+  "extends": "../tsconfig.json",
+  "include": ["./*", "../lib/**/*"],
+  // These will effectively rewrite the original type
+  // definitions to be clasified as internal by TypeDoc
+  // without throwing any errors
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["../node_modules/*"]
+    }
+  }
+}
