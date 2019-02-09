@@ -1,16 +1,8 @@
-import sh from '@shast/sh';
-import { IFileNode } from '~/types';
-import toNode from '~/utils/to-node';
-import { SYMBOL } from '~/constants';
-import { INode } from '@shast/core';
+import { File, INode } from '@shast/core';
 
 export default function traverse(
-  node: IFileNode,
+  node: File,
   cb: (node: INode) => boolean | void
 ): void {
-  sh.syntax.Walk(node[SYMBOL], (srcNode: any) => {
-    if (!srcNode) return true;
-    const node = toNode(srcNode);
-    return cb(node);
-  });
+  // TODO not implemented!
 }

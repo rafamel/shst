@@ -1,13 +1,12 @@
 import sh from '@shast/sh';
-import { SYMBOL } from '~/constants';
-import { IFileNode } from '~/types';
+import { File } from '@shast/core';
+import { wrap, unwrap, call, unwrapType } from './utils';
 
 export default class Printer {
-  private [SYMBOL]: any;
   public constructor() {
-    this[SYMBOL] = sh.syntax.NewPrinter();
+    wrap(this, call(() => sh.syntax.NewPrinter()));
   }
-  public print(node: IFileNode): string {
-    return this[SYMBOL].Print(node[SYMBOL]);
+  public print(node: File): string {
+    return call(() => unwrap(this).Print(unwrapType(node)));
   }
 }

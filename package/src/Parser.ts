@@ -1,16 +1,16 @@
 import sh from '@shast/sh';
-import { SYMBOL, LANGUAGE_MAP } from '~/constants';
+import { LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts } from '~/types';
 import { File } from '@shast/core';
+import { wrap, unwrap, call, wrapType } from './utils';
 
 const { syntax } = sh;
 export default class Parser {
-  private [SYMBOL]: any;
   public stopAt: string | null;
   public comments: boolean;
   public language: TLanguage;
   public constructor({ stopAt, comments, language }: IParserOpts = {}) {
-    const args = [];
+    const args: any = [];
 
     // stopAt
     if (stopAt) args.push(syntax.stopAt(stopAt));
@@ -26,18 +26,10 @@ export default class Parser {
     this.language = lang.self;
     args.push(syntax.Variant(syntax[lang.sh]));
 
-    Object.defineProperty(this, SYMBOL, {
-      enumerable: false,
-      value: syntax.NewParser(...args)
-    });
+    wrap(this, call(() => syntax.NewParser(...args)));
   }
   public parse(str: string): File {
-    const rootNode = this[SYMBOL].Parse(str);
-    return Object.create(File.prototype, {
-      [SYMBOL]: {
-        enumerable: false,
-        value: rootNode
-      }
-    });
+    const rootNode = unwrap(this).Parse(str);
+    return wrapType(File, rootNode);
   }
 }

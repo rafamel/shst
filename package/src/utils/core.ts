@@ -3,6 +3,11 @@
 import { List, from, toArray } from 'list';
 import { SYMBOL } from '~/constants';
 
+// @ts-ignore
+List.prototype.toJSON = function<A>(): A[] {
+  return toArray(this);
+};
+
 export function wrapType(Class: any, val: any) {
   const prev = val.__internal_object__[SYMBOL];
   if (prev) return prev;
