@@ -40,6 +40,14 @@ export default function renderInterface(
       export interface ${obj.is} {
         ${methods}
       }
-    `.trim()
+    `.trim() +
+    `
+      /** 
+       * Determines whether a given instance of a class implements \`${obj.is}\`
+      */
+      export function is${obj.is.slice(1)}(instance: any): boolean {
+        return interfaced('${obj.is}', instance);
+      }
+    `
   );
 }

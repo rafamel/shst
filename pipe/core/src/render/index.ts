@@ -45,7 +45,18 @@ export default function assemble(
     `,
     enum: imports(all.enum.dependencies, 'enum') + all.enum.render,
     interface:
-      imports(all.interface.dependencies, 'interface') + all.interface.render,
+      imports(all.interface.dependencies, 'interface') +
+      `
+      import { interfaces } from './types';
+
+      function interfaced(name: string, instance: any): boolean {
+        const type = instance.constructor && instance.constructor.type;
+        if (!type) return false;
+        const arr: string[] | void = interfaces[name];
+        return !!arr && arr.includes(type);
+      }
+      `.trim() +
+      all.interface.render,
     struct:
       `/* eslint-disable @typescript-eslint/no-use-before-define */\n\n` +
       imports(all.struct.dependencies, 'struct') +
