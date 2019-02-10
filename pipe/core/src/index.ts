@@ -27,4 +27,10 @@ function main(): void {
   Object.entries(assembled).forEach(([name, content]) => {
     write(name + '.ts', content);
   });
+
+  write(
+    'README.md',
+    '# These are programmatically generated sources\n\n' +
+      '**Do not modify them directly, they will be overwritten**\n'
+  );
 }
