@@ -1,5 +1,4 @@
 import { SYMBOL } from '~/constants';
-
 export * from './core';
 
 export function wrap<T>(obj: T, val: any): T {
