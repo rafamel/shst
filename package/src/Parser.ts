@@ -28,8 +28,8 @@ export default class Parser {
 
     wrap(this, call(() => syntax.NewParser(...args)));
   }
-  public parse(str: string): File {
-    const rootNode = unwrap(this).Parse(str);
+  public parse(str: string, name?: string): File {
+    const rootNode = unwrap(this).Parse(str, name);
     return wrapType(File, rootNode);
   }
 }
