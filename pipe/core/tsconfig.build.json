@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
+  "extends": "./tsconfig.json",
+  "include": ["build/**/*"],
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["../../package/src/*"],
+      "#/package/*": ["../../package/src/*"]
+    }
+  }
+}

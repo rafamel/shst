@@ -1,5 +1,5 @@
-import sh from '@shast/sh';
-import { File } from '@shast/core';
+import sh from '#/sh';
+import { File } from '#/core';
 import { wrap, unwrap, call, unwrapType } from './utils';
 
 export default class Printer {

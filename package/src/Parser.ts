@@ -1,7 +1,7 @@
-import sh from '@shast/sh';
+import sh from '#/sh';
 import { LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts } from '~/types';
-import { File } from '@shast/core';
+import { File } from '#/core';
 import { wrap, unwrap, call, wrapType } from './utils';
 
 const { syntax } = sh;

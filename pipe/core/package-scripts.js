@@ -19,27 +19,27 @@ module.exports = scripts({
   build: {
     default:
       'cross-env NODE_ENV=production' +
-      ' nps validate build.prepare build.render build.transpile build.declaration',
+      ' nps validate build.prepare build.render build.raise',
     prepare: series(
       `jake run:zero["shx rm -r ${OUT_DIR}"]`,
-      `shx mkdir ${OUT_DIR} ${OUT_DIR}/src ${OUT_DIR}/lib`
+      `shx mkdir ${OUT_DIR}`
     ),
     render: series(
       `node ${dir('scripts/babel')} src`,
       [
         'prettier',
-        `--write "./build/src/**/*.{${EXT},json,scss}"`,
+        `--write "./build/**/*.{${EXT},json,scss}"`,
         `--config "${dir('.prettierrc.js')}"`,
         `--ignore-path`
       ].join(' '),
-      `eslint ./build/src --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
-      'tsc --noEmit --project ttsconfig.json'
+      `eslint ./build --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
+      'tsc --noEmit --project tsconfig.build.json'
     ),
-    transpile: `babel build/src --out-dir ${OUT_DIR}/lib --extensions ${DOT_EXT} --source-maps inline`,
-    declaration: series(
-      TS &&
-        `tsc --emitDeclarationOnly --project ttsconfig.json --outDir ${OUT_DIR}/lib`,
-      `shx echo "${TS ? 'Declaration files built' : ''}"`
+    raise: series(
+      'shx echo "\nRaising core...\n"',
+      'jake run:zero["shx rm -r ../../package/src/core"]',
+      'jake run:zero["shx mkdir ../../package/src/core"]',
+      'shx cp -r build/* ../../package/src/core/'
     )
   },
   watch: series(

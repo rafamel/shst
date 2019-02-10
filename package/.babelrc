@@ -9,7 +9,9 @@
       {
         "alias": {
           "~": "./src",
-          "@shast": "./src/pipe"
+          "#/package": "./src",
+          "#/core": "./src/core",
+          "#/sh": "../pipe/sh/build/lib"
         }
       }
     ],
@@ -19,14 +21,16 @@
   ],
   "ignore": ["node_modules", "**/*.d.ts"],
   "env": {
-    "test": {
+    "production": {
       "plugins": [
         [
           "babel-plugin-module-resolver",
           {
             "alias": {
-              "~": "./lib",
-              "@shast": "./lib/pipe"
+              "~": "./src",
+              "#/package": "./src",
+              "#/core": "./src/core",
+              "#/sh": "./src/sh"
             }
           }
         ]

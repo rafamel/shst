@@ -6,7 +6,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "#/sh/*": ["../../pipe/sh/build/lib/*"],
+      "#/package/*": ["../../package/src/*"]
     }
   }
 }

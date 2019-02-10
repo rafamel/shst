@@ -39,9 +39,6 @@ export default function assemble(
 
   return {
     index: `
-      import * as types from './types';
-      
-      export default types;
       export * from './enum';
       export * from './interface';
       export * from './struct';
@@ -54,20 +51,6 @@ export default function assemble(
       imports(all.struct.dependencies, 'struct') +
       all.struct.render,
     types: `
-      export const traversal: { [key:string]: string[] } = ${JSON.stringify(
-        Object.values(types).reduce((acc: any, item) => {
-          if (item.kind === 'struct') {
-            // @ts-ignore
-            const inodes = types.INode.implementedBy;
-            acc[item.is] = item.fields
-              .filter((field) => inodes.includes(field.value.type))
-              .map((field) => field.is);
-          }
-          return acc;
-        }, {}),
-        null,
-        2
-      )}
       export const structs: { [key:string]: string } = ${JSON.stringify(
         Object.values(types).reduce((acc: any, item) => {
           if (item.kind === 'struct') {

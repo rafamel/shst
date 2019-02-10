@@ -1,5 +1,6 @@
-import types, * as core from '@shast/core';
-import sh from '@shast/sh';
+import * as core from '#/core';
+import { structs } from '#/core/types';
+import sh from '#/sh';
 import { call, unwrapType, getType, wrapType } from './utils';
 
 export default function traverse(
@@ -11,7 +12,7 @@ export default function traverse(
       if (!node) return true;
       const type = getType(node);
       // @ts-ignore
-      return cb(wrapType(core[types.structs[type]], node));
+      return cb(wrapType(core[structs[type]], node));
     })
   );
 }

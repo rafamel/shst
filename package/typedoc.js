@@ -1,4 +1,4 @@
-const pkg = require('./package/package.json');
+const pkg = require('./package.json');
 const path = require('path');
 
 module.exports = {
@@ -11,13 +11,12 @@ module.exports = {
   excludeExternals: true,
   excludePrivate: true,
   excludeNotExported: true,
-  readme: path.join(__dirname, 'README.md'),
-  tsConfig: path.join(__dirname, 'package/typings/tsconfig.json'),
+  readme: path.join(__dirname, '../README.md'),
+  tsConfig: path.join(__dirname, 'typings/tsconfig.json'),
   exclude: [
     '**/internal/**/*',
-    '**/pipe/sh/**/*',
-    '**/pipe/core/**/helper*',
-    '**/pipe/core/**/types*',
+    '**/core/**/helper*',
+    '**/core/**/types*',
     '**/utils/**/*',
     '**/constants*'
   ]

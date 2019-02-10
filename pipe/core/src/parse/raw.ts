@@ -1,4 +1,4 @@
-import all from '@shast/sh/build/lib/sh.types.json';
+import all from '#/sh/sh.types.json';
 
 const { types }: any = all;
 export default types;

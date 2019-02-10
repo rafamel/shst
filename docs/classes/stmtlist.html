@@ -83,9 +83,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stmtlist.html#last" class="tsd-kind-icon">last</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="stmtlist.html#statements" class="tsd-kind-icon">statements</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="stmtlist.html#type" class="tsd-kind-icon">type</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="stmtlist.html#last" class="tsd-kind-icon">last</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="stmtlist.html#stmts" class="tsd-kind-icon">stmts</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -101,35 +106,82 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="last" class="tsd-anchor"></a>
-					<h3>last</h3>
-					<div class="tsd-signature tsd-kind-icon">last<span class="tsd-signature-symbol">:</span> <a href="list.html" class="tsd-signature-type">List</a><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in lib/pipe/core/struct.d.ts:525</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="statements" class="tsd-anchor"></a>
-					<h3>statements</h3>
-					<div class="tsd-signature tsd-kind-icon">statements<span class="tsd-signature-symbol">:</span> <a href="list.html" class="tsd-signature-type">List</a><span class="tsd-signature-symbol">&lt;</span><a href="stmt.html" class="tsd-signature-type">Stmt</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in lib/pipe/core/struct.d.ts:526</li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;StmtList&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in lib/pipe/core/struct.d.ts:524</li>
+							<li>Defined in src/core/struct.ts:1530</li>
 						</ul>
 					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="last" class="tsd-anchor"></a>
+					<h3>last</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> last<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> last<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.ts:1531</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.ts:1534</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="stmts" class="tsd-anchor"></a>
+					<h3>stmts</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> stmts<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="stmt.html" class="tsd-signature-type">Stmt</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> stmts<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="stmt.html" class="tsd-signature-type">Stmt</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.ts:1537</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="stmt.html" class="tsd-signature-type">Stmt</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.ts:1540</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="stmt.html" class="tsd-signature-type">Stmt</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -145,7 +197,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/inode.html">INode</a>.<a href="../interfaces/inode.html#end">end</a></p>
 								<ul>
-									<li>Defined in lib/pipe/core/struct.d.ts:527</li>
+									<li>Defined in src/core/struct.ts:1543</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
@@ -163,7 +215,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/inode.html">INode</a>.<a href="../interfaces/inode.html#pos">pos</a></p>
 								<ul>
-									<li>Defined in lib/pipe/core/struct.d.ts:528</li>
+									<li>Defined in src/core/struct.ts:1546</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
@@ -180,7 +232,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in lib/pipe/core/struct.d.ts:529</li>
+									<li>Defined in src/core/struct.ts:1550</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
@@ -206,14 +258,14 @@
 					<li class="current tsd-kind-class">
 						<a href="stmtlist.html" class="tsd-kind-icon">Stmt<wbr>List</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="stmtlist.html#last" class="tsd-kind-icon">last</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="stmtlist.html#statements" class="tsd-kind-icon">statements</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 								<a href="stmtlist.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="stmtlist.html#last" class="tsd-kind-icon">last</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="stmtlist.html#stmts" class="tsd-kind-icon">stmts</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="stmtlist.html#end" class="tsd-kind-icon">end</a>

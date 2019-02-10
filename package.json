@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "prepublishOnly": "exit 1",
-    "postinstall": "npm run :bootstrap",
+    "postinstall": "npm run bootstrap",
     "preversion": "nps private.preversion",
     "version": "nps private.version",
+    "bootstrap": "lerna bootstrap",
     "setup": "nps setup",
     "docs": "nps docs",
     "changelog": "nps changelog",
@@ -16,10 +17,8 @@
     "@root": "npm run",
     "@sh": "cd pipe/sh && npm run",
     "@core": "cd pipe/core && npm run",
-    "@shast": "cd package && npm run",
+    "@package": "cd package && npm run",
     "@all": "lerna run --stream",
-    ":bootstrap": "lerna bootstrap",
-    ":link": "lerna link",
     ":commit": "cross-env COMMITIZEN=# git-cz",
     ":version": "cross-env VERSION=# lerna version --no-push --no-changelog"
   },

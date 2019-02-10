@@ -29,10 +29,8 @@
     "@root": "cd ../ && npm run",
     "@sh": "npm run @root -- @sh",
     "@core": "npm run @root -- @core",
-    "@shast": "npm run @root -- @shast",
+    "@package": "npm run @root -- @package",
     "@all": "npm run @root -- @all",
-    ":bootstrap": "npm run @root -- :bootstrap",
-    ":link": "npm run @root -- :link",
     ":commit": "npm run @root -- :commit --",
     ":version": "npm run @root -- :version --"
   },
@@ -47,8 +45,6 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
-    "@shast/core": "^0.0.0",
-    "@shast/sh": "^0.0.0",
     "@types/camelcase": "^4.1.0",
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",

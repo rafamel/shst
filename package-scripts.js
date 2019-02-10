@@ -17,7 +17,7 @@ module.exports = scripts({
   setup: series('npm run @sh -- build', 'npm run @core -- build'),
   docs: series(
     `jake run:zero["shx rm -r ${DOCS_DIR}"]`,
-    `typedoc --out ${DOCS_DIR} --tsconfig package/typings/tsconfig.json`
+    `cd package && typedoc --out ../${DOCS_DIR} --tsconfig typings/tsconfig.json`
   ),
   changelog: 'conventional-changelog -p angular -i CHANGELOG.md -s -r 0',
   validate: {
@@ -34,8 +34,8 @@ module.exports = scripts({
       'concurrently',
       '"npm run @sh -- validate"',
       '"npm run @core -- validate"',
-      '"npm run @shast -- validate"',
-      '-n @sh,@core,@shast -c gray.dim,gray,magenta --kill-others-on-fail'
+      '"npm run @package -- validate"',
+      '-n @sh,@core,@package -c gray.dim,gray,magenta --kill-others-on-fail'
     ].join(' '),
     md: `markdownlint README.md --config ${dir('markdown.json')}`
   },
@@ -49,7 +49,7 @@ module.exports = scripts({
   private: {
     version: series(
       'nps changelog',
-      RELEASE_BUILD && 'npm run @shast -- build',
+      RELEASE_BUILD && 'npm run @package -- build',
       RELEASE_DOCS && 'nps docs'
     ),
     preversion: series(

@@ -33,9 +33,8 @@ module.exports = scripts({
       `shx echo "${TS ? 'Declaration files built' : ''}"`
     ),
     promote: series(
-      `jake run:zero["shx mkdir ${OUT_DIR}/pipe"]`,
-      `shx cp -r ../pipe/sh/build/lib ${OUT_DIR}/pipe/sh`,
-      `shx cp -r ../pipe/core/build/lib ${OUT_DIR}/pipe/core`
+      `jake run:zero["mkdir ${OUT_DIR}/sh"]`,
+      `shx cp -r ../pipe/sh/build/lib/* ${OUT_DIR}/sh/`
     )
   },
   watch: series(

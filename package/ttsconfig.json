@@ -7,10 +7,6 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "allowJs": false,
-    "paths": {
-      "~/*": ["src/*"],
-      "@shast/*": ["src/pipe/*"]
-    },
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths"

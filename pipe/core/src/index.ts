@@ -3,7 +3,7 @@ import fs from 'fs';
 import parse from './parse';
 import render from './render';
 
-const OUT_PATH = path.join(__dirname, '../build/src');
+const OUT_PATH = path.join(__dirname, '../build');
 
 const write = (file: string, content: string): void =>
   fs.writeFileSync(path.join(OUT_PATH, file), content);
@@ -27,6 +27,4 @@ function main(): void {
   Object.entries(assembled).forEach(([name, content]) => {
     write(name + '.ts', content);
   });
-
-  // TODO add README for lib (programmatically generated)
 }

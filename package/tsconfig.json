@@ -8,7 +8,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      // by ./src/core
+      "#/package/*": ["src/*"],
+      // by ./src
+      "#/core/*": ["src/core/*"],
+      "#/core": ["src/core"],
+      "#/sh": ["../pipe/sh/build/lib"],
+      // by ./typings
+      "@/*": ["node_modules/*"]
     }
   }
 }

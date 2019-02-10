@@ -4,6 +4,6 @@
   "interface": "./interface",
   "struct": "./struct",
   "helpers": "./helpers",
-  "util": "shell-parser/src/utils/core",
+  "util": "#/package/utils/core",
   "list": "list"
 }
