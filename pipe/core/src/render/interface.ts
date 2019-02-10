@@ -19,7 +19,11 @@ export default function renderInterface(
             (param): string => {
               dependencies.add(param.value);
 
-              return `${param.name}: ${renderType(param.value, dependencies)}`;
+              return `${param.name}: ${renderType(
+                param.value,
+                'in',
+                dependencies
+              )}`;
             }
           )
           .join(', ');
@@ -27,6 +31,7 @@ export default function renderInterface(
           renderDoc(method.doc) +
           `${method.is}(${params}): ${renderType(
             method.returns,
+            'out',
             dependencies
           )};`
         );

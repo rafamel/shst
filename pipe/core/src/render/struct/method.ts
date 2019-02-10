@@ -14,7 +14,7 @@ export default function renderMethod(
       (param): string => {
         dependencies.add(param.value);
 
-        return `${param.name}: ${renderType(param.value, dependencies)}`;
+        return `${param.name}: ${renderType(param.value, 'in', dependencies)}`;
       }
     )
     .join(', ');
@@ -34,6 +34,7 @@ export default function renderMethod(
     renderDoc(method.doc) +
     `public ${method.is}(${params}): ${renderType(
       method.returns,
+      'out',
       dependencies
     )} {
       return call(() => ${returns});

@@ -42,14 +42,14 @@ export function wrapTypeList<T>(Class: any, arr: T[]): List<T> {
   return from(arr.map((x) => wrapType(Class, x)));
 }
 
-export function unwrapTypeList<T>(list: List<T>): T[] {
-  return toArray(list).map(unwrapType);
+export function unwrapTypeList<T>(list: List<T> | T[]): T[] {
+  return unwrapList(list).map(unwrapType);
 }
 
 export function wrapList<T>(arr: T[]): List<T> {
   return from(arr);
 }
 
-export function unwrapList<T>(list: List<T>): T[] {
-  return toArray(list);
+export function unwrapList<T>(list: List<T> | T[]): T[] {
+  return list instanceof List ? toArray(list) : list;
 }

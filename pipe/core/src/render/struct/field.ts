@@ -12,14 +12,17 @@ export default function renderField(
   return (
     renderDoc(field.doc) +
     `
-    public get ${field.is}(): ${renderType(field.value, dependencies)} {
+    public get ${field.is}(): ${renderType(field.value, 'out', dependencies)} {
       return ${wrapValue(
         ownProp(field, dependencies),
         field.value,
         dependencies
       )};
     }
-    public set ${field.is}(value: ${renderType(field.value, dependencies)}) {
+    public set ${field.is}(value: ${
+      // 'out' as getters must have the same type as setters
+      renderType(field.value, 'out', dependencies)
+    }) {
       call(() => (${ownProp(field, dependencies)} = ${unwrapValue(
       'value',
       field.value,
