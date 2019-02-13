@@ -26,6 +26,7 @@ module.exports = scripts({
     ),
     render: series(
       `node ${dir('scripts/babel')} src`,
+      `shx cp -r src/render/include/* ${OUT_DIR}/`,
       [
         'prettier',
         `--write "./build/**/*.{${EXT},json,scss}"`,

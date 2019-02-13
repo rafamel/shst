@@ -3,7 +3,6 @@
   "enum": "./enum",
   "interface": "./interface",
   "struct": "./struct",
-  "helpers": "./helpers",
-  "util": "#/package/utils/core",
-  "list": "list"
+  "util": "./util",
+  "constants": "./constants"
 }

@@ -1,12 +1,12 @@
 import sh from '#/sh';
 import { File } from '#/core';
-import { wrap, unwrap, call, unwrapType } from './utils';
+import { seed, collect, call, collectType } from '#/core/util';
 
 export default class Printer {
   public constructor() {
-    wrap(this, call(() => sh.syntax.NewPrinter()));
+    seed(this, call(() => sh.syntax.NewPrinter()));
   }
   public print(node: File): string {
-    return call(() => unwrap(this).Print(unwrapType(node)));
+    return call(() => collect(this).Print(collectType(node)));
   }
 }

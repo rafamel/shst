@@ -1,4 +1,3 @@
-export const SYMBOL: unique symbol = Symbol('internal');
 export const NODE_EXCLUDE = ['__internal_object__', '$type'];
 export const LANGUAGE_MAP = {
   bash: { self: 'bash', sh: 'LangBash' },

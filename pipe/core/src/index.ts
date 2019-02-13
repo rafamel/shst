@@ -25,7 +25,7 @@ function main(): void {
   console.log('Rendering core types...');
   const assembled = render(types);
   Object.entries(assembled).forEach(([name, content]) => {
-    write(name + '.ts', content);
+    write(name, content);
   });
 
   write(

@@ -2,7 +2,7 @@ import sh from '#/sh';
 import { LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts } from '~/types';
 import { File } from '#/core';
-import { wrap, unwrap, call, wrapType } from './utils';
+import { seed, collect, call, createType } from '#/core/util';
 
 const { syntax } = sh;
 export default class Parser {
@@ -26,10 +26,10 @@ export default class Parser {
     this.language = lang.self;
     args.push(syntax.Variant(syntax[lang.sh]));
 
-    wrap(this, call(() => syntax.NewParser(...args)));
+    seed(this, call(() => syntax.NewParser(...args)));
   }
   public parse(str: string, name?: string): File {
-    const rootNode = unwrap(this).Parse(str, name);
-    return wrapType(File, rootNode);
+    const rootNode = collect(this).Parse(str, name);
+    return createType(File, rootNode);
   }
 }

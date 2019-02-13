@@ -1,6 +1,6 @@
 import { IInterfaceDef, IMethodDef } from '~/types';
 import assert from 'assert';
-import { renderType, renderDoc } from './helpers';
+import { renderType, renderDoc, renderParams } from './helpers';
 import Dependencies from './Dependencies';
 
 export default function renderInterface(
@@ -14,24 +14,12 @@ export default function renderInterface(
       (method: IMethodDef): string => {
         dependencies.add(method.returns);
 
-        const params = method.params
-          .map(
-            (param): string => {
-              dependencies.add(param.value);
+        const params = renderParams(method.params, dependencies);
 
-              return `${param.name}: ${renderType(
-                param.value,
-                'in',
-                dependencies
-              )}`;
-            }
-          )
-          .join(', ');
         return (
           renderDoc(method.doc) +
           `${method.is}(${params}): ${renderType(
             method.returns,
-            'out',
             dependencies
           )};`
         );
@@ -39,7 +27,7 @@ export default function renderInterface(
     )
     .join('\n');
 
-  dependencies.addCustom('interfaced', 'helpers');
+  dependencies.addCustom('isInterface', 'util');
   return (
     renderDoc(obj.doc) +
     `
@@ -52,7 +40,7 @@ export default function renderInterface(
        * Determines whether a given instance of a class implements \`${obj.is}\`
       */
       export function is${obj.is.slice(1)}(instance: any): boolean {
-        return interfaced('${obj.is}', instance);
+        return isInterface('${obj.is}', instance);
       }
     `
   );

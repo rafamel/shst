@@ -1,16 +1,8 @@
-import { IValue, IFieldDef, IMethodDef } from '~/types';
+import { IValue } from '~/types';
 import Dependencies from '../Dependencies';
 
 export function typeWrap(value: IValue): boolean {
   return value.kind === 'struct' || value.kind === 'interface';
-}
-
-export function ownProp(
-  item: IFieldDef | IMethodDef,
-  dependencies: Dependencies
-): string {
-  dependencies.addCustom('unwrapType', 'util');
-  return `unwrapType(this)['${item.was}']`;
 }
 
 export function wrapValue(
@@ -21,25 +13,21 @@ export function wrapValue(
   if (typeWrap(value)) {
     if (value.kind === 'struct') {
       if (value.list) {
-        dependencies.addCustom('wrapTypeList', 'util');
-        return `wrapTypeList(${value.type}, ${str})`;
+        dependencies.addCustom('createTypeList', 'util');
+        return `createTypeList(${value.type}, ${str})`;
       } else {
-        dependencies.addCustom('wrapType', 'util');
-        return `wrapType(${value.type}, ${str})`;
+        dependencies.addCustom('createType', 'util');
+        return `createType(${value.type}, ${str})`;
       }
     } else {
       if (value.list) {
-        dependencies.addCustom('resolveInterfaceList', 'helpers');
+        dependencies.addCustom('resolveInterfaceList', 'util');
         return `resolveInterfaceList(${str})`;
       } else {
-        dependencies.addCustom('resolveInterface', 'helpers');
+        dependencies.addCustom('resolveInterface', 'util');
         return `resolveInterface(${str})`;
       }
     }
-  }
-  if (value.list) {
-    dependencies.addCustom('wrapList', 'util');
-    return `wrapList(${str})`;
   }
   return str;
 }
@@ -51,16 +39,12 @@ export function unwrapValue(
 ): string {
   if (typeWrap(value)) {
     if (value.list) {
-      dependencies.addCustom('unwrapTypeList', 'util');
-      return `unwrapTypeList(${str})`;
+      dependencies.addCustom('collectTypeList', 'util');
+      return `collectTypeList(${str})`;
     } else {
-      dependencies.addCustom('unwrapType', 'util');
-      return `unwrapType(${str})`;
+      dependencies.addCustom('collectType', 'util');
+      return `collectType(${str})`;
     }
-  }
-  if (value.list) {
-    dependencies.addCustom('unwrapList', 'util');
-    return `unwrapList(${str})`;
   }
   return str;
 }
