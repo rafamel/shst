@@ -44,7 +44,5 @@
     "shx": "^0.3.2",
     "typescript": "^3.2.1"
   },
-  "dependencies": {
-    "list": "^2.0.16"
-  }
+  "dependencies": {}
 }
