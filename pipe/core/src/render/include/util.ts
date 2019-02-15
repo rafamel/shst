@@ -64,7 +64,14 @@ export function seedType(instance: any, Class: any, inner: any) {
   }
 
   const { $root, $internal } = src;
-  const descriptor: any = { value: { instance, inner } };
+  const descriptor: any = {
+    value: {
+      instance,
+      inner,
+      constructor: Class,
+      arrays: {}
+    }
+  };
   descriptor.value.outer = Object.create($root, {
     [SYMBOL]: descriptor,
     // eslint-disable-next-line @typescript-eslint/camelcase
@@ -124,12 +131,57 @@ export function set(obj: any, prop: string, value: any) {
   Object.defineProperty(obj, prop, { value, writable: true });
 }
 
-export function internalArray(arr: any[]) {
+export function internalArrayDescriptor(is: string, isType: boolean) {
   return {
-    $array: arr,
-    $offset: 0,
-    $length: arr.length,
-    $capacity: arr.length,
-    $val: this
+    $array: {
+      get: isType
+        ? function $array() {
+            return collect(this).instance[is].map((x: any) =>
+              internal(collect(x).outer)
+            );
+          }
+        : function $array() {
+            return collect(this).instance[is];
+          }
+    },
+    $offset: {
+      value: 0
+    },
+    $length: {
+      get: function $length() {
+        return collect(this).instance[is].length;
+      }
+    },
+    $capacity: {
+      get: function $capacity() {
+        return collect(this).instance[is].length;
+      }
+    },
+    $val: {
+      get: function $val() {
+        return this;
+      }
+    }
   };
+}
+
+export function internalArray(is: string, was: string, isType: boolean) {
+  const src = collect(this);
+  let ans = src.arrays[is];
+
+  if (!ans) {
+    const { arrays, constructor, inner } = src;
+    const { $arrays } = collect(constructor);
+    let proto = $arrays[is];
+    if (!proto) {
+      $arrays[is] = proto = Object.create(
+        Object.getPrototypeOf(internal(inner)[was]),
+        internalArrayDescriptor(is, isType)
+      );
+    }
+    arrays[is] = ans = Object.create(proto);
+    seed(ans, src);
+  }
+
+  return ans;
 }

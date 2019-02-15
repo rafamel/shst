@@ -25,7 +25,8 @@ export default function renderInternal(
           }
         }
         ${$inner(obj, true, dependencies)}
-      }
+      },
+      $arrays: {}
     }
     export class ${obj.is} {
       static [SYMBOL] = $${obj.is};
@@ -115,18 +116,13 @@ function $inner(
         let str = `collect(this).instance['${field.is}']`;
         if (isInternal) {
           if (field.value.list) {
-            dependencies.addCustom('internal', 'util');
             dependencies.addCustom('internalArray', 'util');
-            if (typeWrap(field.value)) {
-              // TODO
-              // str = `internalArray(
-              //     ${str}.map(x => internal(collect(x).outer))
-              //   )`;
-              str = `collect(this).inner.__internal_object__['${field.was}']`;
-            } else {
-              // TODO
-              str = `internalArray(${str})`;
-            }
+            str = `internalArray.call(
+              this,
+              '${field.is}',
+              '${field.was}',
+              ${String(typeWrap(field.value))}
+            )`;
           } else if (typeWrap(field.value)) {
             dependencies.addCustom('internal', 'util');
             str = `internal(collect(${str}).outer)`;
