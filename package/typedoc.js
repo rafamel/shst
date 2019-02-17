@@ -12,11 +12,12 @@ module.exports = {
   excludePrivate: true,
   excludeNotExported: true,
   readme: path.join(__dirname, '../README.md'),
-  tsConfig: path.join(__dirname, 'typings/tsconfig.json'),
   exclude: [
     '**/internal/**/*',
-    '**/core/**/helper*',
+    '**/test/**/*',
+    '**/core/**/util*',
     '**/core/**/types*',
+    '**/core/**/constants*',
     '**/utils/**/*',
     '**/constants*'
   ]

@@ -17,7 +17,7 @@ module.exports = scripts({
   setup: series('npm run @sh -- build', 'npm run @core -- build'),
   docs: series(
     `jake run:zero["shx rm -r ${DOCS_DIR}"]`,
-    `cd package && typedoc --out ../${DOCS_DIR} --tsconfig typings/tsconfig.json`
+    `cd package && typedoc --out ../${DOCS_DIR}`
   ),
   changelog: 'conventional-changelog -p angular -i CHANGELOG.md -s -r 0',
   validate: {
