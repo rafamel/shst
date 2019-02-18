@@ -17,7 +17,7 @@ export function renderType(obj: IValue, dependencies: Dependencies): string {
 export function renderDoc(doc?: string): string {
   assert(!doc || typeof doc === 'string');
 
-  return doc ? `\n/* ${doc.trim()} */\n` : '';
+  return doc ? `\n/**\n * ${doc.trim()}\n */\n` : '';
 }
 
 export function renderParams(
