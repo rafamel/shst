@@ -23,21 +23,19 @@ module.exports = scripts({
     ),
     transpile: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
     process: series(
-      'minify build/src/gopher.js --out-file build/lib/index.js --mangle.topLevel',
+      'node transforms/expose-packages',
+      /* TODO Commented out as test cases are pending */
+      // // Set markers
+      // 'node transforms/set-markers',
+      // // Run test cases on markers
+      // `cross-env NODE_ENV=test jest test/setup/gopher-markers.js`,
+      // // Remove unmarked code
+      // 'node transforms/remove-dead',
+      // Minify
+      'minify build/src/exposed.js --out-file build/lib/index.js --mangle.topLevel',
       // TODO build types from source
       'shx cp sh.types.json build/lib/'
     )
-    // series(
-    //   /* TODO Commented out as test cases are pending */
-    //   // Set markers
-    //   'node transforms/set-markers',
-    //   // Run test cases on markers
-    //   `cross-env NODE_ENV=test jest test/setup/gopher-markers.js`,
-    //   // Remove unmarked code
-    //   'node transforms/remove-dead',
-    //   // Minify
-    //   'minify build/src/no-dead.js --out-file build/lib/index.js --mangle.topLevel'
-    // )
   },
   fix: [
     'prettier',
