@@ -1,28 +1,32 @@
 #!/bin/sh
 
 set -e
+cd /go
 
-# Install required dev tools for build
-apk update
-apk add git gcc musl-dev
+# Only git is needed, and whichever version 3.9 has is fine.
+apk add --no-cache git
 
-# Install sh package
-go get -u mvdan.cc/sh/syntax
+# Enable Go modules, and disable CGO since we don't need it and we don't want to
+# install gcc.
+export GO111MODULE=on
+export CGO_ENABLED=0
 
-# Install @myitcv's gopherjs fork
-git clone https://github.com/myitcv/gopherjs /go/src/github.com/gopherjs/gopherjs
-cd /go/src/github.com/gopherjs/gopherjs
-GO111MODULE=on go install
+# Shallow clone v3 of the sh package.
+# TODO: pin a version tag or commit hash instead
+git clone --depth=1 -b master.v3 https://github.com/mvdan/sh
+cd /go/sh
 
-# Transpile
-cd /go/src/app/transpile
+# Install the myitcv/gopherjs version pinned by sh v3.
+go install github.com/gopherjs/gopherjs
+
+# Transpile, using sh v3's go.mod to resolve deps.
 # if desired, add -m flag for gopherjs output minification
-gopherjs build -o ../build/src/gopher.js
-cd ../build
+gopherjs build -o /go/app/build/src/gopher.js /go/app/transpile/main.go
+cd /go/app/build
 rm src/gopher.js.map
 
 # Declaration
 printf "declare const sh: any;\nexport default sh;" > lib/index.d.ts
 
 # LICENSE
-cp /go/src/mvdan.cc/sh/LICENSE lib/LICENSE
+cp /go/sh/LICENSE lib/LICENSE

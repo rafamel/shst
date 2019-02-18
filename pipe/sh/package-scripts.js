@@ -8,8 +8,8 @@ const { ROOT_DIR, OUT_DIR, CONFIG_DIR, EXT } = require('./project.config');
 const DOT_EXT = '.' + EXT.replace(/,/g, ',.');
 
 const docker = `docker run -ti --rm --name go-sh-build \
---mount type=bind,source=${ROOT_DIR},target=/go/src/app \
-golang:1.11.5-alpine /bin/sh -x /go/src/app/transpile/docker.sh`;
+--mount type=bind,source=${ROOT_DIR},target=/go/app \
+golang:1.11.5-alpine /bin/sh -x /go/app/transpile/docker.sh`;
 
 process.env.LOG_LEVEL = 'disable';
 module.exports = scripts({
