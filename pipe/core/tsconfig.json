@@ -8,6 +8,7 @@
     "paths": {
       "~/*": ["src/*"],
       "#/sh/*": ["../../pipe/sh/build/lib/*"],
+      "#/sh": ["../../pipe/sh/build/lib"],
       "#/package/*": ["../../package/src/*"]
     }
   }

@@ -46,7 +46,11 @@ export default function assemble(
       imports(all.interface.dependencies, 'interface') + all.interface.render,
     'struct.js':
       '/* eslint-disable import/no-unresolved */\n' +
-      imports(all.implementation.dependencies, 'struct') +
+      imports(all.implementation.dependencies, [
+        'struct',
+        'interface',
+        'enum'
+      ]) +
       all.implementation.render,
     'struct.d.ts':
       imports(all.declaration.dependencies, 'struct') + all.declaration.render,

@@ -3,6 +3,25 @@
 import * as classes from './struct';
 import { interfaces, structs } from './types';
 import { SYMBOL } from './constants';
+import sh from '#/sh';
+
+const syntaxPkg = sh.packages['mvdan.cc/sh/syntax'];
+export function innerProto(was: string): any {
+  return Object.getPrototypeOf(syntaxPkg[was].ptr.nil);
+}
+
+export function propProto(
+  structWas: string,
+  iField: number,
+  fieldIs: string,
+  isType: boolean
+): any {
+  const typ = syntaxPkg[structWas].fields[iField].typ;
+  return Object.create(
+    Object.getPrototypeOf(typ.nil),
+    internalArrayDescriptor(fieldIs, isType)
+  );
+}
 
 /**
  * Gets type name from a gopherjs obj $type prop
@@ -55,15 +74,8 @@ export function createTypeList<T>(Class: any, arr: T[]): T[] {
  * Seeds an instance of a class
  */
 export function seedType(instance: any, Class: any, inner: any) {
-  const src = collect(Class);
-  if (!src.$root) {
-    const pRoot = Object.getPrototypeOf(inner);
-    const pInternal = Object.getPrototypeOf(inner.__internal_object__);
-    src.$root = Object.create(pRoot, src.root);
-    src.$internal = Object.create(pInternal, src.internal);
-  }
+  const { $root, $internal } = collect(Class);
 
-  const { $root, $internal } = src;
   const descriptor: any = {
     value: {
       instance,
@@ -129,6 +141,7 @@ export function internal(obj: any): any {
 
 export function set(obj: any, prop: string, value: any) {
   Object.defineProperty(obj, prop, { value, writable: true });
+  return value;
 }
 
 export function internalArrayDescriptor(is: string, isType: boolean) {
@@ -165,23 +178,14 @@ export function internalArrayDescriptor(is: string, isType: boolean) {
   };
 }
 
-export function internalArray(is: string, was: string, isType: boolean) {
+export function internalArray(is: string) {
   const src = collect(this);
-  let ans = src.arrays[is];
 
+  let ans = src.arrays[is];
   if (!ans) {
-    const { arrays, constructor, inner } = src;
-    const { $arrays } = collect(constructor);
-    let proto = $arrays[is];
-    if (!proto) {
-      $arrays[is] = proto = Object.create(
-        Object.getPrototypeOf(internal(inner)[was]),
-        internalArrayDescriptor(is, isType)
-      );
-    }
-    arrays[is] = ans = Object.create(proto);
+    const { $arrays } = collect(src.constructor);
+    src.arrays[is] = ans = Object.create($arrays[is]);
     seed(ans, src);
   }
-
   return ans;
 }

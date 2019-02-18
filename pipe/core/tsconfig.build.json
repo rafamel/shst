@@ -6,6 +6,7 @@
   "compilerOptions": {
     "paths": {
       "~/*": ["../../package/src/*"],
+      "#/sh": ["../sh/build/lib"],
       "#/package/*": ["../../package/src/*"]
     }
   }

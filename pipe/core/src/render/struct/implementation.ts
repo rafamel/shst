@@ -2,38 +2,77 @@ import assert from 'assert';
 import { IStructDef } from '~/types';
 import Dependencies from '~/render/Dependencies';
 import { wrapValue, unwrapValue, typeWrap } from './helpers';
+import sh from '#/sh';
 
+const syntaxPkg = sh.packages['mvdan.cc/sh/syntax'];
 export default function renderInternal(
   obj: IStructDef,
   dependencies: Dependencies
 ): string {
   assert(obj.kind === 'struct');
+  // TODO remove try/catch (keep assert) once types json match sh version
+  try {
+    assert(!!syntaxPkg[obj.was]['ptr'].nil);
+  } catch (e) {
+    console.log(obj.was, 'skipped');
+    return '';
+  }
 
   dependencies.addCustom('SYMBOL', 'constants');
   dependencies.addCustom('collect', 'util');
   dependencies.addCustom('internal', 'util');
+  dependencies.addCustom('innerProto', 'util');
+  dependencies.addCustom('set', 'util');
 
   return `
-    const $${obj.is} = {
-      root: {
+    const $${obj.is} = () => ({
+      $root: Object.defineProperties({}, {
         ${$inner(obj, false, dependencies)}
-      },
-      internal: {
-        $val: {
-          get: function() {
-            return this;
+      }),
+      $internal: Object.create(
+        innerProto('${obj.was}'),
+        {
+          $val: {
+            get: function() {
+              return this;
+            }
           }
+          ${$inner(obj, true, dependencies)}
         }
-        ${$inner(obj, true, dependencies)}
-      },
-      $arrays: {}
-    }
+      ),
+      $arrays: {
+        ${obj.fields
+          .filter((x) => x.value.list)
+          .map((field) => {
+            dependencies.addCustom('propProto', 'util');
+            const arr = syntaxPkg[obj.was].fields
+              .map(({ prop }: any, i: number) => ({ i, prop }))
+              .filter((x: any) => x.prop === field.was);
+            // TODO remove try/catch (keep assert) once types json match sh version
+            try {
+              assert(arr.length === 1);
+            } catch (e) {
+              console.log(obj.was, field.was, 'skipped');
+              return `${field.is}: {}`;
+            }
+
+            return `${field.is}: propProto(
+              '${obj.is}',
+              ${arr[0].i},
+              '${field.is}',
+              ${String(typeWrap(field.value))}
+            )`;
+          })
+          .join(',\n')}
+      }
+    });
     export class ${obj.is} {
-      static [SYMBOL] = $${obj.is};
+      static get [SYMBOL]() {
+        return set(this, SYMBOL, $${obj.is}());
+      };
       static type = '${obj.is}';
       ${obj.fields
         .map((field) => {
-          dependencies.addCustom('set', 'util');
           return `
             get ${field.is}() {
               return (
@@ -55,16 +94,20 @@ export default function renderInternal(
         .map((method) => {
           dependencies.addCustom('call', 'util');
           return `
-          ${method.is}(
-            ${method.params.map((param) => param.name).join(', ')}
-          ) {
-            return call(() => collect(this).outer['${method.was}'](
-              ${method.params
-                .map((x) => unwrapValue(x.name, x.value, dependencies))
-                .join(', ')}
-            ));
-          }
-        `.trim();
+            ${method.is}(
+              ${method.params.map((param) => param.name).join(', ')}
+            ) {
+              return ${wrapValue(
+                `call(() => collect(this).outer['${method.was}'](
+                  ${method.params
+                    .map((x) => unwrapValue(x.name, x.value, dependencies))
+                    .join(', ')}
+                  ))`,
+                method.returns,
+                dependencies
+              )};
+            }
+          `.trim();
         })
         .join('\n')}
       toJSON() {
@@ -117,12 +160,7 @@ function $inner(
         if (isInternal) {
           if (field.value.list) {
             dependencies.addCustom('internalArray', 'util');
-            str = `internalArray.call(
-              this,
-              '${field.is}',
-              '${field.was}',
-              ${String(typeWrap(field.value))}
-            )`;
+            str = `internalArray.call(this, '${field.is}')`;
           } else if (typeWrap(field.value)) {
             dependencies.addCustom('internal', 'util');
             str = `internal(collect(${str}).outer)`;
