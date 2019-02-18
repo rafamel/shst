@@ -9,7 +9,8 @@ module.exports = {
   modulePathIgnorePatterns: [
     '<rootDir>/lib',
     '<rootDir>/src/@types',
-    '<rootDir>/src/bin'
+    '<rootDir>/src/bin',
+    '<rootDir>/src/core/struct.d.ts'
   ],
   moduleFileExtensions: EXT_ARR.concat(['json']),
   testPathIgnorePatterns: ['/node_modules/']
