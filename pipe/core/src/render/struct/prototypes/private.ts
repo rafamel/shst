@@ -1,6 +1,6 @@
 import { IStructDef, IPrivateDef } from '~/types';
-import Dependencies from '../Dependencies';
-import { renderType, externalize } from '../helpers';
+import Dependencies from '../../Dependencies';
+import { renderType, externalize } from '../../helpers';
 
 export default function renderPrivate(
   item: IStructDef,

@@ -7,11 +7,7 @@ export function renderType(obj: IValue, dependencies: Dependencies): string {
   assert(typeof obj.list === 'boolean');
 
   dependencies.add(obj);
-  if (obj.list) {
-    return `${obj.type}[]`;
-  }
-
-  return obj.type;
+  return obj.list ? `${obj.type}[]` : obj.type;
 }
 
 export function renderDoc(doc?: string): string {

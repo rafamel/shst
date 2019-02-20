@@ -1,6 +1,6 @@
 import { IStructDef } from '~/types';
 
-export default function fromJSON(arr: IStructDef[]): string {
+export default function renderFromJSON(arr: IStructDef[]): string {
   const overloads = arr
     .map((item) => {
       return `function fromJSON(plain: classes.T${item.is}): \

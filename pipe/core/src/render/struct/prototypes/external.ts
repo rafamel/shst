@@ -1,6 +1,6 @@
 import { IStructDef, IFieldDef, IMethodDef } from '~/types';
-import Dependencies from '../Dependencies';
-import { typeWrap, externalize } from '../helpers';
+import Dependencies from '../../Dependencies';
+import { typeWrap, externalize } from '../../helpers';
 
 export default function renderExternal(
   item: IStructDef,

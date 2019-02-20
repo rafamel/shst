@@ -5,11 +5,21 @@ import { externalize, typeWrap } from '../../helpers';
 import renderFromJSON from './from-json';
 import renderConstructor from './constructor';
 import renderToJSON from './to-json';
+import imports from '../../imports';
 
-export default function renderInternal(
-  obj: IStructDef,
-  dependencies: Dependencies
-): string {
+export default function renderImplementation(arr: IStructDef[]): string {
+  const dependencies = new Dependencies();
+
+  const str = arr.map((item) => each(item, dependencies)).join('\n');
+
+  return (
+    '/* eslint-disable import/no-unresolved */\n' +
+    imports(dependencies, ['struct', 'interface', 'enum']) +
+    str
+  );
+}
+
+export function each(obj: IStructDef, dependencies: Dependencies): string {
   assert(obj.kind === 'struct');
 
   dependencies.addCustom('SYMBOL', 'constants');

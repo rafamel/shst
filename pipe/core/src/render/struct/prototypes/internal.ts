@@ -1,6 +1,6 @@
 import { IStructDef, IFieldDef, IPrivateDef } from '~/types';
-import Dependencies from '../Dependencies';
-import { typeWrap, externalize } from '../helpers';
+import Dependencies from '../../Dependencies';
+import { typeWrap, externalize } from '../../helpers';
 
 export default function renderInternal(
   item: IStructDef,

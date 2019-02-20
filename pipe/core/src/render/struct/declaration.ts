@@ -9,11 +9,17 @@ import assert from 'assert';
 import { renderDoc, renderType, renderParams, typeWrap } from '../helpers';
 import Dependencies from '../Dependencies';
 import camelcase from 'camelcase';
+import imports from '../imports';
 
-export default function renderStruct(
-  obj: IStructDef,
-  dependencies: Dependencies
-): string {
+export default function renderDeclaration(arr: IStructDef[]): string {
+  const dependencies = new Dependencies();
+
+  const str = arr.map((item) => each(item, dependencies)).join('\n');
+
+  return imports(dependencies, 'struct') + str;
+}
+
+export function each(obj: IStructDef, dependencies: Dependencies): string {
   assert(obj.kind === 'struct');
 
   obj.implements.forEach((type) => dependencies.addCustom(type, 'interface'));
@@ -123,12 +129,12 @@ export function accessors(
       return methods(
         {
           ...accessor.def,
-          doc: `Shorthand for \`${accessor.struct}.${
-            accessor.def.is
-          }\` method, found at \`${[camelcase(item.is)]
-            .concat(accessor.path)
-            .concat(accessor.def.is)
-            .join('.')}()\``
+          doc:
+            `Shorthand for \`${accessor.struct}.${accessor.def.is}\` ` +
+            `method, found at \`${[camelcase(item.is)]
+              .concat(accessor.path)
+              .concat(accessor.def.is)
+              .join('.')}()\``
         } as IMethodDef,
         dependencies
       );

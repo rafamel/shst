@@ -1,14 +1,14 @@
 import { IStructDef } from '~/types';
 import assert from 'assert';
 import { pkg } from '~/pkg';
-import imports from '../imports';
-import Dependencies from '../Dependencies';
+import imports from '../../imports';
+import Dependencies from '../../Dependencies';
 import renderInternal from './internal';
 import renderExternal from './external';
 import renderArrays from './arrays';
 import renderPrivate from './private';
 
-export default function prototypes(arr: IStructDef[]): string {
+export default function renderPrototypes(arr: IStructDef[]): string {
   const dependencies = new Dependencies();
 
   dependencies.addCustom('pkg', 'pkg');
