@@ -22,10 +22,8 @@ export default function renderDeclaration(arr: IStructDef[]): string {
 export function each(obj: IStructDef, dependencies: Dependencies): string {
   assert(obj.kind === 'struct');
 
+  dependencies.addCustom('IType', 'interface');
   obj.implements.forEach((type) => dependencies.addCustom(type, 'interface'));
-  const implement = obj.implements.length
-    ? 'implements ' + obj.implements.join(', ')
-    : '';
 
   return (
     renderDoc(`\`${obj.is}\` as a plain object.`) +
@@ -39,16 +37,19 @@ export function each(obj: IStructDef, dependencies: Dependencies): string {
     `.trim() +
     renderDoc(obj.doc) +
     `
-    export class ${obj.is} ${implement} {
+    export class ${obj.is} implements ${['IType']
+      .concat(obj.implements)
+      .join(', ')} {
       public static type: '${obj.is}';
       public static fromJSON(plain: T${obj.is}): ${obj.is};
-      ${constructor(obj, dependencies)}
-      ${obj.fields.map((field) => fields(field, dependencies)).join('\n')}
-      ${obj.methods.map((method) => methods(method, dependencies)).join('\n')}
+      ${constructor(obj, dependencies)};
+      public type: '${obj.is}';
+      ${obj.fields.map((field) => fields(field, dependencies)).join(';\n')}
+      ${obj.methods.map((method) => methods(method, dependencies)).join(';\n')}
       ${obj.accessors
         .map((accessor) => accessors(accessor, obj, dependencies))
-        .join('\n')}
-      public toJSON(): T${obj.is}
+        .join(';\n')}
+      public toJSON(): T${obj.is};
     }
     `
   );
@@ -68,9 +69,9 @@ export function constructor(
             )
             .join('; ')}
         }
-      );
+      )
     `.trim()
-    : 'public constructor();';
+    : 'public constructor()';
 }
 
 export function json(

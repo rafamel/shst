@@ -20,10 +20,8 @@ export function call<T>(fn: () => T): T {
  * an interface with "name"
  */
 export function isInterface(name: string, instance: any): boolean {
-  const type = instance.constructor && instance.constructor.type;
-  if (!type) return false;
-  const arr: string[] | void = interfaces[name];
-  return !!arr && arr.includes(type);
+  const type = instance.type;
+  return Boolean(type && interfaces[name][type]);
 }
 
 export function set(obj: any, prop: string, value: any) {

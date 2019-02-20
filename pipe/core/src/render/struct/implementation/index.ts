@@ -34,6 +34,9 @@ export function each(obj: IStructDef, dependencies: Dependencies): string {
       static type = '${obj.is}';
       ${renderFromJSON(obj, dependencies).trim()}
       ${renderConstructor(obj, dependencies).trim()}
+      get type() {
+        return this.constructor.type;
+      }
       ${obj.fields.map((field) => fields(field, dependencies)).join('\n')}
       ${obj.methods.map((method) => methods(method, dependencies)).join('\n')}
       ${obj.accessors.map((accessor) => accessors(accessor)).join('\n')}

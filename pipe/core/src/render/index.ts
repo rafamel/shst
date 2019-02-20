@@ -49,14 +49,18 @@ export default function assemble(
       export const pkg = sh.packages['${path}'];
     `,
     'types.ts': `
-      export const interfaces: { [key:string]: string[] } = ${JSON.stringify(
-        Object.values(types).reduce((acc: any, item) => {
-          if (item.kind === 'interface') {
-            acc[item.is] = item.implementedBy;
-          }
-          return acc;
-        }, {})
-      )};
+      export const interfaces: { [key: string]: { [key: string]: boolean} } = {
+        IType: {
+          ${boxed.struct.map((x) => `${x.is}: true`).join(',\n')}
+        },
+        ${boxed.interface
+          .map((x) => {
+            return `${x.is}: {
+              ${x.implementedBy.map((y) => `${y}: true`).join(',\n')} 
+            }`;
+          })
+          .join(',\n')}
+      };
 
       export const traversal: { [key:string]: Array<{ is: string; list: boolean }> } = {
         ${boxed.struct
