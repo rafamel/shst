@@ -4,5 +4,9 @@
   "interface": "./interface",
   "struct": "./struct",
   "util": "./util",
-  "constants": "./constants"
+  "constants": "./constants",
+  "from-json": "./from-json",
+  "pkg": "./pkg",
+  "prototypes": "./prototypes",
+  "externalize": "./externalize"
 }

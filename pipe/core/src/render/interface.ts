@@ -35,13 +35,23 @@ export default function renderInterface(
         ${methods}
       }
     `.trim() +
+    renderDoc(`Any \`${obj.is}\` implementation as a plain object`) +
     `
-      /** 
-       * Determines whether a given instance of a class implements \`${obj.is}\`
-      */
+      export type T${obj.is} = ${obj.implementedBy
+      .map((x) => {
+        dependencies.addCustom('T' + x, 'struct');
+        return 'T' + x;
+      })
+      .join(' | ')};
+    `.trim() +
+    renderDoc(
+      'Determines whether a given instance is of a class that implements ' +
+        `\`${obj.is}\``
+    ) +
+    `
       export function is${obj.is.slice(1)}(instance: any): boolean {
         return isInterface('${obj.is}', instance);
       }
-    `
+    `.trim()
   );
 }

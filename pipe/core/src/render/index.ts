@@ -4,6 +4,9 @@ import imports from './imports';
 import renderEnum from './enum';
 import renderInterface from './interface';
 import { declaration, implementation } from './struct';
+import fromJSON from './from-json';
+import prototypes from './prototypes';
+import { path } from '~/pkg';
 
 export function kindBox(arr: TTypeDef[]): IKindBox {
   return arr.reduce(
@@ -43,7 +46,9 @@ export default function assemble(
   return {
     'enum.ts': imports(all.enum.dependencies, 'enum') + all.enum.render,
     'interface.ts':
-      imports(all.interface.dependencies, 'interface') + all.interface.render,
+      '/* eslint-disable import/named */\n' +
+      imports(all.interface.dependencies, 'interface') +
+      all.interface.render,
     'struct.js':
       '/* eslint-disable import/no-unresolved */\n' +
       imports(all.implementation.dependencies, [
@@ -54,17 +59,14 @@ export default function assemble(
       all.implementation.render,
     'struct.d.ts':
       imports(all.declaration.dependencies, 'struct') + all.declaration.render,
+    'prototypes.ts': prototypes(boxed.struct),
+    'from-json.ts': fromJSON(boxed.struct),
+    'pkg.ts': `
+      import sh from '#/sh';
+      
+      export const pkg = sh.packages['${path}'];
+    `,
     'types.ts': `
-      export const structs: { [key:string]: string } = ${JSON.stringify(
-        Object.values(types).reduce((acc: any, item) => {
-          if (item.kind === 'struct') {
-            acc[item.was] = item.is;
-          }
-          return acc;
-        }, {}),
-        null,
-        2
-      )}
       export const interfaces: { [key:string]: string[] } = ${JSON.stringify(
         Object.values(types).reduce((acc: any, item) => {
           if (item.kind === 'interface') {

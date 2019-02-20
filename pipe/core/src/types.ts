@@ -34,11 +34,15 @@ export interface IStructDef extends ITypeDef {
   kind: 'struct';
   fields: IFieldDef[];
   methods: IMethodDef[];
+  accessors: IAccesor[];
+  private: IPrivateDef[];
   implements: string[];
 }
 
 export interface IFieldDef extends IDef {
   value: IValue;
+  embedded: boolean;
+  index: number;
 }
 
 export interface IMethodDef extends IDef {
@@ -47,6 +51,18 @@ export interface IMethodDef extends IDef {
     value: IValue;
   }>;
   returns: IValue;
+}
+
+export interface IAccesor {
+  as: 'field' | 'method';
+  struct: string;
+  path: string[];
+  def: IFieldDef | IMethodDef;
+}
+
+export interface IPrivateDef extends IDef {
+  value: IValue;
+  index: number;
 }
 
 export interface IValue {

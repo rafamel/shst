@@ -17,7 +17,7 @@ export function renderType(obj: IValue, dependencies: Dependencies): string {
 export function renderDoc(doc?: string): string {
   assert(!doc || typeof doc === 'string');
 
-  return doc ? `\n/**\n * ${doc.trim()}\n */\n` : '';
+  return doc ? `/**\n * ${doc.trim()}\n */\n` : '';
 }
 
 export function renderParams(
@@ -33,4 +33,29 @@ export function renderParams(
       }
     )
     .join(', ');
+}
+
+export function typeWrap(value: IValue): boolean {
+  return value.kind === 'struct' || value.kind === 'interface';
+}
+
+export function externalize(
+  value: IValue,
+  str: string,
+  dependencies: Dependencies
+): string {
+  if (value.list) {
+    if (typeWrap(value)) {
+      dependencies.addCustom('typeList', 'externalize');
+      return `typeList(${str})`;
+    }
+    dependencies.addCustom('list', 'externalize');
+    return `list(${str})`;
+  }
+  if (typeWrap(value)) {
+    dependencies.addCustom('type', 'externalize');
+    return `type(${str})`;
+  }
+
+  return str;
 }
