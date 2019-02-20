@@ -6,6 +6,7 @@ import renderDeclaration from './struct/declaration';
 import renderPrototypes from './struct/prototypes';
 import renderFromJSON from './from-json';
 import { path } from '~/pkg';
+import { typeWrap } from './helpers';
 
 export function kindBox(arr: TTypeDef[]): IKindBox {
   return arr.reduce(
@@ -54,10 +55,20 @@ export default function assemble(
             acc[item.is] = item.implementedBy;
           }
           return acc;
-        }, {}),
-        null,
-        2
+        }, {})
       )};
+
+      export const traversal: { [key:string]: Array<{ is: string; list: boolean }> } = {
+        ${boxed.struct
+          .map((item) => {
+            return `${item.is}: ${JSON.stringify(
+              item.fields
+                .filter((x) => typeWrap(x.value))
+                .map((x) => ({ is: x.is, list: x.value.list }))
+            )}`;
+          })
+          .join(',\n')}
+      };
     `
   };
 }
