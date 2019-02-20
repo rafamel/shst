@@ -1,7 +1,9 @@
 {
+  "skip": ["BraceExp"],
   "scalars": {
     "int": "number",
     "uint": "number",
+    "uint16": "number",
     "uint32": "number",
     "bool": "boolean",
     "string": "string"

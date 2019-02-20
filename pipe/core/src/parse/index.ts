@@ -3,6 +3,9 @@ import define from './define';
 import { queue } from './types-map';
 import { ITypeMap, ITypeDefMap } from '../types';
 import assert from 'assert';
+import defineAccessors from './accesors';
+import defineSh from './sh';
+import map from './map.json';
 // TODO: replace replaceMap in docs
 // import { replaceMap } from './get-name';
 
@@ -17,8 +20,8 @@ export default function resolve(): ITypeDefMap {
     const next = queue.shift();
     if (!next) throw Error('No next item in queue');
 
-    // Check whether it's already been processed
-    if (acc.hasOwnProperty(next)) continue;
+    // Check whether it's already been processed or should be skipped
+    if (acc.hasOwnProperty(next) || map.skip.includes(next)) continue;
 
     acc[next] = define(next, types[next]);
   }
@@ -33,9 +36,18 @@ export default function resolve(): ITypeDefMap {
     {}
   );
 
+  // Add accessors (embedded fields) to structs
+  defineAccessors(ans);
+
   // Add implements to structs
   Object.values(ans).forEach((item) => {
     if (item.kind !== 'interface') return;
+
+    // Filter skipped
+    item.implementedBy = item.implementedBy.filter(
+      (name) => !map.skip.includes(name)
+    );
+
     item.implementedBy.forEach((name) => {
       assert(typeof ans[name] === 'object');
 
@@ -46,6 +58,9 @@ export default function resolve(): ITypeDefMap {
       struct.implements.push(item.is);
     });
   });
+
+  // Verify sh, add private fields and field indexes
+  defineSh(ans);
 
   return ans;
 }

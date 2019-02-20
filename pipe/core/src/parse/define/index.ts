@@ -76,6 +76,8 @@ function defineStruct(def: ITypeDef, obj: any): IStructDef {
           structMethod(key, value)
         )
       : [],
+    accessors: [],
+    private: [],
     implements: []
   };
 }

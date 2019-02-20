@@ -11,7 +11,9 @@ export function structField(name: string, obj: any): IFieldDef {
     was: name,
     is: getName(name, 'prop'),
     doc: obj.doc,
-    value: resolveProp(obj.type)
+    value: resolveProp(obj.type),
+    embedded: obj.embedded,
+    index: -1
   };
 }
 
