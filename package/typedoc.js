@@ -10,14 +10,17 @@ module.exports = {
   excludeProtected: true,
   excludeExternals: true,
   excludePrivate: true,
-  excludeNotExported: true,
+  excludeNotExported: false,
   readme: path.join(__dirname, '../README.md'),
   exclude: [
-    '**/internal/**/*',
-    '**/test/**/*',
-    '**/core/**/util*',
-    '**/core/**/types*',
     '**/core/**/constants*',
+    '**/core/**/externalize*',
+    '**/core/**/from-json*',
+    '**/core/**/pkg*',
+    '**/core/**/prototypes*',
+    '**/core/**/types*',
+    '**/core/**/util*',
+    '**/test/**/*',
     '**/utils/**/*',
     '**/constants*'
   ]

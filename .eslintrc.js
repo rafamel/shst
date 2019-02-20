@@ -60,6 +60,7 @@ module.exports = {
         /* DISABLED */
         '@typescript-eslint/indent': 0,
         '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-object-literal-type-assertion': 0,
         /* WARNINGS */
         '@typescript-eslint/no-unused-vars': [
           1,
