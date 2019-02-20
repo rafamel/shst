@@ -5,25 +5,12 @@ import Dependencies from './Dependencies';
 import imports from './imports';
 
 export default function renderInterface(arr: IInterfaceDef[]): string {
-  assert(!arr.map((x) => x.is).includes('IType'));
-
   const dependencies = new Dependencies();
   const str = arr.map((item) => each(item, dependencies)).join('\n');
 
   return (
     '/* eslint-disable import/named */\n' +
     imports(dependencies, 'interface') +
-    renderDoc(
-      `Determines whether a given instance is of a class that implements \`IType\``
-    ) +
-    `
-      export function isType(instance: any): boolean {
-        return isInterface('IType', instance);
-      }
-      export interface IType {
-        type: string;
-      }
-    `.trim() +
     str
   );
 }
@@ -52,11 +39,18 @@ export function each(obj: IInterfaceDef, dependencies: Dependencies): string {
   dependencies.addCustom('isInterface', 'util');
   return (
     renderDoc(obj.doc) +
-    `
-      export interface ${obj.is} extends IType {
-        ${methods}
-      }
-    `.trim() +
+    (obj.is === 'IType'
+      ? // IType special case
+        `
+        export interface IType {
+          type: string;
+        }
+      `.trim()
+      : `
+        export interface ${obj.is} extends IType {
+          ${methods}
+        }
+      `.trim()) +
     renderDoc(`Any \`${obj.is}\` implementation as a plain object`) +
     `
       export type T${obj.is} = ${obj.implementedBy

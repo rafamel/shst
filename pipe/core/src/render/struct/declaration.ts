@@ -22,8 +22,10 @@ export default function renderDeclaration(arr: IStructDef[]): string {
 export function each(obj: IStructDef, dependencies: Dependencies): string {
   assert(obj.kind === 'struct');
 
-  dependencies.addCustom('IType', 'interface');
   obj.implements.forEach((type) => dependencies.addCustom(type, 'interface'));
+  const implement = obj.implements.length
+    ? `implements ${obj.implements.join(', ')}`
+    : '';
 
   return (
     renderDoc(`\`${obj.is}\` as a plain object.`) +
@@ -37,9 +39,7 @@ export function each(obj: IStructDef, dependencies: Dependencies): string {
     `.trim() +
     renderDoc(obj.doc) +
     `
-    export class ${obj.is} implements ${['IType']
-      .concat(obj.implements)
-      .join(', ')} {
+    export class ${obj.is} ${implement} {
       public static type: '${obj.is}';
       public static fromJSON(plain: T${obj.is}): ${obj.is};
       ${constructor(obj, dependencies)};

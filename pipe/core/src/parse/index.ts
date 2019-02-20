@@ -36,6 +36,19 @@ export default function resolve(): ITypeDefMap {
     {}
   );
 
+  // Adds IType
+  assert(!ans.IType);
+  ans.IType = {
+    is: 'IType',
+    was: 'IType',
+    doc: 'Implemented by all parsed types',
+    kind: 'interface',
+    methods: [],
+    implementedBy: Object.values(ans)
+      .filter((x) => x.kind === 'struct')
+      .map((x) => x.is)
+  };
+
   // Add accessors (embedded fields) to structs
   defineAccessors(ans);
 

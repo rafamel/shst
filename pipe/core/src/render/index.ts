@@ -50,9 +50,6 @@ export default function assemble(
     `,
     'types.ts': `
       export const interfaces: { [key: string]: { [key: string]: boolean} } = {
-        IType: {
-          ${boxed.struct.map((x) => `${x.is}: true`).join(',\n')}
-        },
         ${boxed.interface
           .map((x) => {
             return `${x.is}: {
