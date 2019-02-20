@@ -16,7 +16,10 @@ export default function renderDeclaration(arr: IStructDef[]): string {
 
   const str = arr.map((item) => each(item, dependencies)).join('\n');
 
-  return imports(dependencies, 'struct') + str;
+  const ttype =
+    renderDoc(`Any class that implements \`IType\``) +
+    `export type TType = ${arr.map((item) => item.is).join(' | ')};`;
+  return imports(dependencies, 'struct') + ttype + str;
 }
 
 export function each(obj: IStructDef, dependencies: Dependencies): string {

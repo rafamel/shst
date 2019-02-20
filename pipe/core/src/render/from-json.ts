@@ -10,10 +10,11 @@ export default function renderFromJSON(arr: IStructDef[]): string {
 
   return `
     import * as classes from './struct';
+    import { TIType } from './interface';
 
     ${overloads}
 
-    function fromJSON(plain: any): any {
+    function fromJSON(plain: TIType): classes.TType {
       return (classes as any)[plain.type].fromJSON(plain);
     }
     export { fromJSON };
