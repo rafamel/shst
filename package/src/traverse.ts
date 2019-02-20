@@ -1,18 +1,24 @@
-import * as core from '#/core';
-import { structs } from '#/core/types';
-import sh from '#/sh';
-import { call, collectType, getType, createType } from '#/core/util';
+import { traversal } from '#/core/types';
+import { INode, isNode } from '#/core';
 
+/**
+ * *DFS* nodes traversal. Will continue traversing in depth if `cb` returns `true` for a given node.
+ */
 export default function traverse(
-  node: core.INode,
-  cb: (node: core.INode) => boolean | void
+  node: INode,
+  cb: (node: INode) => boolean | void
 ): void {
-  call(() =>
-    sh.syntax.Walk(collectType(node), (node: any) => {
-      if (!node) return true;
-      const type = getType(node);
-      // @ts-ignore
-      return cb(createType(core[structs[type]], node));
-    })
-  );
+  if (!cb(node)) return;
+
+  const arr = traversal[node.type];
+  for (let prop of arr) {
+    const item = (node as any)[prop.is];
+    if (prop.list) {
+      for (let one of item) {
+        if (isNode(one)) traverse(one, cb);
+      }
+    } else {
+      if (isNode(item)) traverse(item, cb);
+    }
+  }
 }
