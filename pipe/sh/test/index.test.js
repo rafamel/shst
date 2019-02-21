@@ -1,10 +1,5 @@
-// TODO test that __internal_object__ and $type
-// exist for all structs, as we depend on it
+const sh = require('../build/lib/index');
 
-module.exports = function(sh) {
-  const { syntax } = sh;
-
-  test('test', () => {
-    expect(() => syntax.NewParser()).not.toThrow();
-  });
-};
+test('test', () => {
+  expect(() => sh.syntax.NewParser()).not.toThrow();
+});

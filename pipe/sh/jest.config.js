@@ -6,6 +6,5 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: false,
   moduleFileExtensions: EXT_ARR.concat(['json']),
-  testPathIgnorePatterns: ['/node_modules/'],
-  testMatch: ['<rootDir>/test/setup/*.[jt]s?(x)']
+  testPathIgnorePatterns: ['/node_modules/']
 };

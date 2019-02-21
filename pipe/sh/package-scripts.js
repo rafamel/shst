@@ -24,13 +24,6 @@ module.exports = scripts({
     transpile: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
     process: series(
       'node transforms/expose-packages',
-      /* TODO Commented out as test cases are pending */
-      // // Set markers
-      // 'node transforms/set-markers',
-      // // Run test cases on markers
-      // `cross-env NODE_ENV=test jest test/setup/gopher-markers.js`,
-      // // Remove unmarked code
-      // 'node transforms/remove-dead',
       // Minify
       'minify build/src/exposed.js --out-file build/lib/index.js --mangle.topLevel',
       // TODO build types from source
@@ -47,7 +40,7 @@ module.exports = scripts({
     default: `eslint ./ --ext ${DOT_EXT} -c ${dir('.eslintrc.js')}`,
     scripts: 'jake lintscripts["' + __dirname + '"]'
   },
-  test: series('nps lint', 'cross-env NODE_ENV=test jest test/setup/final.js'),
+  test: series('nps lint', 'cross-env NODE_ENV=test jest'),
   validate: series('nps test lint.scripts', 'jake run:zero["npm outdated"]'),
   update: series('npm update --save/save-dev', 'npm outdated'),
   clean: series(
