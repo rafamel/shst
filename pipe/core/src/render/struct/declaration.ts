@@ -43,10 +43,10 @@ export function each(obj: IStructDef, dependencies: Dependencies): string {
     renderDoc(obj.doc) +
     `
     export class ${obj.is} ${implement} {
-      public static type: '${obj.is}';
+      private static type: '${obj.is}';
       public static fromJSON(plain: T${obj.is}): ${obj.is};
       ${constructor(obj, dependencies)};
-      public type: '${obj.is}';
+      public readonly type: '${obj.is}';
       ${obj.fields.map((field) => fields(field, dependencies)).join(';\n')}
       ${obj.methods.map((method) => methods(method, dependencies)).join(';\n')}
       ${obj.accessors
@@ -119,15 +119,17 @@ export function accessors(
 ): string {
   switch (accessor.as) {
     case 'field':
-      return fields(
-        {
-          ...accessor.def,
-          doc: `A getter property. Shorthand for \`${[camelcase(item.is)]
+      return (
+        renderDoc(
+          `A getter property. Shorthand for \`${[camelcase(item.is)]
             .concat(accessor.path)
             .concat(accessor.def.is)
             .join('.')}\``
-        } as IFieldDef,
-        dependencies
+        ) +
+        `public readonly ${accessor.def.is}: ${renderType(
+          (accessor.def as IFieldDef).value,
+          dependencies
+        )}`
       );
     case 'method':
       return methods(

@@ -43,7 +43,7 @@ export function each(obj: IInterfaceDef, dependencies: Dependencies): string {
       ? // IType special case
         `
         export interface IType {
-          type: string;
+          readonly type: string;
         }
       `.trim()
       : `
