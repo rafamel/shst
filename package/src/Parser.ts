@@ -5,6 +5,9 @@ import { File } from '#/core';
 import { seed, collect, call, internal } from '#/core/util';
 import * as externalize from '#/core/externalize';
 
+/**
+ * Allows configuration of parsing options applied when parsing shell scripts.
+ */
 export default class Parser {
   public stopAt: string | null;
   public comments: boolean;
@@ -28,6 +31,9 @@ export default class Parser {
 
     seed(this, call(() => sh.syntax.NewParser(...args)));
   }
+  /**
+   * Parses a shell script.
+   */
   public parse(str: string, name?: string): File {
     return externalize.type(internal.get(collect(this).Parse(str, name)));
   }
