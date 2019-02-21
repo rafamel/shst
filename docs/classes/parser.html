@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -62,6 +64,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Allows configuration of parsing options applied when parsing shell scripts.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -109,7 +118,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/83dbe43/package/src/Parser.ts#L11">src/Parser.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/1245629/package/src/Parser.ts#L14">src/Parser.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -117,6 +126,15 @@
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> __namedParameters: <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>comments<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bash"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"POSIX"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"MirBSDKorn"</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>stop<wbr>At<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+										</li>
 									</ul>
 								</li>
 							</ul>
@@ -133,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">comments<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/83dbe43/package/src/Parser.ts#L10">src/Parser.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/1245629/package/src/Parser.ts#L13">src/Parser.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -143,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">language<span class="tsd-signature-symbol">:</span> <a href="../globals.html#tlanguage" class="tsd-signature-type">TLanguage</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/83dbe43/package/src/Parser.ts#L11">src/Parser.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/1245629/package/src/Parser.ts#L14">src/Parser.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -153,7 +171,7 @@
 					<div class="tsd-signature tsd-kind-icon">stop<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/83dbe43/package/src/Parser.ts#L9">src/Parser.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/1245629/package/src/Parser.ts#L12">src/Parser.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -170,9 +188,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/83dbe43/package/src/Parser.ts#L31">src/Parser.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/rafamel/shell-parser/blob/1245629/package/src/Parser.ts#L37">src/Parser.ts:37</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Parses a shell script.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>

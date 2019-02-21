@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -70,30 +72,24 @@
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/inode.html" class="tsd-signature-type">INode</a></li>
-					<li><a href="../interfaces/icommand.html" class="tsd-signature-type">ICommand</a></li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="funcdecl.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="funcdecl.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="funcdecl.html#body" class="tsd-kind-icon">body</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="funcdecl.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="funcdecl.html#position" class="tsd-kind-icon">position</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="funcdecl.html#rsrvword" class="tsd-kind-icon">rsrv<wbr>Word</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="funcdecl.html#body" class="tsd-kind-icon">body</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="funcdecl.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="funcdecl.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="funcdecl.html#rsrvword" class="tsd-kind-icon">rsrv<wbr>Word</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="funcdecl.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -102,153 +98,103 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="funcdecl.html#end" class="tsd-kind-icon">end</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="funcdecl.html#pos" class="tsd-kind-icon">pos</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="funcdecl.html#tojson" class="tsd-kind-icon">toJSON</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="funcdecl.html#fromjson" class="tsd-kind-icon">fromJSON</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;FuncDecl&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in src/core/struct.ts:980</li>
-						</ul>
-					</aside>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Func<wbr>Decl<span class="tsd-signature-symbol">(</span>fields<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="funcdecl.html" class="tsd-signature-type">FuncDecl</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.d.ts:694</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fields: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>body<span class="tsd-signature-symbol">: </span><a href="stmt.html" class="tsd-signature-type">Stmt</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>name<span class="tsd-signature-symbol">: </span><a href="lit.html" class="tsd-signature-type">Lit</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>position<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>rsrv<wbr>Word<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="funcdecl.html" class="tsd-signature-type">FuncDecl</a></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="body" class="tsd-anchor"></a>
 					<h3>body</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> body<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="stmt.html" class="tsd-signature-type">Stmt</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> body<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="stmt.html" class="tsd-signature-type">Stmt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:981</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="stmt.html" class="tsd-signature-type">Stmt</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:984</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="stmt.html" class="tsd-signature-type">Stmt</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <a href="stmt.html" class="tsd-signature-type">Stmt</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:702</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="name" class="tsd-anchor"></a>
 					<h3>name</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> name<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="lit.html" class="tsd-signature-type">Lit</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> name<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="lit.html" class="tsd-signature-type">Lit</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:987</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="lit.html" class="tsd-signature-type">Lit</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:990</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="lit.html" class="tsd-signature-type">Lit</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <a href="lit.html" class="tsd-signature-type">Lit</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:703</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="position" class="tsd-anchor"></a>
 					<h3>position</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> position<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> position<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:993</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:996</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="pos.html" class="tsd-signature-type">Pos</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="pos.html" class="tsd-signature-type">Pos</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:704</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="rsrvword" class="tsd-anchor"></a>
 					<h3>rsrv<wbr>Word</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rsrvWord<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> rsrvWord<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:999</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1002</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">rsrv<wbr>Word<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:705</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"FuncDecl"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:701</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -262,9 +208,8 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/icommand.html">ICommand</a>.<a href="../interfaces/icommand.html#end">end</a></p>
 								<ul>
-									<li>Defined in src/core/struct.ts:1005</li>
+									<li>Defined in src/core/struct.d.ts:706</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
@@ -280,9 +225,8 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/icommand.html">ICommand</a>.<a href="../interfaces/icommand.html#pos">pos</a></p>
 								<ul>
-									<li>Defined in src/core/struct.ts:1008</li>
+									<li>Defined in src/core/struct.d.ts:707</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
@@ -293,18 +237,39 @@
 					<a name="tojson" class="tsd-anchor"></a>
 					<h3>toJSON</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+						<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/ifuncdecl.html" class="tsd-signature-type">IFuncDecl</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/core/struct.ts:1012</li>
+									<li>Defined in src/core/struct.d.ts:709</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/ifuncdecl.html" class="tsd-signature-type">IFuncDecl</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="fromjson" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> fromJSON</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">fromJSON<span class="tsd-signature-symbol">(</span>plain<span class="tsd-signature-symbol">: </span><a href="../interfaces/ifuncdecl.html" class="tsd-signature-type">IFuncDecl</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="funcdecl.html" class="tsd-signature-type">FuncDecl</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.d.ts:694</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>plain: <a href="../interfaces/ifuncdecl.html" class="tsd-signature-type">IFuncDecl</a></h5>
+								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="funcdecl.html" class="tsd-signature-type">FuncDecl</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -325,20 +290,23 @@
 					<li class="current tsd-kind-class">
 						<a href="funcdecl.html" class="tsd-kind-icon">Func<wbr>Decl</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="funcdecl.html#type" class="tsd-kind-icon">type</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="funcdecl.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="funcdecl.html#body" class="tsd-kind-icon">body</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="funcdecl.html#name" class="tsd-kind-icon">name</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="funcdecl.html#position" class="tsd-kind-icon">position</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="funcdecl.html#rsrvword" class="tsd-kind-icon">rsrv<wbr>Word</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="funcdecl.html#type" class="tsd-kind-icon">type</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="funcdecl.html#end" class="tsd-kind-icon">end</a>
@@ -348,6 +316,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="funcdecl.html#tojson" class="tsd-kind-icon">toJSON</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="funcdecl.html#fromjson" class="tsd-kind-icon">fromJSON</a>
 							</li>
 						</ul>
 					</li>

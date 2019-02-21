@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -70,33 +72,27 @@
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/inode.html" class="tsd-signature-type">INode</a></li>
-					<li><a href="../interfaces/icommand.html" class="tsd-signature-type">ICommand</a></li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="ifclause.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="ifclause.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#cond" class="tsd-kind-icon">cond</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#else" class="tsd-kind-icon">else</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#fipos" class="tsd-kind-icon">fi<wbr>Pos</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#last" class="tsd-kind-icon">last</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#position" class="tsd-kind-icon">position</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#then" class="tsd-kind-icon">then</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ifclause.html#thenpos" class="tsd-kind-icon">then<wbr>Pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#cond" class="tsd-kind-icon">cond</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#else" class="tsd-kind-icon">else</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#fipos" class="tsd-kind-icon">fi<wbr>Pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#last" class="tsd-kind-icon">last</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#then" class="tsd-kind-icon">then</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#thenpos" class="tsd-kind-icon">then<wbr>Pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ifclause.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -105,249 +101,142 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ifclause.html#end" class="tsd-kind-icon">end</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ifclause.html#pos" class="tsd-kind-icon">pos</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ifclause.html#tojson" class="tsd-kind-icon">toJSON</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="ifclause.html#fromjson" class="tsd-kind-icon">fromJSON</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;IfClause&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in src/core/struct.ts:1023</li>
-						</ul>
-					</aside>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>IfClause<span class="tsd-signature-symbol">(</span>fields<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ifclause.html" class="tsd-signature-type">IfClause</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.d.ts:727</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fields: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>cond<span class="tsd-signature-symbol">: </span><a href="stmtlist.html" class="tsd-signature-type">StmtList</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>else<span class="tsd-signature-symbol">: </span><a href="ifclause.html" class="tsd-signature-type">IfClause</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>fi<wbr>Pos<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>last<span class="tsd-signature-symbol">: </span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">[]</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>position<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>then<span class="tsd-signature-symbol">: </span><a href="stmtlist.html" class="tsd-signature-type">StmtList</a></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>then<wbr>Pos<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="ifclause.html" class="tsd-signature-type">IfClause</a></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="cond" class="tsd-anchor"></a>
 					<h3>cond</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> cond<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="stmtlist.html" class="tsd-signature-type">StmtList</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> cond<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="stmtlist.html" class="tsd-signature-type">StmtList</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1024</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="stmtlist.html" class="tsd-signature-type">StmtList</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1027</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="stmtlist.html" class="tsd-signature-type">StmtList</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">cond<span class="tsd-signature-symbol">:</span> <a href="stmtlist.html" class="tsd-signature-type">StmtList</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:738</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="else" class="tsd-anchor"></a>
 					<h3>else</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> else<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ifclause.html" class="tsd-signature-type">IfClause</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> else<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="ifclause.html" class="tsd-signature-type">IfClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1030</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="ifclause.html" class="tsd-signature-type">IfClause</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1033</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="ifclause.html" class="tsd-signature-type">IfClause</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">else<span class="tsd-signature-symbol">:</span> <a href="ifclause.html" class="tsd-signature-type">IfClause</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:739</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="fipos" class="tsd-anchor"></a>
 					<h3>fi<wbr>Pos</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> fiPos<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> fiPos<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1036</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1039</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="pos.html" class="tsd-signature-type">Pos</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">fi<wbr>Pos<span class="tsd-signature-symbol">:</span> <a href="pos.html" class="tsd-signature-type">Pos</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:740</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="last" class="tsd-anchor"></a>
 					<h3>last</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> last<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> last<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1042</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1045</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">List</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">last<span class="tsd-signature-symbol">:</span> <a href="comment.html" class="tsd-signature-type">Comment</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:741</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="position" class="tsd-anchor"></a>
 					<h3>position</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> position<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> position<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1048</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1051</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="pos.html" class="tsd-signature-type">Pos</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="pos.html" class="tsd-signature-type">Pos</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:742</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="then" class="tsd-anchor"></a>
 					<h3>then</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> then<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="stmtlist.html" class="tsd-signature-type">StmtList</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> then<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="stmtlist.html" class="tsd-signature-type">StmtList</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1054</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="stmtlist.html" class="tsd-signature-type">StmtList</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1057</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="stmtlist.html" class="tsd-signature-type">StmtList</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">then<span class="tsd-signature-symbol">:</span> <a href="stmtlist.html" class="tsd-signature-type">StmtList</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:743</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="thenpos" class="tsd-anchor"></a>
 					<h3>then<wbr>Pos</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> thenPos<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> thenPos<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="pos.html" class="tsd-signature-type">Pos</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1060</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/struct.ts:1063</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <a href="pos.html" class="tsd-signature-type">Pos</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">then<wbr>Pos<span class="tsd-signature-symbol">:</span> <a href="pos.html" class="tsd-signature-type">Pos</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:744</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"IfClause"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:737</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -361,9 +250,8 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/icommand.html">ICommand</a>.<a href="../interfaces/icommand.html#end">end</a></p>
 								<ul>
-									<li>Defined in src/core/struct.ts:1066</li>
+									<li>Defined in src/core/struct.d.ts:745</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
@@ -379,9 +267,8 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/icommand.html">ICommand</a>.<a href="../interfaces/icommand.html#pos">pos</a></p>
 								<ul>
-									<li>Defined in src/core/struct.ts:1069</li>
+									<li>Defined in src/core/struct.d.ts:746</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="pos.html" class="tsd-signature-type">Pos</a></h4>
@@ -392,18 +279,39 @@
 					<a name="tojson" class="tsd-anchor"></a>
 					<h3>toJSON</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+						<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/iifclause.html" class="tsd-signature-type">IIfClause</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/core/struct.ts:1073</li>
+									<li>Defined in src/core/struct.d.ts:748</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/iifclause.html" class="tsd-signature-type">IIfClause</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="fromjson" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> fromJSON</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">fromJSON<span class="tsd-signature-symbol">(</span>plain<span class="tsd-signature-symbol">: </span><a href="../interfaces/iifclause.html" class="tsd-signature-type">IIfClause</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ifclause.html" class="tsd-signature-type">IfClause</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/core/struct.d.ts:727</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>plain: <a href="../interfaces/iifclause.html" class="tsd-signature-type">IIfClause</a></h5>
+								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="ifclause.html" class="tsd-signature-type">IfClause</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -424,29 +332,32 @@
 					<li class="current tsd-kind-class">
 						<a href="ifclause.html" class="tsd-kind-icon">If<wbr>Clause</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="ifclause.html#type" class="tsd-kind-icon">type</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="ifclause.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#cond" class="tsd-kind-icon">cond</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#else" class="tsd-kind-icon">else</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#fipos" class="tsd-kind-icon">fi<wbr>Pos</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#last" class="tsd-kind-icon">last</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#position" class="tsd-kind-icon">position</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#then" class="tsd-kind-icon">then</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="ifclause.html#thenpos" class="tsd-kind-icon">then<wbr>Pos</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="ifclause.html#type" class="tsd-kind-icon">type</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="ifclause.html#end" class="tsd-kind-icon">end</a>
@@ -456,6 +367,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="ifclause.html#tojson" class="tsd-kind-icon">toJSON</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="ifclause.html#fromjson" class="tsd-kind-icon">fromJSON</a>
 							</li>
 						</ul>
 					</li>

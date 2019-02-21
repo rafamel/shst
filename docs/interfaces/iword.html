@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ICommand | shell-parser 0.0.0</title>
+	<title>IWord | shell-parser 0.0.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -52,42 +54,29 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="icommand.html">ICommand</a>
+					<a href="iword.html">IWord</a>
 				</li>
 			</ul>
-			<h1>Interface ICommand</h1>
+			<h1>Interface IWord</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>Word</code> as a plain object.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ICommand</span>
+						<span class="target">IWord</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/arithmcmd.html" class="tsd-signature-type">ArithmCmd</a></li>
-					<li><a href="../classes/binarycmd.html" class="tsd-signature-type">BinaryCmd</a></li>
-					<li><a href="../classes/block.html" class="tsd-signature-type">Block</a></li>
-					<li><a href="../classes/callexpr.html" class="tsd-signature-type">CallExpr</a></li>
-					<li><a href="../classes/caseclause.html" class="tsd-signature-type">CaseClause</a></li>
-					<li><a href="../classes/coprocclause.html" class="tsd-signature-type">CoprocClause</a></li>
-					<li><a href="../classes/declclause.html" class="tsd-signature-type">DeclClause</a></li>
-					<li><a href="../classes/forclause.html" class="tsd-signature-type">ForClause</a></li>
-					<li><a href="../classes/funcdecl.html" class="tsd-signature-type">FuncDecl</a></li>
-					<li><a href="../classes/ifclause.html" class="tsd-signature-type">IfClause</a></li>
-					<li><a href="../classes/letclause.html" class="tsd-signature-type">LetClause</a></li>
-					<li><a href="../classes/subshell.html" class="tsd-signature-type">Subshell</a></li>
-					<li><a href="../classes/testclause.html" class="tsd-signature-type">TestClause</a></li>
-					<li><a href="../classes/timeclause.html" class="tsd-signature-type">TimeClause</a></li>
-					<li><a href="../classes/whileclause.html" class="tsd-signature-type">WhileClause</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -95,50 +84,36 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="icommand.html#end" class="tsd-kind-icon">end</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="icommand.html#pos" class="tsd-kind-icon">pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iword.html#parts" class="tsd-kind-icon">parts</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iword.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="end" class="tsd-anchor"></a>
-					<h3>end</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/pos.html" class="tsd-signature-type">Pos</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/interface.ts:56</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../classes/pos.html" class="tsd-signature-type">Pos</a></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="parts" class="tsd-anchor"></a>
+					<h3>parts</h3>
+					<div class="tsd-signature tsd-kind-icon">parts<span class="tsd-signature-symbol">:</span> <a href="../globals.html#tiwordpart" class="tsd-signature-type">TIWordPart</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:1228</li>
+						</ul>
+					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="pos" class="tsd-anchor"></a>
-					<h3>pos</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">pos<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/pos.html" class="tsd-signature-type">Pos</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in src/core/interface.ts:57</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../classes/pos.html" class="tsd-signature-type">Pos</a></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Word"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/core/struct.d.ts:1227</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -155,13 +130,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="icommand.html" class="tsd-kind-icon">ICommand</a>
+						<a href="iword.html" class="tsd-kind-icon">IWord</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="icommand.html#end" class="tsd-kind-icon">end</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iword.html#parts" class="tsd-kind-icon">parts</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="icommand.html#pos" class="tsd-kind-icon">pos</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iword.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>

@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -62,27 +64,12 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="shell-parser">shell-parser</h1>
 				<p>Provides a JS api for <a href="https://github.com/mvdan/sh">@mvdan&#39;s <code>sh</code></a>.</p>
-				<h2 id="build">Build</h2>
-				<!-- markdownlint-disable MD014 MD031 -->
-				<pre><code class="language-shell"><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/rafamel/shell-parser.git</span>
-<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> shell-parser</span>
-<span class="hljs-meta">$</span><span class="bash"> npm install</span>
-<span class="hljs-meta">$</span><span class="bash"> npm setup</span>
-<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> package</span>
-<span class="hljs-meta">$</span><span class="bash"> npm run build</span></code></pre>
-				<!-- markdownlint-enable MD014 MD031 -->
 				<h2 id="usage">Usage</h2>
-				<p>Transpiled JS files can be found at <code>/build</code>. They expose the <code>Parser</code> and <code>Printer</code> classes, and the <code>traverse()</code> function. Further documentation for those can be found <a href="https://rafamel.github.io/shell-parser/">here.</a></p>
+				<p><a href="#build">Once built,</a> transpiled JS files can be found at <code>/lib</code>. They expose the <code>Parser</code> and <code>Printer</code> classes, and the <code>traverse()</code> function.</p>
+				<p><a href="https://rafamel.github.io/shell-parser/">Full documentation is available here.</a></p>
 				<h2 id="examples">Examples</h2>
-				<h3 id="json-serialization">JSON serialization</h3>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Parser } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./build'</span>);
-
-<span class="hljs-keyword">const</span> parser = <span class="hljs-keyword">new</span> Parser({ <span class="hljs-attr">language</span>: <span class="hljs-string">'POSIX'</span> });
-<span class="hljs-keyword">const</span> tree = parser.parse(<span class="hljs-string">'echo "foo bar"'</span>);
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(tree, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>));</code></pre>
 				<h3 id="traversal">Traversal</h3>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Parser, traverse, Printer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./build'</span>);
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Parser, traverse, Printer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib'</span>);
 
 <span class="hljs-keyword">const</span> parser = <span class="hljs-keyword">new</span> Parser();
 <span class="hljs-keyword">const</span> tree = parser.parse(<span class="hljs-string">"echo 'foo'"</span>);
@@ -96,28 +83,51 @@ traverse(tree, (node) =&gt; {
 
 <span class="hljs-keyword">const</span> printer = <span class="hljs-keyword">new</span> Printer();
 <span class="hljs-built_in">console</span>.log(printer.print(tree)); <span class="hljs-comment">// echo 'bar'</span></code></pre>
+				<h3 id="serialization">Serialization</h3>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Parser } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib'</span>);
+
+<span class="hljs-keyword">const</span> parser = <span class="hljs-keyword">new</span> Parser({ <span class="hljs-attr">language</span>: <span class="hljs-string">'POSIX'</span> });
+<span class="hljs-keyword">const</span> tree = parser.parse(<span class="hljs-string">'echo "foo bar"'</span>);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(tree, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>));</code></pre>
+				<h3 id="deserialization">Deserialization</h3>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Parser, fromJSON, Printer, File } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib'</span>);
+
+<span class="hljs-keyword">const</span> parser = <span class="hljs-keyword">new</span> Parser({ <span class="hljs-attr">language</span>: <span class="hljs-string">'POSIX'</span> });
+<span class="hljs-keyword">const</span> tree = parser.parse(<span class="hljs-string">'echo "foo bar"'</span>);
+
+<span class="hljs-keyword">const</span> printer = <span class="hljs-keyword">new</span> Printer();
+
+<span class="hljs-comment">// We can parse a stringified JSON and reconstruct it</span>
+<span class="hljs-comment">// regardless of its root type via fromJSON().</span>
+<span class="hljs-comment">// `a` will be equal to `tree`.</span>
+<span class="hljs-keyword">const</span> a = fromJSON(<span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(tree)));
+<span class="hljs-built_in">console</span>.log(printer.print(a)); <span class="hljs-comment">// echo "foo bar"</span>
+
+<span class="hljs-comment">// We can also just convert instances to and from plain objects</span>
+<span class="hljs-keyword">const</span> b = fromJSON(tree.toJSON());
+<span class="hljs-built_in">console</span>.log(printer.print(b)); <span class="hljs-comment">// echo "foo bar"</span>
+
+<span class="hljs-comment">// If we know the type of the root node, we can use the constructor</span>
+<span class="hljs-comment">// fromJSON() method. As the tree root is an instance of `File`, we'd do:</span>
+<span class="hljs-keyword">const</span> c = File.fromJSON(tree.toJSON());
+<span class="hljs-built_in">console</span>.log(printer.print(c)); <span class="hljs-comment">// echo "foo bar"</span></code></pre>
+				<h2 id="build">Build</h2>
+				<!-- markdownlint-disable MD014 MD031 -->
+				<pre><code class="language-shell"><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/rafamel/shell-parser.git</span>
+<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> shell-parser</span>
+<span class="hljs-meta">$</span><span class="bash"> npm install</span>
+<span class="hljs-meta">$</span><span class="bash"> npm run @root -- setup</span>
+<span class="hljs-meta">$</span><span class="bash"> npm run @package -- build</span></code></pre>
+				<!-- markdownlint-enable MD014 MD031 -->
+				<p>You can also build the docs via <code>npm run @root -- docs</code>.</p>
 				<h2 id="pending">Pending</h2>
 				<ul>
-					<li>Specific typings for node types.</li>
-					<li>Performance: There is a significant performance reduction that is planned to be solved by applying a number of transforms during transpile time.</li>
-					<li>Tests</li>
+					<li>Tests.</li>
+					<li>Types dump build from source.</li>
+					<li><code>Interactive</code> won&#39;t work properly with streams. The source test case seems to be limited to directly invoking <code>stream.read()</code>, and analyzing the source, it seems there is no way for the stream to emit data that <code>Interactive</code> would react to.</li>
+					<li><code>exec()</code> should return an object of actions to perform.</li>
 				</ul>
-				<!-- ## Notes
-
-* `Errors`: it would be great if they shipped with an identifier, so the message could be native to JS given an error message.
-
-* Dead code from source cannot be tree shaked in JS.
-
-* Node parent.
-
-* `Interactive` doesn't seem to properly work with streams. The test case seems to be limited to directly invoking `stream.read()`, and analyzing the source, it seems there is no way for the stream for emit data that `Interactive` would react to.
-
-* Node parents: There should be a way to obtain the node parent on traversal (Walk)
-
-* instantiating a node from serialized
-
-* exec() returns an object
--->
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -191,9 +201,6 @@ traverse(tree, (node) =&gt; {
 						<a href="classes/block.html" class="tsd-kind-icon">Block</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/braceexp.html" class="tsd-kind-icon">Brace<wbr>Exp</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="classes/cstyleloop.html" class="tsd-kind-icon">CStyle<wbr>Loop</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -240,9 +247,6 @@ traverse(tree, (node) =&gt; {
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/letclause.html" class="tsd-kind-icon">Let<wbr>Clause</a>
-					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="classes/list.html" class="tsd-kind-icon">List</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/lit.html" class="tsd-kind-icon">Lit</a>
@@ -311,31 +315,190 @@ traverse(tree, (node) =&gt; {
 						<a href="classes/worditer.html" class="tsd-kind-icon">Word<wbr>Iter</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/iarithmexpr.html" class="tsd-kind-icon">IArithm<wbr>Expr</a>
+						<a href="interfaces/iarithmcmd.html" class="tsd-kind-icon">IArithm<wbr>Cmd</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/icommand.html" class="tsd-kind-icon">ICommand</a>
+						<a href="interfaces/iarithmexp.html" class="tsd-kind-icon">IArithm<wbr>Exp</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/iloop.html" class="tsd-kind-icon">ILoop</a>
+						<a href="interfaces/iarrayelem.html" class="tsd-kind-icon">IArray<wbr>Elem</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/inode.html" class="tsd-kind-icon">INode</a>
+						<a href="interfaces/iarrayexpr.html" class="tsd-kind-icon">IArray<wbr>Expr</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iassign.html" class="tsd-kind-icon">IAssign</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ibinaryarithm.html" class="tsd-kind-icon">IBinary<wbr>Arithm</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ibinarycmd.html" class="tsd-kind-icon">IBinary<wbr>Cmd</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ibinarytest.html" class="tsd-kind-icon">IBinary<wbr>Test</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iblock.html" class="tsd-kind-icon">IBlock</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icstyleloop.html" class="tsd-kind-icon">ICStyle<wbr>Loop</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icallexpr.html" class="tsd-kind-icon">ICall<wbr>Expr</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icaseclause.html" class="tsd-kind-icon">ICase<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icaseitem.html" class="tsd-kind-icon">ICase<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icmdsubst.html" class="tsd-kind-icon">ICmd<wbr>Subst</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icomment.html" class="tsd-kind-icon">IComment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/icoprocclause.html" class="tsd-kind-icon">ICoproc<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/idblquoted.html" class="tsd-kind-icon">IDbl<wbr>Quoted</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ideclclause.html" class="tsd-kind-icon">IDecl<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iexpansion.html" class="tsd-kind-icon">IExpansion</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iextglob.html" class="tsd-kind-icon">IExt<wbr>Glob</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ifile.html" class="tsd-kind-icon">IFile</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iforclause.html" class="tsd-kind-icon">IFor<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ifuncdecl.html" class="tsd-kind-icon">IFunc<wbr>Decl</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iifclause.html" class="tsd-kind-icon">IIf<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iletclause.html" class="tsd-kind-icon">ILet<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ilit.html" class="tsd-kind-icon">ILit</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iparamexp.html" class="tsd-kind-icon">IParam<wbr>Exp</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iparenarithm.html" class="tsd-kind-icon">IParen<wbr>Arithm</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iparentest.html" class="tsd-kind-icon">IParen<wbr>Test</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/iparseropts.html" class="tsd-kind-icon">IParser<wbr>Opts</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/itestexpr.html" class="tsd-kind-icon">ITest<wbr>Expr</a>
+						<a href="interfaces/ipos.html" class="tsd-kind-icon">IPos</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/iwordpart.html" class="tsd-kind-icon">IWord<wbr>Part</a>
+						<a href="interfaces/iprocsubst.html" class="tsd-kind-icon">IProc<wbr>Subst</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iredirect.html" class="tsd-kind-icon">IRedirect</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ireplace.html" class="tsd-kind-icon">IReplace</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/isglquoted.html" class="tsd-kind-icon">ISgl<wbr>Quoted</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/islice.html" class="tsd-kind-icon">ISlice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/istmt.html" class="tsd-kind-icon">IStmt</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/istmtlist.html" class="tsd-kind-icon">IStmt<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/isubshell.html" class="tsd-kind-icon">ISubshell</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/itestclause.html" class="tsd-kind-icon">ITest<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/itimeclause.html" class="tsd-kind-icon">ITime<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iunaryarithm.html" class="tsd-kind-icon">IUnary<wbr>Arithm</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iunarytest.html" class="tsd-kind-icon">IUnary<wbr>Test</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iwhileclause.html" class="tsd-kind-icon">IWhile<wbr>Clause</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iword.html" class="tsd-kind-icon">IWord</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iworditer.html" class="tsd-kind-icon">IWord<wbr>Iter</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tarithmexpr" class="tsd-kind-icon">TArithm<wbr>Expr</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tcommand" class="tsd-kind-icon">TCommand</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tiarithmexpr" class="tsd-kind-icon">TIArithm<wbr>Expr</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#ticommand" class="tsd-kind-icon">TICommand</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tiloop" class="tsd-kind-icon">TILoop</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tinode" class="tsd-kind-icon">TINode</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#titestexpr" class="tsd-kind-icon">TITest<wbr>Expr</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#titype" class="tsd-kind-icon">TIType</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tiwordpart" class="tsd-kind-icon">TIWord<wbr>Part</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#tlanguage" class="tsd-kind-icon">TLanguage</a>
 					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#fromarray" class="tsd-kind-icon">from<wbr>Array</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tloop" class="tsd-kind-icon">TLoop</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#tnode" class="tsd-kind-icon">TNode</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#ttestexpr" class="tsd-kind-icon">TTest<wbr>Expr</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#ttype" class="tsd-kind-icon">TType</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#twordpart" class="tsd-kind-icon">TWord<wbr>Part</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#fromjson" class="tsd-kind-icon">fromJSON</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isarithmexpr" class="tsd-kind-icon">is<wbr>Arithm<wbr>Expr</a>
@@ -353,10 +516,10 @@ traverse(tree, (node) =&gt; {
 						<a href="globals.html#istestexpr" class="tsd-kind-icon">is<wbr>Test<wbr>Expr</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#iswordpart" class="tsd-kind-icon">is<wbr>Word<wbr>Part</a>
+						<a href="globals.html#istype" class="tsd-kind-icon">is<wbr>Type</a>
 					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#toarray" class="tsd-kind-icon">to<wbr>Array</a>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iswordpart" class="tsd-kind-icon">is<wbr>Word<wbr>Part</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#traverse" class="tsd-kind-icon">traverse</a>
