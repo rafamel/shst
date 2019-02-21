@@ -1,12 +1,12 @@
 import { traversal } from '#/core/types';
-import { INode, isNode } from '#/core';
+import { TNode, isNode } from '#/core';
 
 /**
  * *DFS* nodes traversal. Will continue traversing in depth if `cb` returns `true` for a given node.
  */
 export default function traverse(
-  node: INode,
-  cb: (node: INode) => boolean | void
+  node: TNode,
+  cb: (node: TNode) => boolean | void
 ): void {
   if (!cb(node)) return;
 
