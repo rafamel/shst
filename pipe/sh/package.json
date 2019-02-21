@@ -32,7 +32,6 @@
     "exits": "^0.4.0",
     "jake": "^8.0.19",
     "jest-cli": "^24.0.0",
-    "jscodeshift": "^0.6.3",
     "nps": "^5.9.3",
     "onchange": "^5.2.0",
     "prettier": "^1.16.4",
