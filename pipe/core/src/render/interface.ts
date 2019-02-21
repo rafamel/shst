@@ -40,7 +40,7 @@ export function each(obj: IInterfaceDef, dependencies: Dependencies): string {
       `Determines whether a given instance is a \`${obj.is}\` valid *${obj.was}*`
     ) +
     `
-      export function is${obj.is.slice(1)}(instance: any): boolean {
+      export function is${obj.is.slice(1)}(instance: TType): boolean {
         return isInterface('${obj.is}', instance);
       }
     `.trim()
