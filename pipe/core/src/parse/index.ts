@@ -39,9 +39,9 @@ export default function resolve(): ITypeDefMap {
   // Adds IType
   assert(!ans.IType);
   ans.IType = {
-    is: 'IType',
-    was: 'IType',
-    doc: 'Implemented by all parsed types',
+    is: 'TType',
+    was: 'Type',
+    doc: 'All instances returned by `Parser` are *Type*.',
     kind: 'interface',
     methods: [],
     implementedBy: Object.values(ans)

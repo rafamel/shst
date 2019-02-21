@@ -1,6 +1,6 @@
-import { IInterfaceDef, IMethodDef } from '~/types';
+import { IInterfaceDef } from '~/types';
 import assert from 'assert';
-import { renderType, renderDoc, renderParams } from './helpers';
+import { renderDoc } from './helpers';
 import Dependencies from './Dependencies';
 import imports from './imports';
 
@@ -18,51 +18,26 @@ export default function renderInterface(arr: IInterfaceDef[]): string {
 export function each(obj: IInterfaceDef, dependencies: Dependencies): string {
   assert(obj.kind === 'interface');
 
-  const methods = obj.methods
-    .map(
-      (method: IMethodDef): string => {
-        dependencies.add(method.returns);
-
-        const params = renderParams(method.params, dependencies);
-
-        return (
-          renderDoc(method.doc) +
-          `${method.is}(${params}): ${renderType(
-            method.returns,
-            dependencies
-          )};`
-        );
-      }
-    )
-    .join('\n');
-
   dependencies.addCustom('isInterface', 'util');
+  obj.implementedBy.forEach((x) => dependencies.addCustom(x, 'struct'));
+
   return (
-    renderDoc(obj.doc) +
-    (obj.is === 'IType'
-      ? // IType special case
-        `
-        export interface IType {
-          readonly type: string;
-        }
-      `.trim()
-      : `
-        export interface ${obj.is} extends IType {
-          ${methods}
-        }
-      `.trim()) +
-    renderDoc(`Any \`${obj.is}\` implementation as a plain object`) +
+    renderDoc(
+      `Any class qualifying as *${obj.was}*` + (obj.doc ? '. ' + obj.doc : '')
+    ) +
+    `export type ${obj.is} = ${obj.implementedBy.join(' | ')};` +
+    renderDoc(`Any \`${obj.is}\` as a plain object`) +
     `
-      export type T${obj.is} = ${obj.implementedBy
+      export type TI${obj.was} = ${obj.implementedBy
       .map((x) => {
-        dependencies.addCustom('T' + x, 'struct');
-        return 'T' + x;
+        dependencies.addCustom('I' + x, 'struct');
+        return 'I' + x;
       })
       .join(' | ')};
     `.trim() +
     renderDoc(
       // prettier-ignore
-      `Determines whether a given instance is of a class that implements \`${obj.is}\``
+      `Determines whether a given instance is a \`${obj.is}\` valid *${obj.was}*`
     ) +
     `
       export function is${obj.is.slice(1)}(instance: any): boolean {

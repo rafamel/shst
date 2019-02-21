@@ -16,24 +16,16 @@ export default function renderDeclaration(arr: IStructDef[]): string {
 
   const str = arr.map((item) => each(item, dependencies)).join('\n');
 
-  const ttype =
-    renderDoc(`Any class that implements \`IType\``) +
-    `export type TType = ${arr.map((item) => item.is).join(' | ')};`;
-  return imports(dependencies, 'struct') + ttype + str;
+  return imports(dependencies, 'struct') + str;
 }
 
 export function each(obj: IStructDef, dependencies: Dependencies): string {
   assert(obj.kind === 'struct');
 
-  obj.implements.forEach((type) => dependencies.addCustom(type, 'interface'));
-  const implement = obj.implements.length
-    ? `implements ${obj.implements.join(', ')}`
-    : '';
-
   return (
     renderDoc(`\`${obj.is}\` as a plain object.`) +
     `
-    export type T${obj.is} = {
+    export interface I${obj.is} {
       ${[`type: '${obj.is}'`]
         .concat(obj.fields.map((field) => json(field, false, dependencies)))
         .concat(obj.private.map((field) => json(field, true, dependencies)))
@@ -42,9 +34,9 @@ export function each(obj: IStructDef, dependencies: Dependencies): string {
     `.trim() +
     renderDoc(obj.doc) +
     `
-    export class ${obj.is} ${implement} {
+    export class ${obj.is} {
       private static type: '${obj.is}';
-      public static fromJSON(plain: T${obj.is}): ${obj.is};
+      public static fromJSON(plain: I${obj.is}): ${obj.is};
       ${constructor(obj, dependencies)};
       public readonly type: '${obj.is}';
       ${obj.fields.map((field) => fields(field, dependencies)).join(';\n')}
@@ -52,7 +44,7 @@ export function each(obj: IStructDef, dependencies: Dependencies): string {
       ${obj.accessors
         .map((accessor) => accessors(accessor, obj, dependencies))
         .join(';\n')}
-      public toJSON(): T${obj.is};
+      public toJSON(): I${obj.is};
     }
     `
   );
@@ -82,12 +74,16 @@ export function json(
   isPrivate: boolean,
   dependencies: Dependencies
 ): string {
-  if (field.value.kind === 'interface') {
-    dependencies.addCustom('T' + field.value.type, 'interface');
+  let type = renderType(field.value, dependencies);
+  if (typeWrap(field.value)) {
+    if (field.value.kind === 'interface') {
+      dependencies.addCustom('TI' + field.value.type.slice(1), 'interface');
+      type = 'TI' + type.slice(1);
+    } else {
+      type = 'I' + type;
+    }
   }
-  return `${isPrivate ? '$' : ''}${field.is}: ${
-    typeWrap(field.value) ? 'T' : ''
-  }${renderType(field.value, dependencies)}`;
+  return `${isPrivate ? '$' : ''}${field.is}: ${type}`;
 }
 
 export function fields(field: IFieldDef, dependencies: Dependencies): string {
