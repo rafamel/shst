@@ -22,6 +22,13 @@ go install github.com/gopherjs/gopherjs
 # Transpile, using sh v3's go.mod to resolve deps.
 # if desired, add -m flag for gopherjs output minification
 gopherjs build -o /go/app/build/src/gopher.js /go/app/transpile/main.go
+
+# Get the API dump in JSON. We need a newer x/tools, since gopherjs pulls in an
+# old version, and the sh module doesn't require any x/tools version.
+cd /go/sh/syntax
+go get -u -d golang.org/x/tools@v0.0.0-20190221204921-83362c3779f5
+go run api_dump.go >/go/app/build/src/api_dump.json
+
 cd /go/app/build
 rm src/gopher.js.map
 
