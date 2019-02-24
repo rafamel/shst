@@ -27,7 +27,7 @@ gopherjs build -o /go/app/build/src/gopher.js /go/app/transpile/main.go
 # old version, and the sh module doesn't require any x/tools version.
 cd /go/sh/syntax
 go get -u -d golang.org/x/tools@v0.0.0-20190221204921-83362c3779f5
-go run api_dump.go >/go/app/build/src/api_dump.json
+go run api_dump.go > /go/app/build/lib/sh.types.json
 
 cd /go/app/build
 rm src/gopher.js.map
