@@ -9,26 +9,24 @@ import * as externalize from '#/core/externalize';
  * Allows configuration of parsing options applied when parsing shell scripts.
  */
 export default class Parser {
-  public stopAt: string | null;
-  public comments: boolean;
-  public language: TLanguage;
+  public readonly stopAt: string | null;
+  public readonly comments: boolean;
+  public readonly language: TLanguage;
   public constructor({ stopAt, comments, language }: IParserOpts = {}) {
-    const args: any = [];
-
-    // stopAt
-    if (stopAt) args.push(sh.syntax.stopAt(stopAt));
-    this.stopAt = stopAt || null;
-
-    // comments
-    if (comments) args.push(sh.syntax.KeepComments);
-    this.comments = comments || false;
-
     const lang: { self: TLanguage; sh: string } =
-      // @ts-ignore
-      (language && LANGUAGE_MAP[language.toLowerCase()]) || LANGUAGE_MAP.bash;
-    this.language = lang.self;
-    args.push(sh.syntax.Variant(sh.syntax[lang.sh]));
+      (language && (LANGUAGE_MAP as any)[language.toLowerCase()]) ||
+      LANGUAGE_MAP.bash;
 
+    Object.defineProperties(this, {
+      stopAt: { writable: false, value: stopAt || null },
+      comments: { writable: false, value: comments || false },
+      language: { writable: false, value: lang.self }
+    });
+
+    const args: any = [];
+    if (stopAt) args.push(sh.syntax.stopAt(stopAt));
+    if (comments) args.push(sh.syntax.KeepComments);
+    args.push(sh.syntax.Variant(sh.syntax[lang.sh]));
     seed(this, call(() => sh.syntax.NewParser(...args)));
   }
   /**

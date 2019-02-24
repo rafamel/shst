@@ -6,6 +6,7 @@
   // https://www.typescriptlang.org/docs/handbook/compiler-options.html
   // http://json.schemastore.org/tsconfig
   "compilerOptions": {
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
