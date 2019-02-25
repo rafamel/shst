@@ -25,9 +25,7 @@ module.exports = scripts({
     process: series(
       'node transforms/expose-packages',
       // Minify
-      'minify build/src/exposed.js --out-file build/lib/index.js --mangle.topLevel',
-      // TODO build types from source
-      'shx cp sh.types.json build/lib/'
+      'minify build/src/exposed.js --out-file build/lib/index.js --mangle.topLevel'
     )
   },
   fix: [
