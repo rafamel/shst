@@ -3,6 +3,7 @@ import types from './raw';
 import maps from './map.json';
 import { ITypeMap, ITypeDef } from '~/types';
 import getName from './get-name';
+import { regex } from '~/pkg';
 
 let run = false;
 let typesMap: ITypeMap = {};
@@ -54,7 +55,6 @@ function generate(): void {
   };
 }
 
-const regex = /^mvdan\.cc\/sh\/syntax\./;
 export default {
   get(name: string): ITypeDef {
     if (!run) generate();
