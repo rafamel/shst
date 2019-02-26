@@ -7,8 +7,17 @@ import { seed, call } from '#/core/util';
  * Abstract parser class
  */
 export default class BaseParser {
+  /**
+   * Contains the `stopAt` option passed to the constructor. `null` by default.
+   */
   public readonly stopAt: string | null;
+  /**
+   * Contains the `comments` option passed to the constructor. `false` by default.
+   */
   public readonly comments: boolean;
+  /**
+   * Contains the `language` option passed to the constructor. `"bash"` by default.
+   */
   public readonly language: TLanguage;
   public constructor(opts: IParserOpts = {}) {
     const { stopAt, comments, language } = opts;

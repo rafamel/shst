@@ -5,9 +5,12 @@ import { collect, internal, call } from '#/core/util';
 import * as externalize from '#/core/externalize';
 import uuid from 'uuid/v4';
 
+/**
+ * Allows for ongoing parsing. A use case would be parsing incoming statements for an interactive shell.
+ */
 export default class InteractiveParser extends BaseParser {
   /**
-   * All accumulated `Stmt` objects returned by `InteractiveParser.next()`
+   * All accumulated `Stmt` objects returned by `InteractiveParser.next()`.
    */
   public stmts: Stmt[];
   /**
@@ -19,7 +22,7 @@ export default class InteractiveParser extends BaseParser {
    */
   private pending: string;
   /**
-   *
+   * Subscribed functions via `InteractiveParser.subscribe()`.
    */
   private subscribers: { [key: string]: (stmts: Stmt[]) => void };
   public constructor(opts: IParserOpts) {
