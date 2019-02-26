@@ -1,18 +1,17 @@
 import sh from '#/sh';
 import { LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts } from '~/types';
-import { File } from '#/core';
-import { seed, collect, call, internal } from '#/core/util';
-import * as externalize from '#/core/externalize';
+import { seed, call } from '#/core/util';
 
 /**
- * Allows configuration of parsing options applied when parsing shell scripts.
+ * Abstract parser class
  */
-export default class Parser {
+export default class BaseParser {
   public readonly stopAt: string | null;
   public readonly comments: boolean;
   public readonly language: TLanguage;
-  public constructor({ stopAt, comments, language }: IParserOpts = {}) {
+  public constructor(opts: IParserOpts = {}) {
+    const { stopAt, comments, language } = opts;
     const lang: { self: TLanguage; sh: string } =
       (language && (LANGUAGE_MAP as any)[language.toLowerCase()]) ||
       LANGUAGE_MAP.bash;
@@ -28,11 +27,5 @@ export default class Parser {
     if (comments) args.push(sh.syntax.KeepComments);
     args.push(sh.syntax.Variant(sh.syntax[lang.sh]));
     seed(this, call(() => sh.syntax.NewParser(...args)));
-  }
-  /**
-   * Parses a shell script.
-   */
-  public parse(str: string, name?: string): File {
-    return externalize.type(internal.get(collect(this).Parse(str, name)));
   }
 }

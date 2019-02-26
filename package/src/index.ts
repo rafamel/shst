@@ -1,4 +1,4 @@
 export * from '#/core';
-export { default as Parser } from './Parser';
+export * from './parser';
 export { default as Printer } from './Printer';
 export { default as traverse } from './traverse';
