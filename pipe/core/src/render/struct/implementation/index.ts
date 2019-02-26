@@ -12,11 +12,7 @@ export default function renderImplementation(arr: IStructDef[]): string {
 
   const str = arr.map((item) => each(item, dependencies)).join('\n');
 
-  return (
-    '/* eslint-disable import/no-unresolved */\n' +
-    imports(dependencies, ['struct', 'interface', 'enum']) +
-    str
-  );
+  return imports(dependencies, ['struct', 'interface', 'enum']) + str;
 }
 
 export function each(obj: IStructDef, dependencies: Dependencies): string {

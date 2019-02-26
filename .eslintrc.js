@@ -33,6 +33,17 @@ module.exports = {
     // Prettier
     'prettier/prettier': [2, require('./.prettierrc')]
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['json']
+          .concat(EXT_JS.split(','))
+          .concat(EXT_TS.split(','))
+          .filter(Boolean)
+          .map((x) => '.' + x)
+      }
+    }
+  },
   overrides: [
     /* JAVASCRIPT */
     {
