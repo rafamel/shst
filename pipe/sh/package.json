@@ -26,14 +26,14 @@
     ":version": "npm run @root -- :version --"
   },
   "devDependencies": {
-    "ajv": "^6.9.1",
+    "ajv": "^6.9.2",
     "babel-minify": "^0.5.0",
     "cross-env": "^5.2.0",
-    "eslint": "^5.13.0",
+    "eslint": "^5.14.1",
     "exits": "^0.4.0",
     "jake": "^8.0.19",
     "jest-cli": "^24.0.0",
-    "nps": "^5.9.3",
+    "nps": "^5.9.4",
     "onchange": "^5.2.0",
     "prettier": "^1.16.4",
     "shx": "^0.3.2",

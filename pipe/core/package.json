@@ -34,15 +34,15 @@
     "camelcase": "^5.0.0",
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
-    "eslint": "^5.13.0",
+    "eslint": "^5.14.1",
     "jake": "^8.0.19",
-    "jest-cli": "^24.0.0",
+    "jest-cli": "^24.1.0",
     "jscodeshift": "^0.6.3",
-    "nps": "^5.9.3",
+    "nps": "^5.9.4",
     "onchange": "^5.2.0",
     "prettier": "^1.16.4",
     "shx": "^0.3.2",
-    "typescript": "^3.2.1"
+    "typescript": "^3.3.3333"
   },
   "dependencies": {}
 }
