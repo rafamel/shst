@@ -24,6 +24,7 @@ module.exports = scripts({
     transpile: `exits --log silent "${docker}" -- "docker rm go-sh-build"`,
     process: series(
       'node transforms/expose-packages',
+      'node transforms/dump-lock',
       // Minify
       'minify build/src/exposed.js --out-file build/lib/index.js --mangle.topLevel'
     )
