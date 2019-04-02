@@ -1,8 +1,8 @@
 {
-  "name": "shell-parser",
+  "name": "shst",
   "version": "0.0.0",
   "author": "Rafa Mel",
-  "description": "Shell parser",
+  "description": "A shell parser for Javascript",
   "keywords": [
     "keyword",
     "keyword",
@@ -35,13 +35,13 @@
     ":version": "npm run @root -- :version --"
   },
   "license": "MIT",
-  "homepage": "https://github.com/rafamel/shell-parser",
+  "homepage": "https://github.com/rafamel/shst",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafamel/shell-parser"
+    "url": "https://github.com/rafamel/shst"
   },
   "bugs": {
-    "url": "https://github.com/rafamel/shell-parser/issues"
+    "url": "https://github.com/rafamel/shst/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
