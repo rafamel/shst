@@ -58,6 +58,7 @@ function each(item: IStructDef): void {
         was: gdef.prop,
         index: gdef.i,
         value: {
+          pointer: false,
           list: false,
           type: type.is,
           kind: type.kind

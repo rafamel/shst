@@ -45,6 +45,7 @@ export function structMethod(name: string, obj: any): IMethodDef {
 export function resolveProp(obj: any): IValue {
   if (typeof obj === 'string') {
     return {
+      pointer: false,
       list: false,
       type: typesMap.get(obj).is,
       kind: typesMap.get(obj).kind
@@ -55,7 +56,7 @@ export function resolveProp(obj: any): IValue {
       case 'list':
         return { ...resolveProp(obj.elem), list: true };
       case 'pointer':
-        return resolveProp(obj.elem);
+        return { ...resolveProp(obj.elem), pointer: true };
       default:
         break;
     }

@@ -66,6 +66,7 @@ export interface IPrivateDef extends IDef {
 }
 
 export interface IValue {
+  pointer: boolean;
   list: boolean;
   type: string;
   kind: string;
