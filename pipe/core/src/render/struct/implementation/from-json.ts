@@ -47,6 +47,9 @@ export function each(
   if (typeWrap(field.value)) {
     dependencies.addCustom('fromJSON', 'from-json');
     if (field.value.list) return `plain.${key}.map(x => fromJSON(x))`;
+    if (field.value.pointer) {
+      return `plain.${key} ? fromJSON(plain.${key}) : null`;
+    }
 
     return `fromJSON(plain.${key})`;
   }

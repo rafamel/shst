@@ -30,8 +30,19 @@ export function each(
   }
 
   if (typeWrap(field.value)) {
-    if (field.value.list) str += '.map(x => x.toJSON())';
-    else str += '.toJSON()';
+    if (field.value.list) {
+      str += '.map(x => x.toJSON())';
+    } else if (field.value.pointer) {
+      str +=
+        ' && ' +
+        str
+          .split(':')
+          .slice(1)
+          .join(':') +
+        '.toJSON()';
+    } else {
+      str += '.toJSON()';
+    }
   }
   return str;
 }
