@@ -40,17 +40,18 @@ export function externalize(
   str: string,
   dependencies: Dependencies
 ): string {
+  const pointer = String(value.pointer);
   if (value.list) {
     if (typeWrap(value)) {
       dependencies.addCustom('typeList', 'externalize');
-      return `typeList(${str})`;
+      return `typeList(${str}, ${pointer})`;
     }
     dependencies.addCustom('list', 'externalize');
-    return `list(${str})`;
+    return `list(${str}, ${pointer})`;
   }
   if (typeWrap(value)) {
     dependencies.addCustom('type', 'externalize');
-    return `type(${str})`;
+    return `type(${str}, ${pointer})`;
   }
 
   return str;

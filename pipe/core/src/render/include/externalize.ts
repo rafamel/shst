@@ -3,18 +3,30 @@ import * as classes from './struct';
 import { collect } from './util';
 import { SYMBOL } from './constants';
 
-export function type(source: any) {
+export function type(source: any, pointer: boolean = false) {
+  if (pointer) {
+    const keys = Object.keys(source);
+    if (keys.length < 1 || (keys.length === 1 && keys[0] === '$val')) {
+      return null;
+    }
+  }
   const Class = (classes as any)[source.$is];
   const instance = Object.create(Class.prototype);
   return seed(instance, Class, source);
 }
 
-export function list(arr: any) {
-  return arr.$array.slice(arr.$offset, arr.$offset + arr.$length);
+export function list(arr: any, pointer: boolean = false) {
+  return !pointer || (arr.$array && arr.offset != null && arr.length != null)
+    ? arr.$array.slice(arr.$offset, arr.$offset + arr.$length)
+    : [];
 }
 
-export function typeList(arr: any) {
-  return list(arr).map(type);
+export function typeList(arr: any, pointer: boolean = false) {
+  return pointer
+    ? list(arr)
+        .map((x: any) => type(x, true))
+        .filter((x: any) => x !== null)
+    : list(arr).map((x: any) => type(x, false));
 }
 
 /**
