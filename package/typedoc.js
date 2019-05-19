@@ -1,27 +1,16 @@
-const pkg = require('./package.json');
-const path = require('path');
+const hook = require('../setup/monorepo/hook');
 
+hook(require.resolve('./project.config'));
+const typedoc = require('../setup/typedoc');
+
+const path = require('path');
 module.exports = {
-  name: `${pkg.name} ${pkg.version}`,
-  mode: 'file',
-  theme: 'default',
-  includeDeclarations: true,
-  excludePrivate: true,
-  excludeProtected: true,
-  excludeExternals: true,
-  excludePrivate: true,
-  excludeNotExported: false,
+  ...typedoc,
   readme: path.join(__dirname, '../README.md'),
-  exclude: [
-    '**/core/**/constants*',
-    '**/core/**/externalize*',
-    '**/core/**/from-json*',
-    '**/core/**/pkg*',
-    '**/core/**/prototypes*',
-    '**/core/**/types*',
-    '**/core/**/util*',
-    '**/test/**/*',
+  exclude: typedoc.exclude.concat([
     '**/utils/**/*',
-    '**/constants*'
-  ]
+    '**/constants*',
+    '**/packages/sh/*',
+    '**/packages/core/!(enum|from-json|interface|struct)*'
+  ])
 };

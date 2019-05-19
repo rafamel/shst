@@ -1,6 +1,4 @@
-import { File } from '#/core';
-import { collect, internal, call } from '#/core/util';
-import * as externalize from '#/core/externalize';
+import core, { File } from '@shst/core';
 import BaseParser from './BaseParser';
 
 /**
@@ -11,8 +9,8 @@ export default class Parser extends BaseParser {
    * Parses a shell script.
    */
   public parse(str: string, name?: string): File {
-    return externalize.type(
-      internal.get(call(() => collect(this).Parse(str, name)))
+    return core.externalize.type(
+      core.internal.get(core.call(() => core.collect(this).Parse(str, name)))
     );
   }
 }

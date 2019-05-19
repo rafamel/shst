@@ -1,4 +1,3 @@
-import all from '#/sh/sh.types.json';
+import sh from '@shst/sh';
 
-const { types }: any = all;
-export default types;
+export default sh.declaration.types;

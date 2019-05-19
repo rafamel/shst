@@ -1,9 +1,9 @@
 import assert from 'assert';
-import types from './raw';
 import maps from './map.json';
 import { ITypeMap, ITypeDef } from '~/types';
 import getName from './get-name';
-import { regex } from '~/pkg';
+import { REGEX } from '~/constants';
+import types from './raw';
 
 let run = false;
 let typesMap: ITypeMap = {};
@@ -11,6 +11,7 @@ let typesMap: ITypeMap = {};
 export const queue: string[] = [];
 
 function generate(): void {
+  if (!types) throw Error(`Types haven't been provided`);
   run = true;
   typesMap = {
     ...Object.keys(maps.scalars).reduce(
@@ -61,7 +62,7 @@ export default {
 
     assert(typeof name === 'string');
 
-    name = name.replace(regex, '');
+    name = name.replace(REGEX, '');
     assert(typesMap.hasOwnProperty(name));
 
     const def = typesMap[name];

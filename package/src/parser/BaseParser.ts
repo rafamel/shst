@@ -1,7 +1,7 @@
-import sh from '#/sh';
+import sh from '@shst/sh';
 import { LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts } from '~/types';
-import { seed, call } from '#/core/util';
+import core from '@shst/core';
 
 /**
  * Abstract parser class
@@ -31,10 +31,10 @@ export default class BaseParser {
       language: { writable: false, value: lang.self }
     });
 
-    const args: any = [];
+    const args: any[] = [];
     if (stopAt) args.push(sh.syntax.stopAt(stopAt));
     if (comments) args.push(sh.syntax.KeepComments);
     args.push(sh.syntax.Variant(sh.syntax[lang.sh]));
-    seed(this, call(() => sh.syntax.NewParser(...args)));
+    core.seed(this, core.call(() => sh.syntax.NewParser(...args)));
   }
 }

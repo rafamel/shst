@@ -1,7 +1,7 @@
 import { ITypeDefMap, IStructDef, IPrivateDef } from '~/types';
 import assert from 'assert';
 import typesMap from '../types-map';
-import { pkg } from '~/pkg';
+import sh from '@shst/sh';
 
 export default function defineSh(all: ITypeDefMap): void {
   Object.values(all)
@@ -10,7 +10,7 @@ export default function defineSh(all: ITypeDefMap): void {
 }
 
 function each(item: IStructDef): void {
-  const struct = pkg[item.was];
+  const struct = sh.package[item.was];
 
   assert(!!struct);
   assert(!!struct.ptr);

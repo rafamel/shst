@@ -1,16 +1,13 @@
 {
   "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
-  "extends": "./tsconfig.json",
+  "extends": "../setup/ttsconfig.json",
   "include": ["src/**/*"],
   "compilerOptions": {
-    "noEmit": false,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "allowJs": false,
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths"
-      }
-    ]
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"],
+      "@shst/sh": ["src/packages/sh"],
+      "@shst/core": ["src/packages/core"]
+    }
   }
 }

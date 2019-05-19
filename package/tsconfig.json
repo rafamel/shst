@@ -1,23 +1,9 @@
 {
   "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
-  "extends": "../tsconfig.json",
-  "include": ["src/**/*", "test/**/*", "typings/**/*"],
+  "extends": "../setup/tsconfig.json",
+  "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules"],
-  // https://www.typescriptlang.org/docs/handbook/compiler-options.html
-  // http://json.schemastore.org/tsconfig
   "compilerOptions": {
-    "strictPropertyInitialization": false,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"],
-      // by ./src/core
-      "#/package/*": ["src/*"],
-      // by ./src
-      "#/core/*": ["src/core/*"],
-      "#/core": ["src/core"],
-      "#/sh": ["../pipe/sh/build/lib"],
-      // by ./typings
-      "@/*": ["node_modules/*"]
-    }
+    "baseUrl": "."
   }
 }

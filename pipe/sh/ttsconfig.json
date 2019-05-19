@@ -1,0 +1,8 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
+  "extends": "../../setup/ttsconfig.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "baseUrl": "."
+  }
+}

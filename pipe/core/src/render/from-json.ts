@@ -14,6 +14,7 @@ export default function renderFromJSON(arr: IStructDef[]): string {
 
     ${overloads}
 
+    function fromJSON(plain: TIType): TType;
     function fromJSON(plain: TIType): TType {
       return (classes as any)[plain.type].fromJSON(plain);
     }

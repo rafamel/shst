@@ -1,8 +1,6 @@
 import BaseParser from './BaseParser';
-import { Stmt } from '#/core';
+import core, { Stmt } from '@shst/core';
 import { IParserOpts } from '~/types';
-import { collect, internal, call } from '#/core/util';
-import * as externalize from '#/core/externalize';
 import uuid from 'uuid/v4';
 
 /**
@@ -45,9 +43,9 @@ export default class InteractiveParser extends BaseParser {
     }
 
     str = this.pending + str;
-    const isIncomplete: boolean = call(() => {
-      return collect(this).Interactive(str, (arr: Stmt[]) => {
-        stmts = arr.map((x) => externalize.type(internal.get(x)));
+    const isIncomplete: boolean = core.call(() => {
+      return core.collect(this).Interactive(str, (arr: Stmt[]) => {
+        stmts = arr.map((x) => core.externalize.type(core.internal.get(x)));
         this.stmts.push(...stmts);
       });
     });
@@ -90,7 +88,7 @@ export default class InteractiveParser extends BaseParser {
     const id = uuid();
 
     this.subscribers[id] = fn;
-    return function unsubscribe() {
+    return () => {
       delete this.subscribers[id];
     };
   }

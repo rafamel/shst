@@ -1,10 +1,10 @@
-const { EXT, ROOT_DIR } = require('./project.config');
-const EXT_ARR = EXT.split(',').map((x) => x.trim());
+const hook = require('../../setup/monorepo/hook');
+
+hook(require.resolve('./project.config'));
+const jest = require('../../setup/jest.config');
 
 module.exports = {
-  rootDir: ROOT_DIR,
-  testEnvironment: 'node',
+  ...jest,
   collectCoverage: false,
-  moduleFileExtensions: EXT_ARR.concat(['json']),
-  testPathIgnorePatterns: ['/node_modules/']
+  modulePathIgnorePatterns: jest.modulePathIgnorePatterns.concat([])
 };

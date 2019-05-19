@@ -1,43 +1,33 @@
+# shst
+
+[![Version](https://img.shields.io/npm/v/shst.svg)](https://www.npmjs.com/package/shst)
+[![Build Status](https://img.shields.io/travis/rafamel/shst/master.svg)](https://travis-ci.org/rafamel/shst)
+[![Coverage](https://img.shields.io/coveralls/rafamel/shst/master.svg)](https://coveralls.io/github/rafamel/shst)
+[![Dependencies](https://img.shields.io/david/rafamel/shst.svg)](https://david-dm.org/rafamel/shst)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/shst.svg)](https://snyk.io/test/npm/shst)
+[![License](https://img.shields.io/github/license/rafamel/shst.svg)](https://github.com/rafamel/shst/blob/master/LICENSE)
+[![Types](https://img.shields.io/npm/types/shst.svg)](https://www.npmjs.com/package/shst)
+
 <div align="center">
   <br />
+  <br />
   <a href="https://www.npmjs.com/package/shst" target="_blank">
-    <img alt="shst" width="350" src="https://raw.githubusercontent.com/rafamel/shst/master/scripts/assets/logo.png" />
+    <img alt="shst" width="350" src="https://raw.githubusercontent.com/rafamel/shst/master/assets/logo.png" />
   </a>
   <br />
   <br />
   <strong>A shell parser for Javascript</strong>
   <br />
   <br />
-  <a href="https://www.npmjs.com/package/shst">
-    <img src="https://img.shields.io/npm/v/shst.svg" alt="Version">
-  </a>
-  <a href="https://www.npmjs.com/package/shst">
-    <img src="https://img.shields.io/npm/types/shst.svg" alt="Types">
-  </a>
-  <a href="https://travis-ci.org/rafamel/shst">
-    <img src="https://img.shields.io/travis/rafamel/shst.svg" alt="Build Status">
-  </a>
-  <a href="https://coveralls.io/github/rafamel/shst">
-    <img src="https://img.shields.io/coveralls/rafamel/shst.svg" alt="Coverage">
-  </a>
-  <a href="https://david-dm.org/rafamel/shst">
-    <img src="https://img.shields.io/david/rafamel/shst.svg" alt="Dependencies">
-  </a>
-  <a href="https://snyk.io/test/npm/shst">
-    <img src="https://img.shields.io/snyk/vulnerabilities/npm/shst.svg" alt="Vulnerabilities">
-  </a>
-  <a href="https://github.com/rafamel/shst/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/rafamel/shst.svg" alt="License">
-  </a>
-  <br />
-  <br />
 </div>
 
-# shst
+<!-- ## Install
+
+[`npm install shst`](https://www.npmjs.com/package/shst) -->
 
 ## Usage
 
-[Once built,](#build) transpiled JS files can be found at `/lib`. They expose the `Parser`, `InteractiveParser`, and `Printer` classes, and the `traverse()` function.
+[Once built,](#build) transpiled JS files can be found at `/package/pkg`. They expose the `Parser`, `InteractiveParser`, and `Printer` classes, and the `traverse()` function.
 
 [Full documentation is available here.](https://rafamel.github.io/shst/)
 
@@ -48,7 +38,7 @@
 #### Script parsing
 
 ```javascript
-const { Parser, Printer } = require('./lib');
+const { Parser, Printer } = require('./package/pkg');
 
 const parser = new Parser();
 const tree = parser.parse("echo 'foo'");
@@ -60,7 +50,7 @@ console.log(printer.print(tree)); // echo 'foo'
 #### Interactive parsing
 
 ```javascript
-const { InteractiveParser } = require('./lib');
+const { InteractiveParser } = require('./package/pkg');
 
 const interactive = new InteractiveParser();
 
@@ -108,7 +98,7 @@ interactive.end(); // [ Stmt {}, Stmt {}, Stmt {}, Stmt {}, Stmt {}, Stmt {} ]
 ### Traversal
 
 ```javascript
-const { Parser, traverse, Printer } = require('./lib');
+const { Parser, traverse, Printer } = require('./package/pkg');
 
 const parser = new Parser();
 const tree = parser.parse("echo 'foo'");
@@ -129,7 +119,7 @@ console.log(printer.print(tree)); // echo 'bar'
 #### Serialization
 
 ```javascript
-const { Parser } = require('./lib');
+const { Parser } = require('./package/pkg');
 
 const parser = new Parser({ language: 'POSIX' });
 const tree = parser.parse('echo "foo bar"');
@@ -140,7 +130,7 @@ console.log(JSON.stringify(tree, null, 2));
 #### Deserialization
 
 ```javascript
-const { Parser, fromJSON, Printer, File } = require('./lib');
+const { Parser, fromJSON, Printer, File } = require('./package/pkg');
 
 const parser = new Parser({ language: 'POSIX' });
 const tree = parser.parse('echo "foo bar"');
@@ -170,8 +160,7 @@ console.log(printer.print(c)); // echo "foo bar"
 $ git clone https://github.com/rafamel/shst.git
 $ cd shst
 $ npm install
-$ npm run @root -- setup
-$ npm run @package -- build
+$ npx kpo :series "kpo @ bootstrap" "kpo @package build"
 ```
 <!-- markdownlint-enable MD014 MD031 -->
 

@@ -1,4 +1,3 @@
-import types from './raw';
 import define from './define';
 import { queue } from './types-map';
 import { ITypeMap, ITypeDefMap, IInterfaceDef } from '../types';
@@ -7,6 +6,7 @@ import defineAccessors from './accesors';
 import defineSh from './sh';
 import map from './map.json';
 import docMap from './doc-map';
+import types from './raw';
 // TODO: replace replaceMap in docs
 // import { replaceMap } from './get-name';
 
@@ -22,7 +22,9 @@ export default function resolve(): ITypeDefMap {
     if (!next) throw Error('No next item in queue');
 
     // Check whether it's already been processed or should be skipped
-    if (acc.hasOwnProperty(next) || map.skip.includes(next)) continue;
+    if (acc.hasOwnProperty(next) || (map.skip as string[]).includes(next)) {
+      continue;
+    }
 
     acc[next] = define(next, types[next]);
   }
@@ -59,7 +61,7 @@ export default function resolve(): ITypeDefMap {
 
     // Filter skipped
     item.implementedBy = item.implementedBy.filter(
-      (name) => !map.skip.includes(name)
+      (name) => !(map.skip as string[]).includes(name)
     );
 
     item.implementedBy.forEach((name) => {

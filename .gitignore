@@ -1,10 +1,11 @@
 # Project Specific #
 ####################
-lib
+pkg
 build
-bin
+lib
 dist
-_test.*
+out
+_test*
 
 # Node, Frameworks, Editors #
 #############################
@@ -45,6 +46,7 @@ npm-debug.log
 *.log
 *.sql
 *.sqlite
+*.db
 
 # OS generated files #
 ######################

@@ -14,3 +14,11 @@ export interface IParserOpts {
    */
   language?: TLanguage;
 }
+
+export interface IPrinterOpts {
+  minify?: boolean;
+  padding?: boolean;
+  switchCaseIndent?: boolean;
+  binaryNextLine?: boolean;
+  spaceRedirects?: boolean;
+}

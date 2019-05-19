@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (c) 2016, Daniel Martí. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -59,7 +59,6 @@ func main() {
 		}
 		return jp
 	})
-
 	stx.Set("KeepComments", func(v interface{}) {
 		syntax.KeepComments(&v.(*jsParser).Parser)
 	})
@@ -81,9 +80,44 @@ func main() {
 	})
 
 	// Printer
-	stx.Set("NewPrinter", func() *js.Object {
+	stx.Set("NewPrinter", func(options ...func(interface{})) *js.Object {
 		p := syntax.NewPrinter()
-		return js.MakeFullWrapper(jsPrinter{p})
+		jp := js.MakeFullWrapper(&jsPrinter{Printer: *p})
+		// Apply the options after we've wrapped the printer, as
+		// otherwise we cannot internalise the value.
+		for _, opt := range options {
+			opt(jp)
+		}
+		return jp
+	})
+	stx.Set("Minify", func(v interface{}) {
+		syntax.Minify(&v.(*jsPrinter).Printer)
+	})
+	stx.Set("Indent", func(spaces uint) func(interface{}) {
+		return func(v interface{}) {
+			syntax.Indent(spaces)(&v.(*jsPrinter).Printer)
+		}
+	})
+	stx.Set("KeepPadding", func(v interface{}) {
+		syntax.KeepPadding(&v.(*jsPrinter).Printer)
+	})
+	stx.Set("SwitchCaseIndent", func(v interface{}) {
+		syntax.SwitchCaseIndent(&v.(*jsPrinter).Printer)
+	})
+	stx.Set("BinaryNextLine", func(v interface{}) {
+		syntax.BinaryNextLine(&v.(*jsPrinter).Printer)
+	})
+	stx.Set("SpaceRedirects", func(v interface{}) {
+		syntax.SpaceRedirects(&v.(*jsPrinter).Printer)
+	})
+
+	// Independent functions
+	stx.Set("Simplify", syntax.Simplify)
+	stx.Set("QuotePattern", syntax.QuotePattern)
+	stx.Set("HasPattern", syntax.HasPattern)
+	stx.Set("ValidName", syntax.ValidName)
+	stx.Set("SplitBraces", func(w *syntax.Word) *js.Object {
+		return js.MakeFullWrapper(syntax.SplitBraces(w))
 	})
 }
 
@@ -127,7 +161,7 @@ func (p *jsParser) Interactive(src string, jsFn func([]*js.Object) bool) bool {
 }
 
 type jsPrinter struct {
-	*syntax.Printer
+	syntax.Printer
 }
 
 func (p jsPrinter) Print(file *syntax.File) string {

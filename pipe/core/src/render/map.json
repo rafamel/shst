@@ -6,7 +6,7 @@
   "util": "./util",
   "constants": "./constants",
   "from-json": "./from-json",
-  "pkg": "./pkg",
+  "sh": "./sh",
   "prototypes": "./prototypes",
   "externalize": "./externalize"
 }
