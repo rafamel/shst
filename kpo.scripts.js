@@ -27,6 +27,7 @@ module.exports.scripts = {
     modules: remove('./node_modules', { confirm: true })
   },
   /* Hooks */
+  postinstall: kpo`bootstrap`,
   $precommit: [
     !vars.commitizen && Error(`Commit by running 'kpo commit'`),
     kpo`validate`

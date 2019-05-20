@@ -22,7 +22,7 @@ module.exports.scripts = {
       remove(['out', 'pkg']),
       ['out', 'pkg/dist-node', 'pkg/dist-types'].map(ensure),
       copy(['README.md', 'package.json'], 'pkg'),
-      json('pkg/package.json', (pkg) =>
+      json('pkg/package.json', (file, pkg) =>
         Object.assign(pkg, {
           main: 'dist-node/index.js',
           types: 'dist-types/index.d.ts'
@@ -31,11 +31,11 @@ module.exports.scripts = {
     ],
     $assemble: [
       log`[2/6] Parsing sh types...`,
-      json('pkg/dist-node/core.types.json', parse),
+      json('pkg/dist-node/core.types.json', (file, json) => parse(json)),
       log`[3/6] Rendering core types...`,
       json(
         'pkg/dist-node/core.types.json',
-        (types) =>
+        (file, types) =>
           Promise.all(render(types).map(([k, v]) => write.fn(`out/${k}`, v))),
         { overwrite: false }
       ),
@@ -53,7 +53,7 @@ module.exports.scripts = {
       line`babel ./out --out-dir ./pkg/dist-node
         --extensions .${extensions.replace(/,/g, ',.')} --source-maps inline`,
       scripts.build.$types || Error('Build types script missing'),
-      copy(glob`out/*.d.ts`, './pkg/dist-types/')
+      copy(glob`out/**/*.d.ts`, { from: 'out', to: './pkg/dist-types/' })
     ],
     $settle: [
       log`\n[5/6] Linking packages...\n`,

@@ -155,14 +155,12 @@ console.log(printer.print(c)); // echo "foo bar"
 
 ## Build
 
-<!-- markdownlint-disable MD014 MD031 -->
-```shell
+```
 $ git clone https://github.com/rafamel/shst.git
 $ cd shst
 $ npm install
-$ npx kpo :series "kpo @ bootstrap" "kpo @package build"
+$ npx kpo @package build
 ```
-<!-- markdownlint-enable MD014 MD031 -->
 
 You can also build the docs via `npm run @root -- docs`.
 

@@ -18,7 +18,7 @@ module.exports.scripts = {
       rm`pkg`,
       ['pkg/dist-node', 'pkg/dist-types'].map(ensure),
       copy(['README.md', 'package.json'], 'pkg'),
-      json('pkg/package.json', (pkg) =>
+      json('pkg/package.json', (file, pkg) =>
         Object.assign(pkg, {
           main: 'dist-node/index.js',
           types: 'dist-types/index.d.ts'
@@ -34,10 +34,10 @@ module.exports.scripts = {
     ],
     $transform: [
       log`\n[3/8] Exposing packages...`,
-      rw('pkg/dist-node/sh.js', expose),
+      rw('pkg/dist-node/sh.js', (file, raw) => expose(raw)),
       log`[4/8] Verifying types lock...`,
       read('transpile/types.lock', (lock) =>
-        json.fn('pkg/dist-node/sh.types.json', (types) => {
+        json.fn('pkg/dist-node/sh.types.json', (file, types) => {
           log.fn`    Current lock: ${lock}`;
           validate(types, lock);
         })

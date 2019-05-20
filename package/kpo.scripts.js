@@ -7,13 +7,13 @@ const { log, series, move, kpo, rm, copy } = require('kpo');
 const chalk = require('chalk');
 const project = require('./project.config');
 
-const fail = { fail: true };
 const vars = {
   root: project.get('paths.root'),
   docs: project.get('paths.docs'),
   typescript: project.get('typescript')
 };
 
+const fail = { fail: true };
 module.exports.options = options;
 module.exports.scripts = {
   ...scripts,
