@@ -1,12 +1,19 @@
+const os = require('os');
 const project = require('../project.config');
 
+const user = os.userInfo().uid === -1 ? null : os.userInfo();
 module.exports = {
   log: 'info',
   project: `shst-sh`,
   tasks: {
     transpile: {
       primary: 'go',
-      cmd: ['/bin/sh', '-x', '/go/app/transpile/docker.sh']
+      cmd: [
+        '/bin/sh',
+        '-c',
+        '/bin/sh -x /go/app/transpile/docker.sh' +
+          (user ? ` && chown -R ${user.uid}:${user.gid} /go/app/pkg` : '')
+      ]
     }
   },
   compose: {
