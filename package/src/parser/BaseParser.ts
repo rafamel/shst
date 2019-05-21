@@ -1,7 +1,7 @@
-import sh from '@shst/sh';
+import core from '@shst/core';
+import sh from '~/sh';
 import { LANGUAGE_MAP } from '~/constants';
 import { TLanguage, IParserOpts } from '~/types';
-import core from '@shst/core';
 
 /**
  * Abstract parser class

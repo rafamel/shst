@@ -3,7 +3,6 @@ export interface ISh {
   packages: any;
   path: string;
   package: any;
-  declaration: { types: any; funcs: any };
 }
 
 let stored: ISh;

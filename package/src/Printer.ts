@@ -1,5 +1,5 @@
-import sh from '@shst/sh';
 import core, { File } from '@shst/core';
+import sh from '~/sh';
 import { IPrinterOpts } from '~/types';
 
 /**

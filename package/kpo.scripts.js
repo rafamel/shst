@@ -19,18 +19,18 @@ module.exports.scripts = {
   ...scripts,
   build: {
     ...scripts.build,
-    force: [
-      scripts.build.force,
-      copy(['../CHANGELOG.md'], 'pkg/'),
-      copy(['../README.md', '../LICENSE'], 'pkg/', fail),
-      copy('../pipe/sh/pkg/LICENSE', 'pkg/SH.LICENSE', fail),
+    pack: [
+      scripts.build.pack,
+      copy(['../README.md', '../LICENSE', '../CHANGELOG.md'], { to: 'pkg' }),
+      copy('../pipe/sh/pkg/SH.LICENSE', { to: 'pkg' }, fail),
+      copy('../pipe/sh/pkg/dist-src', 'pkg/dist-src/packages/sh', fail),
       copy('../pipe/sh/pkg/dist-node', 'pkg/dist-node/packages/sh', fail),
       copy('../pipe/sh/pkg/dist-types', 'pkg/dist-types/packages/sh', fail),
+      copy('../pipe/core/pkg/dist-src', 'pkg/dist-src/packages/core', fail),
       copy('../pipe/core/pkg/dist-node', 'pkg/dist-node/packages/core', fail),
       copy('../pipe/core/pkg/dist-types', 'pkg/dist-types/packages/core', fail)
     ]
   },
-  // Build script readme, changelog, sh+core on packages
   commit: [
     log`${chalk.bold.yellow('\nWARN:')} Validating only ${vars.root}`,
     series.env('kpo @root commit --', { VALIDATE: vars.root })

@@ -3,6 +3,7 @@ import assert from 'assert';
 import typesMap from '../types-map';
 import sh from '@shst/sh';
 
+const pkg = sh().package;
 export default function defineSh(all: ITypeDefMap): void {
   Object.values(all)
     .filter((x) => x.kind === 'struct')
@@ -10,7 +11,7 @@ export default function defineSh(all: ITypeDefMap): void {
 }
 
 function each(item: IStructDef): void {
-  const struct = sh.package[item.was];
+  const struct = pkg[item.was];
 
   assert(!!struct);
   assert(!!struct.ptr);

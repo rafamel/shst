@@ -1,3 +1,3 @@
-import sh from '@shst/sh';
+import { declaration } from '@shst/sh';
 
-export default sh.declaration.types;
+export default declaration.types;

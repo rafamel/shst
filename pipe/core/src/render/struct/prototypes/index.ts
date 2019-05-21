@@ -8,6 +8,7 @@ import renderExternal from './external';
 import renderArrays from './arrays';
 import renderPrivate from './private';
 
+const pkg = sh().package;
 export default function renderPrototypes(arr: IStructDef[]): string {
   const dependencies = new Dependencies();
 
@@ -35,7 +36,7 @@ export default function renderPrototypes(arr: IStructDef[]): string {
 }
 
 function each(item: IStructDef, dependencies: Dependencies): string {
-  const struct = sh.package[item.was];
+  const struct = pkg[item.was];
   assert(!!struct);
 
   dependencies.addCustom('enqueue', 'sh');

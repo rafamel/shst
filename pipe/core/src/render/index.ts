@@ -15,6 +15,16 @@ export function assemble(types: ITypeDefMap): { [key: string]: string } {
   const boxed = kindBox(Object.values(types));
 
   return {
+    'index.ts': `
+      import * as classes from './struct';
+      import * as types from './types';
+
+      export default { classes, types };
+      export * from './enum';
+      export * from './interface';
+      export * from './struct';
+      export * from './from-json';
+    `,
     'enum.ts': renderEnum(boxed.enum),
     'interface.ts': renderInterface(boxed.interface),
     'struct.js': renderImplementation(boxed.struct),

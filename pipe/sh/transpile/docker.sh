@@ -22,10 +22,10 @@ cd /go/sh/_js
 
 # Transpile, using sh v3's go.mod to resolve deps.
 # if desired, add -m flag for gopherjs output minification
-go run github.com/gopherjs/gopherjs build -o /go/app/pkg/dist-node/sh.js /go/app/transpile/main.go
+go run github.com/gopherjs/gopherjs build -o /go/app/pkg/dist-src/sh/index.js /go/app/transpile/main.go
 
 # Get the API dump in JSON.
-go run api_dump.go > /go/app/pkg/dist-node/sh.types.json
+go run api_dump.go > /go/app/pkg/declaration.json
 
 # LICENSE
-cp /go/sh/LICENSE /go/app/pkg/LICENSE
+cp /go/sh/LICENSE /go/app/pkg/SH.LICENSE

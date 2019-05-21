@@ -3,13 +3,14 @@ const { default: slim } = require('slimconf');
 const pkg = require('./package.json');
 
 module.exports = slim({
-  // transpile straight up with babel.
-  nodeOnly: true,
+  // Transpiles to esnext
+  esnext: true,
+  // Enables typescript and produce declaration files
   typescript: true,
   // Extensions allowed for each file type, as a comma separated string
   ext: {
     js: 'js,cjs,mjs,jsx',
-    ts: 'ts,tsx'
+    ts: 'ts,tsx,d.ts'
   },
   // Paths used on build
   paths: {

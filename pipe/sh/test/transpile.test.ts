@@ -1,9 +1,11 @@
+import get, { declaration } from '../pkg';
 import path from 'path';
 import fs from 'fs-extra';
-import sh from '../pkg';
 import Ajv from 'ajv';
 import typesSchema from './types-schema';
 
+// TODO test ShError
+const sh = get();
 const parser = (): any => sh.syntax.NewParser();
 const printer = (): any => sh.syntax.NewPrinter();
 const parse = (str = `echo 'foo'`): any => parser().Parse(str);
@@ -17,17 +19,12 @@ describe(`Build`, () => {
     );
   });
   test(`LICENSE file exists`, async () => {
-    await expect(fs.pathExists(at('LICENSE'))).resolves.toBe(true);
+    await expect(fs.pathExists(at('SH.LICENSE'))).resolves.toBe(true);
   });
-  test(`types dump file exists and is exported`, async () => {
-    const json = at('dist-node/sh.types.json');
-    await expect(fs.pathExists(json)).resolves.toBe(true);
-    await expect(fs.readJSON(json)).resolves.toEqual(sh.declaration);
-  });
-  test(`type declaration file conforms to schema`, () => {
+  test(`type declaration conforms to schema`, async () => {
     const ajv = new Ajv();
 
-    var valid = ajv.validate(typesSchema, sh.declaration);
+    var valid = ajv.validate(typesSchema, declaration);
     // eslint-disable-next-line no-console
     if (!valid) console.log(ajv.errors);
     expect(valid).toBe(true);
@@ -35,10 +32,9 @@ describe(`Build`, () => {
 });
 
 describe(`Preconditions`, () => {
-  test(`exports syntax, declaration, package, packages`, () => {
+  test(`exports syntax, path, package, packages`, () => {
     expect(Object.keys(sh).sort()).toMatchInlineSnapshot(`
       Array [
-        "declaration",
         "package",
         "packages",
         "path",

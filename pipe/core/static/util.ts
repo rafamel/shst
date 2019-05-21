@@ -1,6 +1,6 @@
 /* eslint-disable babel/no-invalid-this */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { interfaces } from './types';
+import core from './core';
 import { SYMBOL } from './constants';
 
 /**
@@ -21,7 +21,7 @@ export function call<T>(fn: () => T): T {
  */
 export function isInterface(name: string, instance: any): boolean {
   const type = instance.type;
-  return Boolean(type && interfaces[name][type]);
+  return Boolean(type && core.types.interfaces[name][type]);
 }
 
 export function set(obj: any, prop: string, value: any) {

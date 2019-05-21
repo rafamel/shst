@@ -20,7 +20,7 @@
   "scripts": {
     "start": "kpo start --",
     "build": "kpo build --",
-    "build.force": "kpo build.force --",
+    "build.pack": "kpo build.pack --",
     "commit": "kpo commit --",
     "semantic": "kpo semantic --",
     "release": "kpo release --",
@@ -65,5 +65,18 @@
   "dependencies": {
     "camelcase": "^5.0.0",
     "uuid": "^3.3.2"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg",
+        {
+          "exclude": [
+            "__mocks__/**/*",
+            "__tests__/**/*"
+          ]
+        }
+      ]
+    ]
   }
 }

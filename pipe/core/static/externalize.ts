@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import * as classes from './struct';
+import core from './core';
 import { collect } from './util';
 import { SYMBOL } from './constants';
 
@@ -10,7 +10,7 @@ export function type(source: any, pointer: boolean = false) {
       return null;
     }
   }
-  const Class = (classes as any)[source.$is];
+  const Class = (core.classes as any)[source.$is];
   const instance = Object.create(Class.prototype);
   return seed(instance, Class, source);
 }

@@ -1,4 +1,4 @@
-import './initialize';
+import './sh';
 
 export * from '@shst/core';
 export * from './parser';

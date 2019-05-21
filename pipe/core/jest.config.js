@@ -5,7 +5,8 @@ const jest = require('../../setup/jest.config');
 
 module.exports = {
   ...jest,
+  modulePathIgnorePatterns: jest.modulePathIgnorePatterns.concat([]),
   collectCoverageFrom: jest.collectCoverageFrom.concat(
-    jest.collectCoverageFrom[0].replace('src', 'out')
+    jest.collectCoverageFrom[0].replace('src', 'static')
   )
 };

@@ -3,10 +3,10 @@
   "enum": "./enum",
   "interface": "./interface",
   "struct": "./struct",
-  "util": "./util",
-  "constants": "./constants",
   "from-json": "./from-json",
-  "sh": "./sh",
   "prototypes": "./prototypes",
-  "externalize": "./externalize"
+  "constants": "../constants",
+  "externalize": "../externalize",
+  "sh": "../sh",
+  "util": "../util"
 }
