@@ -60,11 +60,11 @@
     "@shst/core": "^0.0.0",
     "@shst/sh": "^0.0.0",
     "@types/camelcase": "^5.2.0",
-    "@types/uuid": "^3.4.4"
+    "@types/uuid": "^8.0.0"
   },
   "dependencies": {
     "camelcase": "^5.0.0",
-    "uuid": "^3.3.2"
+    "uuid": "^8.0.0"
   },
   "@pika/pack": {
     "pipeline": [
