@@ -63,7 +63,7 @@
     "@types/uuid": "^3.4.4"
   },
   "dependencies": {
-    "camelcase": "^5.0.0",
+    "camelcase": "^6.0.0",
     "uuid": "^3.3.2"
   },
   "@pika/pack": {
